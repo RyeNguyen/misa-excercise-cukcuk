@@ -1,0 +1,24 @@
+.misa-button {
+	height: 40px;
+	border-radius: 4px;
+	color: #fff;
+	background-color: #019160;
+	padding: 0 24px;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+	transition: 0.2s all ease-in-out;
+}
+
+.misa-button:hover {
+	background-color: #2FBE8E;
+}
+
+.misa-button:active {
+	background-color: #01B075;
+}
+
+.misa-button__icon {
+	display: flex;
+	align-items: center;
+}

@@ -1,0 +1,62 @@
+@import url('../variables.css');
+
+.misa-menu {
+    width: 225px;
+    height: calc(100vh - 49px);
+    border-right: 1px solid var(--color-hightlight);
+}
+
+.misa-menu .misa-menu__item {
+    height: 44px;
+    width: 100%;
+    color: var(--color-black);
+    padding: 0 16px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+}
+
+.misa-menu .misa-menu__item:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-black);
+}
+
+.misa-menu .misa-menu__item--active {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.misa-menu .misa-menu__item .misa-menu__icon {
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    margin-right: 10px;
+}
+
+.misa-menu .misa-menu__item:first-child .misa-menu__icon {
+    background-image: url('../../content/icon/dashboard.png');
+}
+
+.misa-menu .misa-menu__item:nth-child(2) .misa-menu__icon {
+    background-image: url('../../content/icon/report.png');
+}
+
+.misa-menu .misa-menu__item:nth-child(3) .misa-menu__icon {
+    background-image: url('../../content/icon/dashboard.png');
+}
+
+.misa-menu .misa-menu__item:nth-child(4) .misa-menu__icon {
+    background-image: url('../../content/icon/dic-employee.png');
+}
+
+.misa-menu .misa-menu__item:nth-child(5) .misa-menu__icon {
+    background-image: url('../../content/icon/dic-employee.png');
+}
+
+.misa-menu .misa-menu__item:nth-child(6) .misa-menu__icon {
+    background-image: url('../../content/icon/setting.png');
+}

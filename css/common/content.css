@@ -1,0 +1,30 @@
+.misa-content {
+	width: calc(100% - 226px);
+	height: calc(100% - 49px);
+	position: absolute;
+	top: 49px;
+	left: 226px;
+	padding: 24px 16px;
+}
+
+.misa-content .misa-content__header {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.misa-content .misa-content__header .header__title {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+}
+
+.misa-content .misa-content__header .button__icon {
+	width: 24px;
+	height: 24px;
+	background-image: url('../../content/icon/add.png');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
