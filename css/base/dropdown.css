@@ -30,15 +30,24 @@
 .misa-dropdown .dropdown__content {
     width: 200px;
     position: absolute;
-    display: none;
+    display: block;
+    z-index: 5;
     padding: 4px 0;
+    background-color: var(--color-white);
     border-radius: 4px;
     box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.25);
 }
 
+.misa-dropdown .dropdown__content--hidden {
+    display: none;
+}
+
+.misa-dropdown .dropdown__content--showed {
+    display: block;
+}
+
 .misa-dropdown .dropdown__content a {
     height: 40px;
-    display: block;
     padding: 0 10px;
     color: var(--color-content-text);
     text-decoration: none;
@@ -48,8 +57,4 @@
 
 .misa-dropdown .dropdown__content a:hover {
     background-color: var(--color-secondary-hover);
-}
-
-.show {
-    display: block;
 }

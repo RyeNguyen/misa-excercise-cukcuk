@@ -7,9 +7,11 @@
 	border-radius: 4px;
 	padding: 0 24px;
 	text-align: center;
-	display: inline-block;
 	cursor: pointer;
 	transition: 0.2s all ease-in-out;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
 .misa-button--primary {

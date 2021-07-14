@@ -6,5 +6,5 @@ textBox.setAttribute('size', textBox.getAttribute('placeholder').length);
 
 dropdownButton.addEventListener('click', () => {
     console.log('click');
-    dropdown1.classList.add('show');
+    dropdown1.classList.toggle('dropdown__content--showed');
 })

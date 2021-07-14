@@ -28,13 +28,12 @@ body {
 
 ::-webkit-scrollbar-thumb {
     background: var(--color-hightlight);
-    border-radius: 4px;
+    border-radius: 16px;
 }
 
 h1 {
     margin: 0;
-    font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 h2 {
