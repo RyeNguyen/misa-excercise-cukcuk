@@ -44,3 +44,27 @@
 .misa-content .misa-content__search .misa-content__search--left .misa-dropdown {
 	margin: 0 12px;
 }
+
+.misa-content__table-container {
+	width: 100%;
+	height: calc(100vh - 240px);
+	margin-top: 16px;
+	overflow: auto;
+}
+
+.misa-content__table {
+	width: 100%;
+	text-align: left;
+	font-weight: normal;
+	position: relative;
+}
+
+.misa-content__table .table__header {
+	position: sticky;
+	top: 0;
+	left: 0;
+} 
+
+.misa-content__table tr {
+	height: 40px;
+}
