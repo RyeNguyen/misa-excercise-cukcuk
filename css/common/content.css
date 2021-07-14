@@ -1,70 +1,89 @@
+@import url('../base/table.css');
+@import url(../variables.css);
+
 .misa-content {
-	width: calc(100% - 226px);
-	height: calc(100% - 49px);
-	position: absolute;
-	top: 49px;
-	left: 226px;
-	padding: 16px;
+    width: calc(100% - 226px);
+    height: calc(100% - 49px);
+    position: absolute;
+    top: 49px;
+    left: 226px;
+    padding: 16px;
 }
 
-.misa-content .misa-content__header {
-	width: 100%;
-	display: flex;
-	align-items: center;
+    .misa-content .misa-content__header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+        .misa-content .misa-content__header .header__title {
+            font-weight: bold;
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .misa-content .misa-content__header .button__icon {
+            width: 24px;
+            height: 24px;
+            background-image: url('../../content/icon/add.png');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+    .misa-content .misa-content__search {
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+        .misa-content .misa-content__search .misa-content__search--left {
+            display: flex;
+            align-content: center;
+        }
+
+            .misa-content .misa-content__search .misa-content__search--left .misa-dropdown {
+                margin: 0 12px;
+            }
+
+.misa-content__footer {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.misa-content .misa-content__header .header__title {
-	font-weight: bold;
-	font-size: 20px;
-	margin: 0;
-	padding: 0;
-}
+    .misa-content__footer .misa__pagination {
+        width: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.misa-content .misa-content__header .button__icon {
-	width: 24px;
-	height: 24px;
-	background-image: url('../../content/icon/add.png');
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
+        .misa-content__footer .misa__pagination .pagination__button {
+            cursor: pointer;
+        }
 
-.misa-content .misa-content__search {
-	margin-top: 16px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
+        .misa-content__footer .misa__pagination .pagination__number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--color-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            cursor: pointer;
+            transition: 0.2s all ease-in-out;
+        }
 
-.misa-content .misa-content__search .misa-content__search--left {
-	display: flex;
-	align-content: center;
-}
+            .misa-content__footer .misa__pagination .pagination__number:hover {
+                background-color: var(--color-secondary-hover);
+            }
 
-.misa-content .misa-content__search .misa-content__search--left .misa-dropdown {
-	margin: 0 12px;
-}
-
-.misa-content__table-container {
-	width: 100%;
-	height: calc(100vh - 240px);
-	margin-top: 16px;
-	overflow: auto;
-}
-
-.misa-content__table {
-	width: 100%;
-	text-align: left;
-	font-weight: normal;
-	position: relative;
-}
-
-.misa-content__table .table__header {
-	position: sticky;
-	top: 0;
-	left: 0;
-} 
-
-.misa-content__table tr {
-	height: 40px;
-}
+            .misa-content__footer .misa__pagination .pagination__number.active {
+                background-color: var(--color-primary);
+                color: var(--color-white);
+            }

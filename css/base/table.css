@@ -1,0 +1,32 @@
+﻿@import url('../variables.css');
+
+.misa-content__table-container {
+    width: 100%;
+    height: calc(100vh - 240px);
+    margin-top: 16px;
+    overflow: auto;
+}
+
+.misa-content__table {
+    width: 100%;
+    text-align: left;
+    font-weight: normal;
+    position: relative;
+    border-collapse: collapse;
+}
+
+    .misa-content__table .table__header th {
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: var(--color-white);
+    }
+
+    .misa-content__table tr {
+        height: 40px;
+        border-bottom: 1px solid var(--color-hightlight);
+    }
+
+        .misa-content__table tr:nth-child(odd) {
+            background-color: rgba(229, 229, 229, 0.5);
+        }
