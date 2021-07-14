@@ -14,11 +14,11 @@
 }
 
 .misa-modal {
-    width: 50%;
+    width: 40%;
     height: 90vh;
     background-color: var(--color-white);
     border-radius: 4px;
-    padding: 24px 16px;
+    padding: 24px;
 }
 
 .misa-modal__header {
@@ -54,8 +54,12 @@
         }
 
     .misa-modal__content .misa-modal__form {
-        width: 70%;
+        width: 75%;
     }
+
+        .misa-modal__content .misa-modal__form .misa-modal__info {
+            margin-bottom: 24px;
+        }
 
         .misa-modal__content .misa-modal__form .info__title {
             text-transform: uppercase;
@@ -68,7 +72,29 @@
             margin: 16px 0;
         }
 
-        .misa-modal__content .misa-modal__form .misa-label-text {
-            display: block;
-            font-size: 13px;
+        .misa-modal__content .misa-modal__form .misa-modal__fields {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
+
+            .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+                width: 49%;
+                margin-bottom: 16px;
+            }
+
+                .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field.large {
+                }
+
+.misa-modal__form .misa-modal__field .misa-label-text {
+    display: block;
+}
+
+.misa-modal__form .misa-modal__field input {
+    width: 100%;
+}
+
+.misa__asterisk {
+    color: var(--color-alert);
+}
