@@ -9,7 +9,6 @@
 .misa-menu .misa-menu__item {
     height: 44px;
     width: 100%;
-    color: var(--color-black);
     padding: 0 16px;
     box-sizing: border-box;
     display: flex;

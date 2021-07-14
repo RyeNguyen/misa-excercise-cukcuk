@@ -4,7 +4,7 @@
 	position: absolute;
 	top: 49px;
 	left: 226px;
-	padding: 24px 16px;
+	padding: 16px;
 }
 
 .misa-content .misa-content__header {
@@ -27,4 +27,20 @@
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
+}
+
+.misa-content .misa-content__search {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.misa-content .misa-content__search .misa-content__search--left {
+	display: flex;
+	align-content: center;
+}
+
+.misa-content .misa-content__search .misa-content__search--left .misa-dropdown {
+	margin: 0 12px;
 }

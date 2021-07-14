@@ -1,3 +1,5 @@
+@import url('../variables.css');
+
 .misa-text-box--default {
 	height: 40px;
 	box-sizing: border-box;
@@ -5,9 +7,10 @@
 	border: 1px solid #BBB;
 	padding: 0 16px;
 	outline: none;
+	display: inline-block;
 	transition: 0.2s all ease-in-out;
 }
 
 .misa-text-box--default:focus {
-	border-color: #019160;
+	border-color: var(--color-primary);
 }
