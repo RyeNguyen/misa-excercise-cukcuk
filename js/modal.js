@@ -29,7 +29,13 @@ const assignDropdown = (dropdown) => {
     })
 }
 
-console.log(modalSex.dropdownButton)
+window.onclick = function(event) {
+    if (popupModal.style.display === 'flex') {
+        if (event.target.matches('.misa-modal-container')) {
+            popupModal.style.display = 'none';
+        }
+    }
+}
 
 assignDropdown(modalSex);
 assignDropdown(modalRole);

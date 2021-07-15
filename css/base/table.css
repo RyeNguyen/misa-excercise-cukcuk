@@ -1,5 +1,11 @@
 ﻿@import url('../variables.css');
 
+/*
+Text căn trái
+tiền căn phải
+date căn giữa
+*/
+
 .misa-content__table-container {
     width: 100%;
     height: calc(100vh - 240px);
@@ -26,6 +32,12 @@
     .misa-content__table tr {
         height: 40px;
         border-bottom: 1px solid var(--color-hightlight);
+    }
+
+    .misa-content__table td:nth-child(9),
+    .misa-content__table th:nth-child(9) {
+        text-align: right;
+        padding-right: 16px;
     }
 
         .misa-content__table tr:nth-child(odd) {
