@@ -9,6 +9,7 @@
 
 .misa-content__table {
     width: 100%;
+    min-width: 1280px;
     text-align: left;
     font-weight: normal;
     position: relative;

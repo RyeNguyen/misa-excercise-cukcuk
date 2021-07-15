@@ -20,6 +20,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -43,6 +44,14 @@ h2 {
 
 p {
     margin: 0;
+}
+
+.misa-show {
+    display: block;
+}
+
+.misa-rotate180 {
+    transform: rotateZ(180deg);
 }
 
 @font-face {

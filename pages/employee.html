@@ -67,7 +67,7 @@
         <!-- header của content ở đây, bao gồm title và nút thêm nhân viên -->
         <div class="misa-content__header">
             <h1 class="misa-content__header header__title">Danh sách nhân viên</h1>
-            <div class="misa-button--primary misa-button__icon">
+            <div class="misa-button--primary misa-button__icon" id="button__add-employee">
                 <div class="button__icon"></div>
                 <div class="button__text">Thêm nhân viên</div>
             </div>
@@ -76,24 +76,27 @@
         <!-- mục tìm kiếm của content ở đây -->
         <div class="misa-content__search">
             <div class="misa-content__search--left">
-                <input class="misa-text-box--default" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                <div class="misa-text-box--default">
+                    <div id="search-icon"></div>
+                    <input type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại">
+                </div>
                 <div class="misa-dropdown">
-                    <button class="dropdown__button">
+                    <button class="dropdown__button" id="dropdown__room">
                         Tất cả phòng ban
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div id="dropdown__content-1" class="dropdown__content dropdown__content--hidden">
+                    <div id="dropdown__content-room" class="dropdown__content dropdown__content--hidden">
                         <a href="#">Phòng ban 1</a>
                         <a href="#">Phòng ban 2</a>
                         <a href="#">Phòng ban 3</a>
                     </div>
                 </div>
                 <div class="misa-dropdown">
-                    <button class="dropdown__button">
+                    <button class="dropdown__button" id="dropdown__role">
                         Tất cả vị trí
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div id="dropdown__content-2" class="dropdown__content dropdown__content--hidden">
+                    <div id="dropdown__content-role" class="dropdown__content dropdown__content--hidden">
                         <a href="#">Vị trí 1</a>
                         <a href="#">Vị trí 2</a>
                         <a href="#">Vị trí 3</a>
@@ -1092,6 +1095,8 @@
     <!-- popup modal ở đây, hiện ra khi click vào nút Thêm nhân viên -->
     <div class="misa-modal-container">
         <div class="misa-modal">
+            <img src="../content/icon/x.svg" alt="close button" class="misa-modal__button-close">
+
             <h1 class="misa-modal__header">Thông tin nhân viên</h1>
 
             <div class="misa-modal__content">
@@ -1101,11 +1106,13 @@
                 </div>
 
                 <div class="misa-modal__form">
+                    <!-- Thông tin nhân viên -->
                     <div class="misa-modal__info">
                         <h2 class="info__title">a. thông tin chung:</h2>
                         <div class="misa__divider"></div>
 
                         <div class="misa-modal__fields">
+                            <!-- Nhập mã nhân viên ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-code" class="misa-label-text">
                                     Mã nhân viên (<span class="misa__asterisk">*</span>)
@@ -1113,6 +1120,7 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-code" />
                             </div>
 
+                            <!-- Nhập tên ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-name" class="misa-label-text">
                                     Họ và tên (<span class="misa__asterisk">*</span>)
@@ -1120,20 +1128,33 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-name" />
                             </div>
 
+                            <!-- Nhập ngày sinh ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-date-born" class="misa-label-text">
                                     Ngày sinh
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-date-born" />
+                                <input class="misa-text-box--default" type="date" id="input-employee-date-born" />
                             </div>
 
+                            <!-- Nhaaph giới tính ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-sex" class="misa-label-text">
                                     Giới tính
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-sex" />
+                                <div class="misa-dropdown" id="input-employee-sex">
+                                    <button class="dropdown__button" id="dropdown__sex">
+                                        Chọn giới tính
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="dropdown__content-sex" class="dropdown__content dropdown__content--hidden">
+                                        <a href="#">Nam</a>
+                                        <a href="#">Nữ</a>
+                                        <a href="#">Khác</a>
+                                    </div>
+                                </div>
                             </div>
 
+                            <!-- Nhập CMT ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-id" class="misa-label-text">
                                     Số CMTND/Căn cước (<span class="misa__asterisk">*</span>)
@@ -1141,13 +1162,15 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-id" />
                             </div>
 
+                            <!-- Nhập ngày cấp CMT ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-id-date" class="misa-label-text">
                                     Ngày cấp
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-id-date" />
+                                <input class="misa-text-box--default" type="date" id="input-employee-id-date" />
                             </div>
 
+                            <!-- Nhập nơi cấp CMT ở đây -->
                             <div class="misa-modal__field large">
                                 <label for="input-employee-id-place" class="misa-label-text">
                                     Nơi cấp
@@ -1155,41 +1178,69 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-id-place" />
                             </div>
 
+                            <!-- Nhập email ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-email" class="misa-label-text">
                                     Email (<span class="misa__asterisk">*</span>)
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-email" />
+                                <input class="misa-text-box--default" type="email" id="input-employee-email" />
                             </div>
 
+                            <!-- Nhập SĐT ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-phone" class="misa-label-text">
                                     Số điện thoại (<span class="misa__asterisk">*</span>)
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-phone" />
+                                <input class="misa-text-box--default" type="tel" id="input-employee-phone" />
                             </div>
                         </div>
                     </div>
 
+                    <!-- Thông tin công việc -->
                     <div class="misa-modal__info">
                         <h2 class="info__title">b. thông tin công việc:</h2>
                         <div class="misa__divider"></div>
 
                         <div class="misa-modal__fields">
+                            <!-- Nhập vị trí ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-role" class="misa-label-text">
                                     Vị trí
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-role" />
+                                <div class="misa-dropdown" id="input-employee-role">
+                                    <button class="dropdown__button" id="dropdown__modal-role">
+                                        Chọn vị trí
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="dropdown__content-modal-role"
+                                         class="dropdown__content dropdown__content--hidden">
+                                        <a href="#">Giám đốc</a>
+                                        <a href="#">Nhân viên</a>
+                                        <a href="#">Bla bla</a>
+                                    </div>
+                                </div>
                             </div>
 
+                            <!-- Nhập phòng ban ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-work-place" class="misa-label-text">
                                     Phòng ban
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-work-place" />
+                                <div class="misa-dropdown" id="input-employee-work-place">
+                                    <button class="dropdown__button" id="dropdown__work-place">
+                                        Chọn phòng ban
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="dropdown__content-work-place"
+                                         class="dropdown__content dropdown__content--hidden">
+                                        <a href="#">Phòng nhân sự</a>
+                                        <a href="#">Phòng phát triển</a>
+                                        <a href="#">Bla bla</a>
+                                    </div>
+                                </div>
                             </div>
 
+                            <!-- Nhập mã số thuế ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-wage" class="misa-label-text">
                                     Mã số thuế cá nhân
@@ -1197,6 +1248,7 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-wage" />
                             </div>
 
+                            <!-- Nhập lương ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-income" class="misa-label-text">
                                     Mức lương cơ bản
@@ -1204,18 +1256,32 @@
                                 <input class="misa-text-box--default" type="text" id="input-employee-income" />
                             </div>
 
+                            <!-- Nhập ngày vào công ty ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-date-company" class="misa-label-text">
                                     Ngày gia nhập công ty
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-date-company" />
+                                <input class="misa-text-box--default" type="date" id="input-employee-date-company" />
                             </div>
 
+                            <!-- Nhập tình trạng làm việc ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-work-status" class="misa-label-text">
                                     Tình trạng công việc
                                 </label>
-                                <input class="misa-text-box--default" type="text" id="input-employee-work-status" />
+                                <div class="misa-dropdown" id="input-employee-work-status">
+                                    <button class="dropdown__button" id="dropdown__work-status">
+                                        Chọn tình trạng
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div id="dropdown__content-work-status"
+                                         class="dropdown__content dropdown__content--hidden">
+                                        <a href="#">Đang làm việc</a>
+                                        <a href="#">Đang thử việc</a>
+                                        <a href="#">Đang nghỉ tạm thời</a>
+                                        <a href="#">Đã nghỉ</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1230,5 +1296,6 @@
     </div>
 
     <script src="../js/script.js"></script>
+    <script src="../js/modal.js"></script>
 </body>
 </html>

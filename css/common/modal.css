@@ -15,12 +15,19 @@
 
 .misa-modal {
     width: 50%;
-    height: 90vh;
+    height: 95vh;
     background-color: var(--color-white);
     border-radius: 4px;
     overflow: hidden;
     padding: 24px;
     position: relative;
+}
+
+.misa-modal__button-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
 }
 
 .misa-modal__header {
@@ -71,7 +78,7 @@
             width: 80px;
             height: 4px;
             background-color: var(--color-primary);
-            margin: 4px 0;
+            margin: 8px 0;
         }
 
         .misa-modal__content .misa-modal__form .misa-modal__fields {
@@ -83,7 +90,7 @@
 
             .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
                 width: 49%;
-                margin-bottom: 4px;
+                margin-bottom: 6px;
             }
 
                 .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field.large {
@@ -94,7 +101,8 @@
     display: block;
 }
 
-.misa-modal__form .misa-modal__field input {
+.misa-modal__form .misa-modal__field input,
+.misa-modal__form .misa-modal__field .misa-dropdown {
     width: 100%;
 }
 
