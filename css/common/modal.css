@@ -90,7 +90,7 @@
 
             .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
                 width: 49%;
-                margin-bottom: 6px;
+                margin-bottom: 16px;
             }
 
                 .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field.large {
@@ -99,6 +99,7 @@
 
 .misa-modal__form .misa-modal__field .misa-label-text {
     display: block;
+    margin-bottom: 4px;
 }
 
 .misa-modal__form .misa-modal__field input,
@@ -122,6 +123,6 @@
     justify-content: flex-end;
 }
 
-.misa-modal .misa-modal__footer .misa-button--primary {
-    margin-left: 16px;
-}
+    .misa-modal .misa-modal__footer .misa-button--primary {
+        margin-left: 16px;
+    }

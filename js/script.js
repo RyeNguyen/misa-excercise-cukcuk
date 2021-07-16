@@ -7,6 +7,7 @@ menuItems = Array.prototype.slice.call(menuItems);
 
 const buttonAdd = document.getElementById('button__add-employee');
 
+//Xử lý functionality của menu
 menuItems.map(menuItem => {
     menuItem.addEventListener('click', () => {
         for (let i = 0; i < menuItems.length; i++) {
@@ -16,61 +17,14 @@ menuItems.map(menuItem => {
     })
 })
 
+//Dãn width text-box căn theo placeholder 
 textBox.setAttribute('size', textBox.getAttribute('placeholder').length);
 
-window.onclick = function (event) {
-    if (!event.target.matches('.misa-dropdown__button')) {
-        var dropdowns = document.getElementsByClassName("dropdown__content");
-        var i;
-        for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('dropdown__content--showed')) {
-                openDropdown.classList.remove('dropdown__content--showed');
-                openDropdown.classList.add('dropdown__content--hidden')
-            }
-        }
-    }
-}
-
-function dropdownInfo(btn, content, icon) {
-    this.btn = document.getElementById(btn);
-    this.content = document.getElementById(content);
-    this.icon = document.querySelector(icon);
-}
-
-const assignDropdown = (dropdown) => {
-    dropdown.btn.addEventListener('click', () => {
-        dropdown.icon.classList.toggle('misa-rotate180');
-        dropdown.content.classList.toggle('dropdown__content--showed');
-    })
-}
-
-const dropdownRoom = new dropdownInfo(
-    'dropdown__room',
-    'dropdown__content-room',
-    '.misa-dropdown #dropdown__room i'
-)
-
-assignDropdown(dropdownRoom);
-
-const dropdownRole = new dropdownInfo(
-    'dropdown__role',
-    'dropdown__content-role',
-    '.misa-dropdown #dropdown__role i'
-)
-
-assignDropdown(dropdownRole);
-
-const dropdownRestaurant = new dropdownInfo(
-    'dropdown__restaurant',
-    'dropdown__content-restaurant',
-    '.misa-dropdown #dropdown__restaurant i'
-)
-
-assignDropdown(dropdownRestaurant);
-
+//Ẩn hiện popup modal
 buttonAdd.addEventListener('click', () => {
     popupModal.style.display = 'flex';
+    const employeeIdInput = document.getElementById('input-employee-code');
+    employeeIdInput.focus();
 })
 
 popupModalCloseBtn.addEventListener('click', () => {

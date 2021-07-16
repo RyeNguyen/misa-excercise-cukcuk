@@ -54,7 +54,7 @@
                     border-color: var(--color-primary);
                 }
 
-.header__title .header__text {
+.header__title .dropdown__title {
     font-weight: bold;
     font-size: 15px;
 }
