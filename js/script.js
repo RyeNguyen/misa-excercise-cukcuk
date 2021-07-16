@@ -1,16 +1,10 @@
 ﻿const textBox = document.querySelector('.misa-text-box--default input');
-const buttonRoomIcon = document.querySelector('.misa-dropdown #dropdown__room i');
-const buttonRoleIcon = document.querySelector('.misa-dropdown #dropdown__role i');
 const popupModal = document.querySelector('.misa-modal-container');
 const popupModalCloseBtn = document.querySelector('.misa-modal__button-close');
 
 let menuItems = document.querySelectorAll('.misa-menu__item');
 menuItems = Array.prototype.slice.call(menuItems);
 
-const dropdownButtonRoom = document.getElementById('dropdown__room');
-const dropdownButtonRole = document.getElementById('dropdown__role');
-const dropdownRoom = document.getElementById('dropdown__content-room');
-const dropdownRole = document.getElementById('dropdown__content-role');
 const buttonAdd = document.getElementById('button__add-employee');
 
 menuItems.map(menuItem => {
@@ -24,15 +18,42 @@ menuItems.map(menuItem => {
 
 textBox.setAttribute('size', textBox.getAttribute('placeholder').length);
 
-dropdownButtonRoom.addEventListener('click', () => {
-    buttonRoomIcon.classList.toggle('misa-rotate180');
-    dropdownRoom.classList.toggle('dropdown__content--showed');
-})
+function dropdownInfo(btn, content, icon) {
+    this.btn = document.getElementById(btn);
+    this.content = document.getElementById(content);
+    this.icon = document.querySelector(icon);
+}
 
-dropdownButtonRole.addEventListener('click', () => {
-    buttonRoleIcon.classList.toggle('misa-rotate180');
-    dropdownRole.classList.toggle('dropdown__content--showed');
-})
+const assignDropdown = (dropdown) => {
+    dropdown.btn.addEventListener('click', () => {
+        dropdown.icon.classList.toggle('misa-rotate180');
+        dropdown.content.classList.toggle('dropdown__content--showed');
+    })
+}
+
+const dropdownRoom = new dropdownInfo(
+    'dropdown__room',
+    'dropdown__content-room',
+    '.misa-dropdown #dropdown__room i'
+)
+
+assignDropdown(dropdownRoom);
+
+const dropdownRole = new dropdownInfo(
+    'dropdown__role',
+    'dropdown__content-role',
+    '.misa-dropdown #dropdown__role i'
+)
+
+assignDropdown(dropdownRole);
+
+const dropdownRestaurant = new dropdownInfo(
+    'dropdown__restaurant',
+    'dropdown__content-restaurant',
+    '.misa-dropdown #dropdown__restaurant i'
+)
+
+assignDropdown(dropdownRestaurant);
 
 buttonAdd.addEventListener('click', () => {
     popupModal.style.display = 'flex';

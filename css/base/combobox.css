@@ -1,0 +1,26 @@
+﻿@import url('../variables.css');
+
+.misa-combobox {
+    width: 200px;
+    position: relative;
+}
+
+    .misa-combobox input {
+        padding: 0 54px 0 16px;
+    }
+
+    .misa-combobox .misa-button--secondary {
+        position: absolute;
+        top: 1px;
+        right: 1px;
+        width: 38px;
+        height: 38px;
+        border-top: none;
+        border-right: none;
+        border-bottom: none;
+        border-radius: 0 4px 4px 0;
+    }
+
+        .misa-combobox .misa-button--secondary:active {
+            background-color: transparent;
+        }

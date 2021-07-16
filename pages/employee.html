@@ -22,8 +22,17 @@
         </div>
         <div class="misa-header--right">
             <div class="header__title">
-                <div class="header__text">Nhà hàng Biển Đông</div>
-                <div class="header__title header__icon"></div>
+                <div class="misa-dropdown">
+                    <button class="dropdown__button" id="dropdown__restaurant">
+                        <div class="header__text">Nhà hàng Biển Đông</div>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div id="dropdown__content-restaurant" class="dropdown__content dropdown__content--hidden">
+                        <a href="#">Nhà hàng Sen Việt</a>
+                        <a href="#">Nhà hàng Vua Chả Cá</a>
+                        <a href="#">Nhà hàng Don Chicken</a>
+                    </div>
+                </div>
             </div>
             <div class="header__user">
                 <div class="header__profile-picture"></div>
@@ -97,6 +106,15 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div id="dropdown__content-role" class="dropdown__content dropdown__content--hidden">
+                        <a href="#">Vị trí 1</a>
+                        <a href="#">Vị trí 2</a>
+                        <a href="#">Vị trí 3</a>
+                    </div>
+                </div>
+                <div class="misa-combobox">
+                    <input type="text" name="" placeholder="Tất cả phòng ban" />
+                    <div class="misa-button--secondary"><i class="fas fa-chevron-down"></i></div>
+                    <div class="dropdown__content dropdown__content--showed">
                         <a href="#">Vị trí 1</a>
                         <a href="#">Vị trí 2</a>
                         <a href="#">Vị trí 3</a>
