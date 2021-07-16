@@ -18,6 +18,20 @@ menuItems.map(menuItem => {
 
 textBox.setAttribute('size', textBox.getAttribute('placeholder').length);
 
+window.onclick = function (event) {
+    if (!event.target.matches('.misa-dropdown__button')) {
+        var dropdowns = document.getElementsByClassName("dropdown__content");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('dropdown__content--showed')) {
+                openDropdown.classList.remove('dropdown__content--showed');
+                openDropdown.classList.add('dropdown__content--hidden')
+            }
+        }
+    }
+}
+
 function dropdownInfo(btn, content, icon) {
     this.btn = document.getElementById(btn);
     this.content = document.getElementById(content);
