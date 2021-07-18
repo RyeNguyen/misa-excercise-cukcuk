@@ -126,3 +126,13 @@
     .misa-modal .misa-modal__footer .misa-button--primary {
         margin-left: 16px;
     }
+
+    @media screen and (max-width: 1920px) {
+        .misa-modal__form .misa-modal__field .misa-label-text {
+            margin-bottom: 0;
+        }
+
+        .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+            margin-bottom: 6px;
+        }
+    }

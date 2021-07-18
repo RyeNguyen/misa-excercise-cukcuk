@@ -30,3 +30,17 @@ buttonAdd.addEventListener('click', () => {
 popupModalCloseBtn.addEventListener('click', () => {
     popupModal.style.display = 'none';
 })
+
+const currencyFormatter = (number) => {
+    return number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+}
+
+const dateNum = (num) => {
+    return num < 10 ? '0' + num : num
+};
+
+const dateFormatter = (str) => {
+    if (str.length === 0) return '';
+    const date = new Date(str);
+    return `${dateNum(date.getDate())}/${dateNum(date.getMonth() + 1)}/${dateNum(date.getFullYear())}`;
+}

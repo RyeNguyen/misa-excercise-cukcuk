@@ -1,7 +1,6 @@
 const inputIncome = document.getElementById('input-employee-income');
-console.log(inputIncome.value);
 
-const modalSex = new dropdownInfo(
+const modalSex = new DropdownInfo(
     '#dropdown__sex .dropdown__button',
     '#dropdown__sex .dropdown__content',
     '#dropdown__sex i',
@@ -9,7 +8,7 @@ const modalSex = new dropdownInfo(
     '#dropdown__sex .dropdown__title'
 );
 
-const modalRole = new dropdownInfo(
+const modalRole = new DropdownInfo(
     '#dropdown__modal-role .dropdown__button',
     '#dropdown__modal-role .dropdown__content',
     '#dropdown__modal-role i',
@@ -17,7 +16,7 @@ const modalRole = new dropdownInfo(
     '#dropdown__modal-role .dropdown__title'
 );
 
-const modalWorkPlace = new dropdownInfo(
+const modalWorkPlace = new DropdownInfo(
     '#dropdown__work-place .dropdown__button',
     '#dropdown__work-place .dropdown__content',
     '#dropdown__work-place i',
@@ -25,7 +24,7 @@ const modalWorkPlace = new dropdownInfo(
     '#dropdown__work-place .dropdown__title'
 );
 
-const modalWorkStatus = new dropdownInfo(
+const modalWorkStatus = new DropdownInfo(
     '#dropdown__work-status .dropdown__button',
     '#dropdown__work-status .dropdown__content',
     '#dropdown__work-status i',
@@ -40,21 +39,6 @@ window.onclick = function (event) {
         }
     }
 }
-
-assignDropdown(modalSex);
-assignDropdown(modalRole);
-assignDropdown(modalWorkPlace);
-assignDropdown(modalWorkStatus);
-
-
-
-
-
-const currencyFormatter = (number) => {
-    return number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
-}
-
-console.log(currencyFormatter(100000))
 
 inputIncome.addEventListener('input', () => {
     console.log(inputIncome.value)

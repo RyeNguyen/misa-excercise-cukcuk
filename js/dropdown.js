@@ -1,36 +1,32 @@
-﻿//Khởi tạo object dropdown
-function dropdownInfo(btn, content, icon, options, title) {
+﻿//Khởi tạo object dropdown với các chức năng cơ bản
+function DropdownInfo(btn, content, icon, options, title) {
     this.btn = document.querySelector(btn);
     this.content = document.querySelector(content);
     this.icon = document.querySelector(icon);
     this.options = document.querySelectorAll(options);
     this.title = document.querySelector(title);
-}
 
-//Assign chức năng cho các object dropdown
-const assignDropdown = (dropdown) => {
-    //Chức năng show options 
-    dropdown.btn.addEventListener('click', () => {
-        dropdown.icon.classList.toggle('misa-rotate180');
-        dropdown.content.classList.toggle('dropdown__content--showed');
+    //Chức năng show options
+    this.btn.addEventListener('click', () => {
+        this.icon.classList.toggle('misa-rotate180');
+        this.content.classList.toggle('dropdown__content--showed');
     })
 
-    dropdown.options.forEach(option => {
+    this.options.forEach(option => {
         option.addEventListener('click', () => {
-            //Chức năng thay đổi title của dropdown
-            const chosenOption = option.textContent;
-            dropdown.title.textContent = chosenOption;
+            //Thay đổi title của dropdown
+            this.title.textContent = option.textContent;
 
             //Ản hiên các dropdown options đang active (cần convert options thành array để chạy vòng for)
-            const dropdownOptions = Array.prototype.slice.call(dropdown.options);
+            const dropdownOptions = Array.prototype.slice.call(this.options);
             for (let i = 0; i < dropdownOptions.length; i++) {
                 dropdownOptions[i].classList.remove('dropdown__content-link--active');
             }
             option.classList.add('dropdown__content-link--active');
 
             //Ẩn options khi chọn xong
-            dropdown.content.classList.remove('dropdown__content--showed');
-            dropdown.icon.classList.toggle('misa-rotate180');
+            this.content.classList.remove('dropdown__content--showed');
+            this.icon.classList.toggle('misa-rotate180');
         })
     })
 }
@@ -49,7 +45,7 @@ const assignDropdown = (dropdown) => {
 //    }
 //})
 
-const dropdownRestaurant = new dropdownInfo(
+const dropdownRestaurant = new DropdownInfo(
     '#dropdown__restaurant .dropdown__button',
     '#dropdown__restaurant .dropdown__content',
     '#dropdown__restaurant i',
@@ -57,9 +53,7 @@ const dropdownRestaurant = new dropdownInfo(
     '#dropdown__restaurant .dropdown__title'
 )
 
-assignDropdown(dropdownRestaurant);
-
-const dropdownRoom = new dropdownInfo(
+const dropdownRoom = new DropdownInfo(
     '#dropdown__room .dropdown__button',
     '#dropdown__room .dropdown__content',
     '#dropdown__room i',
@@ -67,14 +61,10 @@ const dropdownRoom = new dropdownInfo(
     '#dropdown__room .dropdown__title'
 )
 
-assignDropdown(dropdownRoom);
-
-const dropdownRole = new dropdownInfo(
+const dropdownRole = new DropdownInfo(
     '#dropdown__role .dropdown__button',
     '#dropdown__role .dropdown__content',
     '#dropdown__role i',
     '#dropdown__role a',
     '#dropdown__role .dropdown__title'
 )
-
-assignDropdown(dropdownRole);
