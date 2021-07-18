@@ -19,7 +19,7 @@ getEmployees = async () => {
                     <th>Phòng ban</th>
                     <th>Mức lương cơ bản</th>
                     <th>Tình trạng công việc</th>
-                    </tr>`;
+                    </tr><tbody>`;
 
         employeesArray.map(individual => {
             employees += `<tr>`;
@@ -35,6 +35,7 @@ getEmployees = async () => {
             employees += `<td>${examineData(individual.WorkStatus)}</td>`;
             employees += `</tr>`;
         })
+        employees += `</tbody>`
 
         employeesTable.innerHTML = employees;
     } catch (err) {

@@ -1,4 +1,23 @@
-﻿//Khởi tạo object dropdown với các chức năng cơ bản
+﻿let positionsArray = [];
+
+getPositions = async () => {
+    try {
+        const response = await fetch('http://cukcuk.manhnv.net/v1/Positions');
+        positionsArray = await response.json();
+
+        let positions = '';
+        positionsArray.forEach(item => {
+            positions += `<a href="#">${item.PositionName}</a>`;
+        })
+        dropdownRole.content.innerHTML = positions;
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+getPositions().then(r => console.log(r));
+
+//Khởi tạo object dropdown với các chức năng cơ bản
 function DropdownInfo(btn, content, icon, options, title) {
     this.btn = document.querySelector(btn);
     this.content = document.querySelector(content);
@@ -68,3 +87,5 @@ const dropdownRole = new DropdownInfo(
     '#dropdown__role a',
     '#dropdown__role .dropdown__title'
 )
+
+// <a href="#"><i class="fas fa-check"></i>Nhà hàng Sen Việt</a>

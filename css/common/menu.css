@@ -4,6 +4,11 @@
     width: 225px;
     height: calc(100vh - 49px);
     border-right: 1px solid var(--color-hightlight);
+    transition: 0.2s all ease-in-out;
+}
+
+.misa-menu--shrink {
+    width: 64px;
 }
 
 .misa-menu .misa-menu__item {
@@ -15,6 +20,10 @@
     align-items: center;
     cursor: pointer;
     transition: 0.2s all ease-in-out;
+}
+
+.misa-menu__item--shrink {
+    justify-content: space-evenly;
 }
 
 .misa-menu .misa-menu__item:hover {
@@ -34,6 +43,10 @@
     background-position: center;
     background-size: cover;
     margin-right: 10px;
+}
+
+.misa-menu__icon--shrink {
+    margin-right: 0 !important;
 }
 
 .misa-menu .misa-menu__item:first-child .misa-menu__icon {

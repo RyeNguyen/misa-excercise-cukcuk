@@ -8,6 +8,12 @@
     top: 49px;
     left: 226px;
     padding: 16px;
+    transition: 0.2s all ease-in-out;
+}
+
+.misa-content--extend {
+    width: calc(100% - 64px);
+    left: 64px;
 }
 
     .misa-content .misa-content__header {
