@@ -38,6 +38,7 @@ date căn giữa
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-right: 16px;
 }
 
 .misa-content__table td:first-child {
@@ -45,7 +46,7 @@ date căn giữa
 }
 
 .misa-content__table td:nth-child(2) {
-    min-width: 200px;
+    min-width: 150px;
 }
 
 .misa-content__table td:nth-child(3) {
@@ -61,7 +62,8 @@ date căn giữa
 }
 
 .misa-content__table td:nth-child(6) {
-    max-width: 250px;
+    min-width: 200px;
+    max-width: 300px;
 }
 
 .misa-content__table td:nth-child(7) {

@@ -50,19 +50,22 @@ function DropdownInfo(btn, content, icon, options, title) {
     })
 }
 
-//window.addEventListener('click', (ev) => {
-//    console.log(ev.target.matches('.dropdown__button') || ev.target.matches('.dropdown__title'));
-//    if (!ev.target.matches('.dropdown__button') || !ev.target.matches('.dropdown__title')) {
-//        const dropdownContents = document.getElementsByClassName("dropdown__content");
-//        for (let i = 0; i < dropdownContents.length; i++) {
-//            const openDropdown = dropdownContents[i];
-//            console.log(openDropdown);
-//            if (openDropdown.classList.contains('dropdown__content--showed')) {
-//                openDropdown.classList.remove('dropdown__content--showed');
-//            }
-//        }
-//    }
-//})
+window.addEventListener('click', (ev) => {
+   if (!ev.target.matches('.dropdown__button') && !ev.target.matches('.dropdown__title')) {
+       const dropdownContents = document.getElementsByClassName("dropdown__content");
+       const dropdownIcons = document.querySelectorAll(".dropdown__button i");
+       for (let i = 0; i < dropdownContents.length; i++) {
+           const openDropdown = dropdownContents[i];
+           if (openDropdown.classList.contains('dropdown__content--showed')) {
+               openDropdown.classList.remove('dropdown__content--showed');
+           }
+       }
+
+       for (let i = 0; i < dropdownIcons.length; i++) {
+           dropdownIcons[i].classList.remove('misa-rotate180');
+       }
+   }
+})
 
 const dropdownRestaurant = new DropdownInfo(
     '#dropdown__restaurant .dropdown__button',
@@ -87,5 +90,3 @@ const dropdownRole = new DropdownInfo(
     '#dropdown__role a',
     '#dropdown__role .dropdown__title'
 )
-
-// <a href="#"><i class="fas fa-check"></i>Nhà hàng Sen Việt</a>

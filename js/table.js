@@ -6,7 +6,6 @@ getEmployees = async () => {
     try {
         const response = await fetch('http://cukcuk.manhnv.net/v1/Employees');
         employeesArray = await response.json();
-        console.log(employeesArray)
 
         let employees = `<tr class="table__header">
                     <th>Mã nhân viên</th>

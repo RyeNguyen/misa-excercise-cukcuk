@@ -19,7 +19,8 @@ popupModalCloseBtn.addEventListener('click', () => {
 })
 
 const currencyFormatter = (number) => {
-    return number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+    const formattedStr = number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
+    return formattedStr.substr(0, formattedStr.length - 1);
 }
 
 const dateNum = (num) => {

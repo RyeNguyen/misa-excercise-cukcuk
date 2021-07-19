@@ -98,9 +98,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="dropdown__content dropdown__content--hidden">
-                        <a href="#">Phòng ban 1</a>
-                        <a href="#">Phòng ban 2</a>
-                        <a href="#">Phòng ban 3</a>
+                        <a href="#"><i class="fas fa-check"></i>Phòng ban 1</a>
+                        <a href="#"><i class="fas fa-check"></i>Phòng ban 2</a>
+                        <a href="#"><i class="fas fa-check"></i>Phòng ban 3</a>
                     </div>
                 </div>
                 <div class="misa-dropdown" id="dropdown__role">
@@ -109,9 +109,9 @@
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="dropdown__content dropdown__content--hidden">
-<!--                        <a href="#">Vị trí 1</a>-->
-<!--                        <a href="#">Vị trí 2</a>-->
-<!--                        <a href="#">Vị trí 3</a>-->
+<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 1</a>-->
+<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 2</a>-->
+<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 3</a>-->
                     </div>
                 </div>
                 <!--<div class="misa-combobox">
@@ -210,9 +210,9 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown__content dropdown__content--hidden">
-                                        <a href="#">Nam</a>
-                                        <a href="#">Nữ</a>
-                                        <a href="#">Khác</a>
+                                        <a href="#"><i class="fas fa-check"></i>Nam</a>
+                                        <a href="#"><i class="fas fa-check"></i>Nữ</a>
+                                        <a href="#"><i class="fas fa-check"></i>Khác</a>
                                     </div>
                                 </div>
                             </div>
@@ -234,13 +234,15 @@
                             </div>
 
                             <!-- Nhập nơi cấp CMT ở đây -->
-                            <div class="misa-modal__field large">
+                            <div class="misa-modal__field">
                                 <label for="input-employee-id-place" class="misa-label-text">
                                     Nơi cấp
                                 </label>
                                 <input class="misa-text-box--default" type="text" id="input-employee-id-place" />
                             </div>
+                        </div>
 
+                        <div class="misa-modal__fields">
                             <!-- Nhập email ở đây -->
                             <div class="misa-modal__field">
                                 <label for="input-employee-email" class="misa-label-text">
@@ -276,9 +278,9 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown__content dropdown__content--hidden">
-                                        <a href="#">Giám đốc</a>
-                                        <a href="#">Nhân viên</a>
-                                        <a href="#">Bla bla</a>
+                                        <a href="#"><i class="fas fa-check"></i>Giám đốc</a>
+                                        <a href="#"><i class="fas fa-check"></i>Nhân viên</a>
+                                        <a href="#"><i class="fas fa-check"></i>Bla bla</a>
                                     </div>
                                 </div>
                             </div>
@@ -294,9 +296,9 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown__content dropdown__content--hidden">
-                                        <a href="#">Phòng nhân sự</a>
-                                        <a href="#">Phòng phát triển</a>
-                                        <a href="#">Bla bla</a>
+                                        <a href="#"><i class="fas fa-check"></i>Phòng nhân sự</a>
+                                        <a href="#"><i class="fas fa-check"></i>Phòng phát triển</a>
+                                        <a href="#"><i class="fas fa-check"></i>Bla bla</a>
                                     </div>
                                 </div>
                             </div>
@@ -314,7 +316,8 @@
                                 <label for="input-employee-income" class="misa-label-text">
                                     Mức lương cơ bản
                                 </label>
-                                <input class="misa-text-box--default" type="number" id="input-employee-income" />
+                                <input class="misa-text-box--default" type="text" pattern="[0-9]*"
+                                       id="input-employee-income" />
                             </div>
 
                             <!-- Nhập ngày vào công ty ở đây -->
@@ -336,10 +339,10 @@
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
                                     <div class="dropdown__content dropdown__content--hidden">
-                                        <a href="#">Đang làm việc</a>
-                                        <a href="#">Đang thử việc</a>
-                                        <a href="#">Đang nghỉ tạm thời</a>
-                                        <a href="#">Đã nghỉ</a>
+                                        <a href="#"><i class="fas fa-check"></i>Đang làm việc</a>
+                                        <a href="#"><i class="fas fa-check"></i>Đang thử việc</a>
+                                        <a href="#"><i class="fas fa-check"></i>Đang nghỉ tạm thời</a>
+                                        <a href="#"><i class="fas fa-check"></i>Đã nghỉ</a>
                                     </div>
                                 </div>
                             </div>
@@ -350,7 +353,10 @@
 
             <div class="misa-modal__footer">
                 <div class="misa-button--secondary">Hủy</div>
-                <div class="misa-button--primary">Lưu</div>
+                <div class="misa-button--primary misa-button__icon">
+                    <div class="button__icon"><i class="far fa-save"></i></div>
+                    <div class="button__text">Lưu</div>
+                </div>
             </div>
         </div>
     </div>

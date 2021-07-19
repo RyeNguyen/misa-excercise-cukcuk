@@ -40,7 +40,9 @@ window.onclick = function (event) {
     }
 }
 
-inputIncome.addEventListener('input', () => {
-    console.log(inputIncome.value)
-    inputIncome.value = currencyFormatter(inputIncome.value);
+inputIncome.addEventListener('change', () => {
+    inputIncome.value = parseFloat(inputIncome.value.replace(/,/g, ""))
+        .toFixed(0)
+        .toString()
+        .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 });
