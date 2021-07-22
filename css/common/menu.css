@@ -36,6 +36,11 @@
     color: var(--color-white);
 }
 
+.misa-menu .misa-menu__item--active:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
 .misa-menu .misa-menu__item .misa-menu__icon {
     width: 20px;
     height: 20px;

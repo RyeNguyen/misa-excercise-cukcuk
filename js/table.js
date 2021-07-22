@@ -1,49 +1,65 @@
-const employeesTable = document.querySelector('.misa-content__table');
-let employeesArray = [];
+const employeesTable = $('.misa-content__table');
 
-//Call API lấy dữ liệu nhân viên
-getEmployees = async () => {
+//Hàm load lại dữ liệu danh sách nhân viên cho table
+//Author: NQMinh(21/07/2021)
+const loadData = () => {
     try {
-        const response = await fetch('http://cukcuk.manhnv.net/v1/Employees');
-        employeesArray = await response.json();
+        //Clean dữ liệu cũ đã hiển thị trong danh mục
+        $('tbody').empty();
 
-        let employees = `<tr class="table__header">
-                    <th>Mã nhân viên</th>
-                    <th>Họ và tên</th>
-                    <th>Giới tính</th>
-                    <th>Ngày sinh</th>
-                    <th>Điện thoại</th>
-                    <th>Email</th>
-                    <th>Chức vụ</th>
-                    <th>Phòng ban</th>
-                    <th>Mức lương cơ bản</th>
-                    <th>Tình trạng công việc</th>
-                    </tr><tbody>`;
-
-        employeesArray.map(individual => {
-            employees += `<tr>`;
-            employees += `<td>${examineData(individual.EmployeeCode)}</td>`;
-            employees += `<td>${examineData(individual.FullName)}</td>`;
-            employees += `<td>${examineData(individual.GenderName)}</td>`;
-            employees += `<td>${dateFormatter(examineData(individual.DateOfBirth))}</td>`;
-            employees += `<td>${examineData(individual.PhoneNumber)}</td>`;
-            employees += `<td>${examineData(individual.Email)}</td>`;
-            employees += `<td>${examineData(individual.PositionName)}</td>`;
-            employees += `<td>${examineData(individual.DepartmentName)}</td>`;
-            employees += `<td>${currencyFormatter(examineData(individual.Salary))}</td>`;
-            employees += `<td>${examineData(individual.WorkStatus)}</td>`;
-            employees += `</tr>`;
+        //Call API lấy dữ liệu nhân viên
+        //Author: NQMinh(17/07/2021)
+        $.ajax({
+            url: 'http://cukcuk.manhnv.net/v1/Employees',
+            method: 'GET',
+        }).done(function (res) {
+            renderTable(res)
+        }).fail(function (res) {
+            console.log(res)
+            alert('ERRORRRRRRRRRRRRRR');
         })
-        employees += `</tbody>`
-
-        employeesTable.innerHTML = employees;
-    } catch (err) {
-        console.error(err);
+    } catch (error) {
+        console.log(error)
     }
 }
 
-getEmployees().then(r => console.log(r));
+loadData();
 
+//Hàm render table bằng dữ liệu lấy từ API
+//Author: NQMinh(17/07/2021)
+const renderTable = (tableData) => {
+    tableData.forEach(employee => {
+        const employeeCode = employee['EmployeeCode'];
+        const fullName = employee['FullName'];
+        const gender = employee['GenderName'];
+        const dob = employee['DateOfBirth'];
+        const phone = employee['PhoneNumber'];
+        const email = employee['Email'];
+        const position = employee['PositionName'];
+        const department = employee['DepartmentName'];
+        const salary = employee['Salary'];
+        const workStatus = employee['WorkStatus'];
+        const trHTML = $(`<tr>
+                        <td>${examineData(employeeCode)}</td>
+                        <td>${examineData(fullName)}</td>
+                        <td>${examineData(gender)}</td>
+                        <td>${dateFormatter(examineData(dob))}</td>
+                        <td>${examineData(phone)}</td>
+                        <td>${examineData(email)}</td>
+                        <td>${examineData(position)}</td>
+                        <td>${examineData(department)}</td>
+                        <td>${currencyFormatter(examineData(salary))}</td>
+                        <td>${examineData(workStatus)}</td>
+                    </tr>`);
+
+        $('tbody').append(trHTML);
+    })
+}
+
+//Hàm kiểm tra dữ liệu trả về
+//@params dữ liệu cụ thể trong từng ô
+//@returns khoảng trống nếu dữ liệu đó bằng null, còn không thì trả lại dữ liệu
+//Author: NQMinh(17/07/2021)
 const examineData = data => {
     return data ? data : '';
 }

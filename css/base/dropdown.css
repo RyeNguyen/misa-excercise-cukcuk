@@ -70,6 +70,11 @@
     color: var(--color-white) !important;
 }
 
+.dropdown__content-link--active:hover {
+    background-color: var(--color-primary) !important;
+    color: var(--color-white) !important;
+}
+
 .dropdown__content-link--active i {
     display: block !important;
 }

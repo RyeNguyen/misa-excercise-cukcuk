@@ -26,6 +26,7 @@ body {
 
 ::-webkit-scrollbar-track {
     background-color: var(--color-secondary);
+    border-radius: 16px;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -57,6 +58,10 @@ p {
 
 .misa-rotate180 {
     transform: rotateZ(180deg);
+}
+
+.misa-input--alert {
+    border: 1px solid var(--color-alert);
 }
 
 @font-face {
