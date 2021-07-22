@@ -44,7 +44,7 @@ const renderTable = (tableData) => {
                         <td>${examineData(employeeCode)}</td>
                         <td>${examineData(fullName)}</td>
                         <td>${examineData(gender)}</td>
-                        <td>${dateFormatter(examineData(dob))}</td>
+                        <td>${dateFormatter(examineData(dob), false)}</td>
                         <td>${examineData(phone)}</td>
                         <td>${examineData(email)}</td>
                         <td>${examineData(position)}</td>

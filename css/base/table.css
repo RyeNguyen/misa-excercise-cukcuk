@@ -34,6 +34,14 @@ date căn giữa
         border-bottom: 1px solid var(--color-hightlight);
     }
 
+    .misa-content__table tbody tr {
+        cursor: pointer;
+    }
+
+    .misa-content__table tbody tr:hover {
+        background-color: var(--color-secondary-hover);
+    }
+
 .misa-content__table td {
     overflow: hidden;
     text-overflow: ellipsis;

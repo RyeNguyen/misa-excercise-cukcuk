@@ -7,11 +7,11 @@ const buttonRefresh = $('#button__refresh');
 const paginationButtons = $('.misa__pagination .pagination__number');
 
 //Biến cờ lưu tạm id của một nhân viên
-employeeId = null;
+let employeeId = null;
 
 //Biến kiểm tra xem user khi click vào nút lưu là muốn sửa hay thêm mới nhân viên
 //Author: NQMinh(22/7/2021)
-wantToCreateNewEmployee = false;
+let wantToCreateNewEmployee = false;
 
 //Biến kiểm tra xem API đã từng được gọi chưa để load dữ liệu cho dropdown 1 lần duy nhất
 //Author: NQMinh(22/7/2021)
@@ -108,7 +108,7 @@ buttonRefresh.click(() => {
 
 //Hàm lưu thông tin nhân viên khi sự kiện click xảy ra
 //Author: NQMinh(22/07/2021)
-function saveDataOnClick () {
+const saveDataOnClick = () => {
     //fix tạm dữ liệu
     let employee = {
         "EmployeeId": "f44d3bec-ea01-11eb-94eb-42010a8c0002",
@@ -187,19 +187,50 @@ function saveDataOnClick () {
 //@params 1 con số bất kỳ
 //@returns con số được format kiểu tiền Việt ở dạng string
 //Author: NQMinh(18/07/2021)
-const currencyFormatter = (number) => {
-    const formattedStr = number.toLocaleString('vi', { style: 'currency', currency: 'VND' });
-    return formattedStr.substr(0, formattedStr.length - 1);
+const currencyFormatter = (salary) => {
+    numericOnly();
+    let result = '';
+    if (salary != null) {
+        for (let i = String(salary).length; i > 0; i -= 3) {
+            if (i > 3) {
+                const number = String(salary).slice(i - 3, i);
+                result += number.split('').reverse().join('') + '.';
+            } else {
+                const number = String(salary).slice(0, i);
+                result += number.split('').reverse().join('');
+            }
+        }
+        return result.split('').reverse().join('');
+    } else {
+        return '';
+    }
+}
+
+//Hàm ngăn chặn các ký tự ngoài ký tự số được nhập vào input
+//Author: NQMinh(22/07/2021)
+const numericOnly = () => {
+    inputIncome.attr('onkeydown', `return ( event.ctrlKey || event.altKey 
+                    || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false) 
+                    || (95<event.keyCode && event.keyCode<106)
+                    || (event.keyCode==8) || (event.keyCode==9) 
+                    || (event.keyCode>34 && event.keyCode<40) 
+                    || (event.keyCode==46) )`)
 }
 
 //Hàm định dạng ngày tháng
-//@params 1 string ngày tháng của dạng default của HTML
-//@returns nếu đầu vào trống thì trả về trống, còn không thì trả về string dạng ngày tháng đã được format dd/mm/yyyy
+//@params 1 string ngày tháng của dạng default của HTML, 1 biến onModal kiểm tra đây có phải dữ liệu render trên
+// form sửa nhân viên
+//@returns nếu đầu vào trống hoặc null thì trả về trống, còn không thì có hai trường hợp: nếu dữ liệu trả về cho modal
+// thì sẽ
+// ở dạng yyyy-mm-dd, nếu render trên table thì ở dạng dd/mm/yyyy
 //Author: NQMinh(18/07/2021)
-const dateFormatter = (str) => {
+const dateFormatter = (str, onModal) => {
+    if (!str) return '';
     if (str.length === 0) return '';
     const date = new Date(str);
-    return `${dateNum(date.getDate())}/${dateNum(date.getMonth() + 1)}/${dateNum(date.getFullYear())}`;
+    return onModal ?
+        `${dateNum(date.getFullYear())}-${dateNum(date.getMonth() + 1)}-${dateNum(date.getDate())}` :
+        `${dateNum(date.getDate())}/${dateNum(date.getMonth() + 1)}/${dateNum(date.getFullYear())}`;
 }
 
 //Hàm định dạng cụ thể ngày và tháng

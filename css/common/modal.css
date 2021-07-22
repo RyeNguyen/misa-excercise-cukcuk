@@ -141,6 +141,27 @@
         }
     }
 
+#income-container {
+    position: relative;
+}
+
+#income-container input {
+    text-align: right;
+    padding-right: 52px;
+}
+
+#income-container #income-container__label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-style: italic;
+}
+
 @media screen and (max-width: 1080px) {
     .misa-modal {
         width: 90%;

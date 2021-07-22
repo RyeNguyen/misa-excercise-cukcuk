@@ -1,10 +1,19 @@
+//Input phần thông tin chung:
 const inputEmployeeCode = $('#input-employee-code');
-const inputIncome = $('#input-employee-income');
 const inputName = $('#input-employee-name');
+const inputDob = $('#input-employee-date-born');
 const inputId = $('#input-employee-id');
+const inputIdDate = $('#input-employee-id-date');
+const inputIdPlace = $('#input-employee-id-place');
 const inputEmail = $('#input-employee-email');
 const inputPhone = $('#input-employee-phone');
+const inputCompanyDate = $('#input-employee-date-company');
+
+//Input phần thông tin công việc:
+const inputEmployeeTax = $('#input-employee-wage');
+const inputIncome = $('#input-employee-income');
 const popupModalInputs = $('.misa-modal-container input');
+
 const submitBtn = $('#button__submit');
 const cancelBtn = $('#button__cancel');
 const popupModalCloseBtn = $('.misa-modal__button-close');
@@ -74,9 +83,29 @@ const closeModal = () => {
 //Hàm binding dữ liệu từ các row vào modal
 //Author: NQMinh(22/07/2021)
 const bindingDataFromTable = (data) => {
+    //Thông tin chung
     inputEmployeeCode.val(data['EmployeeCode']);
     inputName.val(data['FullName']);
+    inputDob.val(dateFormatter(data['DateOfBirth'], true));
+    $('#dropdown__sex .dropdown__title').text((data['GenderName']) ? (data['GenderName']) : 'Chọn giới tính');
+    inputId.val(data['IdentityNumber']);
+    inputIdDate.val(dateFormatter(data['IdentityDate'], true));
+    inputIdPlace.val(data['IdentityPlace']);
+    inputEmail.val(data['Email']);
+    inputPhone.val(data['PhoneNumber']);
+
+    //Thông tin công việc
+    inputEmployeeTax.val(data['PersonalTaxCode']);
+    inputIncome.val(currencyFormatter(data['Salary']));
+    inputCompanyDate.val(dateFormatter(data['CreatedDate'], true));
 }
+
+//Sự kiện định dạng ô nhập lương
+//Author: NQMinh(22/07/2021)
+inputIncome.on('input', () => {
+    const formatted = String(inputIncome.val()).replaceAll('.', '');
+    inputIncome.val(currencyFormatter(formatted));
+});
 
 // const showError = () => {
 //     console.log('Loi Vkl :>')
@@ -106,13 +135,6 @@ const bindingDataFromTable = (data) => {
 //
 //     }
 // }
-
-// inputIncome.addEventListener('change', () => {
-//     inputIncome.value = parseFloat(inputIncome.value.replace(/,/g, ""))
-//         .toFixed(0)
-//         .toString()
-//         .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-// });
 
 // submitBtn.addEventListener('click', () => {
 //     checkRequired([inputEmployeeId, inputName, inputId, inputEmail, inputPhone]);

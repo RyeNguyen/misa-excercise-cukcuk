@@ -97,22 +97,14 @@
                         <span class="dropdown__title">Tất cả phòng ban</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="dropdown__content dropdown__content--hidden">
-<!--                        <a href="#"><i class="fas fa-check"></i>Phòng ban 1</a>-->
-<!--                        <a href="#"><i class="fas fa-check"></i>Phòng ban 2</a>-->
-<!--                        <a href="#"><i class="fas fa-check"></i>Phòng ban 3</a>-->
-                    </div>
+                    <div class="dropdown__content dropdown__content--hidden"></div>
                 </div>
                 <div class="misa-dropdown" id="dropdown__role">
                     <button class="dropdown__button">
                         <span class="dropdown__title">Tất cả vị trí</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="dropdown__content dropdown__content--hidden">
-<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 1</a>-->
-<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 2</a>-->
-<!--                        <a href="#"><i class="fas fa-check"></i>Vị trí 3</a>-->
-                    </div>
+                    <div class="dropdown__content dropdown__content--hidden"></div>
                 </div>
                 <!--<div class="misa-combobox">
                     <input type="text" name="" placeholder="Tất cả phòng ban" />
@@ -294,11 +286,7 @@
                                         <span class="dropdown__title">Chọn vị trí</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
-                                    <div class="dropdown__content dropdown__content--hidden">
-<!--                                        <a href="#"><i class="fas fa-check"></i>Giám đốc</a>-->
-<!--                                        <a href="#"><i class="fas fa-check"></i>Nhân viên</a>-->
-<!--                                        <a href="#"><i class="fas fa-check"></i>Bla bla</a>-->
-                                    </div>
+                                    <div class="dropdown__content dropdown__content--hidden"></div>
                                 </div>
                             </div>
 
@@ -329,8 +317,11 @@
                                 <label for="input-employee-income" class="misa-label-text">
                                     Mức lương cơ bản
                                 </label>
-                                <input class="misa-text-box--default" type="text" pattern="[0-9]*"
-                                       id="input-employee-income" />
+                                <div id="income-container">
+                                    <input class="misa-text-box--default" type="text"
+                                    id="input-employee-income"/>
+                                    <div id="income-container__label">VNĐ</div>
+                                </div>
                             </div>
 
                             <!-- Nhập ngày vào công ty ở đây -->
