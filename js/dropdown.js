@@ -1,6 +1,7 @@
 ﻿let positionsArray = [];
 
 //Khởi tạo object dropdown với các chức năng cơ bản
+//@params id của dropdown
 //Author: NQMinh (16/07/2021)
 function DropdownInfo(dropdownId) {
     this.btn = $(`${dropdownId} .dropdown__button`);
@@ -18,12 +19,13 @@ function DropdownInfo(dropdownId) {
     assignDropdownOptions(this);
 }
 
+//Hàm gán chức năng chọn options của dropdown
 const assignDropdownOptions = (dropdown) => {
     dropdown.options.click(function (event) {
         //Thay đổi title của dropdown
         dropdown.title.textContent = event.target.textContent;
 
-        //Ản hiên các dropdown options đang active (cần convert options thành array để chạy vòng for)
+        //Ản hiên các dropdown options đang active
         dropdown.options.removeClass('dropdown__content-link--active');
         $(this).addClass('dropdown__content-link--active');
 
@@ -37,7 +39,9 @@ const assignDropdownOptions = (dropdown) => {
 //Author: NQMinh(19/07/2021)
 window.addEventListener('click', (ev) => {
     //Nếu click ngoài button hoặc title
-    if (!ev.target.matches('.dropdown__button') && !ev.target.matches('.dropdown__title')) {
+    if (!ev.target.matches('.dropdown__button') &&
+        !ev.target.matches('.dropdown__title')
+        /*!ev.target.matches($('.dropdown__button i:first'))*/) {
         //toàn bộ các dropdown xổ ra của cả trang
         const dropdownContents = document.getElementsByClassName("dropdown__content");
 
@@ -59,24 +63,10 @@ window.addEventListener('click', (ev) => {
     }
 })
 
-// getPositions = async () => {
-//     try {
-//         const response = await fetch('http://cukcuk.manhnv.net/v1/Positions');
-//         positionsArray = await response.json();
-//
-//         let positions = '';
-//         positionsArray.forEach(item => {
-//             positions += `<a href="#"><i class="fas fa-check"></i>${item['PositionName']}</a>`;
-//         })
-//         dropdownRole.content.innerHTML = positions;
-//         assignDropdownOptions(dropdownRole);
-//     } catch (err) {
-//         console.error(err);
-//     }
-// }
-
 const dropdownRestaurant = new DropdownInfo('#dropdown__restaurant');
 
-const dropdownRoom = new DropdownInfo('#dropdown__room');
+//Khởi tạo dropdown phòng ban ở trang chủ
+let dropdownRoom = new DropdownInfo('#dropdown__room');
 
-const dropdownRole = new DropdownInfo('#dropdown__role');
+//Khởi tạo dropdown vị trí ở trang chủ
+let dropdownRole = new DropdownInfo('#dropdown__role');

@@ -1,4 +1,5 @@
 const employeesTable = $('.misa-content__table');
+const employeeTableRow = $('.misa-content__table tbody tr');
 
 //Hàm load lại dữ liệu danh sách nhân viên cho table
 //Author: NQMinh(21/07/2021)
@@ -39,7 +40,7 @@ const renderTable = (tableData) => {
         const department = employee['DepartmentName'];
         const salary = employee['Salary'];
         const workStatus = employee['WorkStatus'];
-        const trHTML = $(`<tr>
+        const trHTML = $(`<tr tr-data="${employee['EmployeeId']}">
                         <td>${examineData(employeeCode)}</td>
                         <td>${examineData(fullName)}</td>
                         <td>${examineData(gender)}</td>
@@ -51,7 +52,6 @@ const renderTable = (tableData) => {
                         <td>${currencyFormatter(examineData(salary))}</td>
                         <td>${examineData(workStatus)}</td>
                     </tr>`);
-
         $('tbody').append(trHTML);
     })
 }
@@ -63,3 +63,34 @@ const renderTable = (tableData) => {
 const examineData = data => {
     return data ? data : '';
 }
+
+employeesTable.on('dblclick', 'tbody tr', function() {
+    wantToCreateNewEmployee = false;
+    //Hiển thị form chi tiết
+    openModal();
+    //Lấy id
+    employeeId = $(this).attr('tr-data');
+    try {
+        $.ajax({
+            url: `http://cukcuk.manhnv.net/v1/Employees/${employeeId}`,
+            method: 'GET',
+        }).done(function (res) {
+            //binding dữ liệu lên form
+            bindingDataFromTable(res);
+        }).fail(function (res) {
+            switch(res.status) {
+                case 500:
+                    alert('Code cùi');
+                    break;
+                case 400:
+                    alert('Dữ liệu không hợp lệ');
+                    break;
+                case 404:
+                    alert('Quay đầu là bờ');
+                    break;
+            }
+        })
+    } catch (error) {
+        console.log(error)
+    }
+})
