@@ -61,6 +61,7 @@ class Dropdown {
             //Ản hiên các dropdown options đang active
             self.options.removeClass('dropdown__content-link--active');
             $(this).addClass('dropdown__content-link--active');
+            $(self).attr('value', $(this).attr('value'));
 
             //Ẩn options khi chọn xong
             self.content.removeClass('dropdown__content--showed');

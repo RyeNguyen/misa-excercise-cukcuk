@@ -91,11 +91,8 @@
             .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
                 width: 49%;
                 margin-bottom: 16px;
+                position: relative;
             }
-
-                .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field.large {
-                    width: 52%;
-                }
 
 .misa-modal__form .misa-modal__field .misa-label-text {
     display: block;

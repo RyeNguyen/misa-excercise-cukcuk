@@ -1,10 +1,10 @@
+$(document).ready(() => {
+    const original = new Variables();
+})
+
 class Variables {
     //Biến cờ lưu tạm id của một nhân viên
     static employeeId = null;
-
-    //Biến kiểm tra xem user khi click vào nút lưu là muốn sửa hay thêm mới nhân viên
-    //Author: NQMinh(22/7/2021)
-    static wantToCreateNewEmployee = false;
 
     //Biến kiểm tra xem API đã từng được gọi chưa để load dữ liệu cho dropdown 1 lần duy nhất
     //Author: NQMinh(22/7/2021)
