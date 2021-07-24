@@ -77,9 +77,15 @@
         <!-- header của content ở đây, bao gồm title và nút thêm nhân viên -->
         <div class="misa-content__header">
             <h1 class="misa-content__header header__title">Danh sách nhân viên</h1>
-            <div class="misa-button--primary misa-button__icon" id="button__add-employee">
-                <div class="button__icon"></div>
-                <div class="button__text">Thêm nhân viên</div>
+            <div class="button__container">
+                <div class="misa-button--primary" id="button__delete-employee">
+                    <div class="button__text">Xóa nhân viên</div>
+                </div>
+
+                <div class="misa-button--primary misa-button__icon" id="button__add-employee">
+                    <div class="button__icon"></div>
+                    <div class="button__text">Thêm nhân viên</div>
+                </div>
             </div>
         </div>
 
@@ -128,6 +134,7 @@
             <table class="misa-content__table">
                 <thead>
                 <tr class="table__header">
+                    <th></th>
                     <th>Mã nhân viên</th>
                     <th>Họ và tên</th>
                     <th>Giới tính</th>
@@ -186,7 +193,6 @@
                         <div class="misa-modal__fields">
                             <!-- Nhập mã nhân viên ở đây -->
                             <div class="misa-modal__field">
-<!--                                <div class="misa-bubble&#45;&#45;alert">Trường này bắt buộc nhập</div>-->
                                 <label for="input-employee-code" class="misa-label-text">
                                     Mã nhân viên (<span class="misa__asterisk">*</span>)
                                 </label>

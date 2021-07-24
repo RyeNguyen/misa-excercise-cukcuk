@@ -51,6 +51,9 @@ class EmployeePage {
         //Author: NQMinh(15/07/2021)
         Variables.textBox.attr('size', Variables.textBox.attr('placeholder').length);
 
+        //TODO: Xử lý sự kiện khi nhấn nút xóa
+        Variables.buttonDelete.click(() => {});
+
         //Hiển thị form thêm mới nhân viên khi nhấn button thêm nhân viên
         //Author: NQMinh(15/07/2021)
         Variables.buttonAdd.click(() => EmployeeIdAPI.getEmployeeCode());
@@ -69,6 +72,16 @@ class EmployeePage {
         //Xử lý sự kiện thu gọn menu khi nhấn nút toggle góc trái
         //Author(17/07/2021)
         Variables.menuToggle.click(() => this.toggleMenu());
+
+        Variables.employeesTable.on('click', 'tbody tr', function() {
+            const row = $(this).children()[0];
+            const checkbox = $(row).children().children()[0];
+            $(checkbox).attr('checked', !$(checkbox).attr('checked'));
+
+            if ($(checkbox).attr('checked') === 'checked') {
+                Variables.buttonDelete.toggleClass('misa-show');
+            }
+        });
 
         //Sự kiện click hai lần vào table row -> lấy dữ liệu cá nhân nhân viên
         Variables.employeesTable.on('dblclick', 'tbody tr', function () {
@@ -200,99 +213,102 @@ class EmployeePage {
     //Author: NQMinh(22/07/2021)
     static saveDataOnClick = (self) => {
         console.log(self);
-        if (self.validateAll()) {
-            //fix tạm dữ liệu
-            let employee = {
-                // "EmployeeId": "f44d3bec-ea01-11eb-94eb-42010a8c0002",
-                // "EmployeeCode": "NVF0067331320",
-                // "FirstName": null,
-                // "LastName": null,
-                // "FullName": "Đỗ Thị Hưng",
-                // "Gender": 1,
-                // "DateOfBirth": "3232-12-03T00:00:00",
-                // "PhoneNumber": "21423524124",
-                // "Email": "DTH@gmail.com",
-                // "Address": null,
-                // "IdentityNumber": "123124134230",
-                // "IdentityDate": "3333-12-03T00:00:00",
-                // "IdentityPlace": "HĐ-HN",
-                // "JoinDate": null,
-                // "MartialStatus": null,
-                // "EducationalBackground": null,
-                // "QualificationId": null,
-                // "DepartmentId": "17120d02-6ab5-3e43-18cb-66948daf6128",
-                // "PositionId": "548dce5f-5f29-4617-725d-e2ec561b0f41",
-                // "WorkStatus": 0,
-                // "PersonalTaxCode": "31231212321",
-                // "Salary": 2132132,
-                // "PositionCode": "P94",
-                // "PositionName": "Nhân viên",
-                // "DepartmentCode": "PB89",
-                // "DepartmentName": "Phòng đào tạo",
-                // "QualificationName": null,
-                // "GenderName": "Nam",
-                // "EducationalBackgroundName": null,
-                // "MartialStatusName": null,
-                // "CreatedDate": "2021-07-21T08:59:27",
-                // "CreatedBy": null,
-                // "ModifiedDate": "2021-07-21T09:01:07",
-                // "ModifiedBy": null
-            };
-            //TODO: validate toàn bộ dữ liệu
+        // if (self.validateAll()) {
+        //
+        // }
+        //fix tạm dữ liệu
+        let employee = {
+            // "EmployeeId": "f44d3bec-ea01-11eb-94eb-42010a8c0002",
+            // "EmployeeCode": "NVF0067331320",
+            // "FirstName": null,
+            // "LastName": null,
+            // "FullName": "Đỗ Thị Hưng",
+            // "Gender": 1,
+            // "DateOfBirth": "3232-12-03T00:00:00",
+            // "PhoneNumber": "21423524124",
+            // "Email": "DTH@gmail.com",
+            // "Address": null,
+            // "IdentityNumber": "123124134230",
+            // "IdentityDate": "3333-12-03T00:00:00",
+            // "IdentityPlace": "HĐ-HN",
+            // "JoinDate": null,
+            // "MartialStatus": null,
+            // "EducationalBackground": null,
+            // "QualificationId": null,
+            // "DepartmentId": "17120d02-6ab5-3e43-18cb-66948daf6128",
+            // "PositionId": "548dce5f-5f29-4617-725d-e2ec561b0f41",
+            // "WorkStatus": 0,
+            // "PersonalTaxCode": "31231212321",
+            // "Salary": 2132132,
+            // "PositionCode": "P94",
+            // "PositionName": "Nhân viên",
+            // "DepartmentCode": "PB89",
+            // "DepartmentName": "Phòng đào tạo",
+            // "QualificationName": null,
+            // "GenderName": "Nam",
+            // "EducationalBackgroundName": null,
+            // "MartialStatusName": null,
+            // "CreatedDate": "2021-07-21T08:59:27",
+            // "CreatedBy": null,
+            // "ModifiedDate": "2021-07-21T09:01:07",
+            // "ModifiedBy": null
+        };
+        //TODO: validate toàn bộ dữ liệu
 
-            //thu thập dữ liệu -> build thành object nhân viên
-            employee['EmployeeCode'] = Variables.inputEmployeeCode.val();
-            employee['FullName'] = Variables.inputName.val();
-            employee['DateOfBirth'] = Variables.inputDob.val();
+        //thu thập dữ liệu -> build thành object nhân viên
+        employee['EmployeeCode'] = Variables.inputEmployeeCode.val();
+        employee['FullName'] = Variables.inputName.val();
+        employee['DateOfBirth'] = Variables.inputDob.val();
 
-            //TODO: không hiển thị -> sửa
-            employee['GenderName'] = $('#dropdown__sex .dropdown__title').text();
+        //TODO: không hiển thị -> sửa
+        employee['GenderName'] = $('#dropdown__sex .dropdown__title').text();
 
-            employee['IdentityNumber'] = Variables.inputId.val();
-            employee['Email'] = Variables.inputEmail.val();
-            employee['PhoneNumber'] = Variables.inputPhone.val();
-            employee['PositionId'] = $('#dropdown__modal-role .dropdown__content-link--active').attr('value');
-            employee['DepartmentId'] = $('#dropdown__work-place .dropdown__content-link--active').attr('value');
-            employee['PersonalTaxCode'] = Variables.inputEmployeeTax.val();
-            employee['Salary'] = parseInt(Variables.inputIncome.val().split('.').join(''));
+        employee['IdentityNumber'] = Variables.inputId.val();
+        employee['Email'] = Variables.inputEmail.val();
+        employee['PhoneNumber'] = Variables.inputPhone.val();
+        employee['PositionId'] = $('#dropdown__modal-role .dropdown__content-link--active').attr('value');
+        employee['DepartmentId'] = $('#dropdown__work-place .dropdown__content-link--active').attr('value');
+        employee['PersonalTaxCode'] = Variables.inputEmployeeTax.val();
+        employee['Salary'] = parseInt(Variables.inputIncome.val().split('.').join(''));
 
-            //gọi đến API lưu dữ liệu
-            $.ajax({
-                url: EmployeePage.wantToCreateNewEmployee ?
-                    'http://cukcuk.manhnv.net/v1/Employees' :
-                    `http://cukcuk.manhnv.net/v1/Employees/${Variables.employeeId}`,
-                method: EmployeePage.wantToCreateNewEmployee ? 'POST' : 'PUT',
-                data: JSON.stringify(employee),
-                dataType: 'json',
-                contentType: 'application/json',
-            }).done(function (res) {
-                self.loadData();
-                self.closeModal();
-            }).fail(function (res) {
-                switch (res.status) {
-                    case 500:
-                        alert('Code cùi');
-                        break;
-                    case 400:
-                        alert('Dữ liệu không hợp lệ');
-                        break;
-                    case 404:
-                        alert('Quay đầu là bờ');
-                        break;
-                }
-            })
-        }
+        //gọi đến API lưu dữ liệu
+        $.ajax({
+            url: EmployeePage.wantToCreateNewEmployee ?
+                'http://cukcuk.manhnv.net/v1/Employees' :
+                `http://cukcuk.manhnv.net/v1/Employees/${Variables.employeeId}`,
+            method: EmployeePage.wantToCreateNewEmployee ? 'POST' : 'PUT',
+            data: JSON.stringify(employee),
+            dataType: 'json',
+            contentType: 'application/json',
+        }).done(function (res) {
+            alert('OK bạn')
+            self.loadData();
+            self.closeModal();
+        }).fail(function (res) {
+            switch (res.status) {
+                case 500:
+                    alert('Code cùi');
+                    break;
+                case 400:
+                    alert('Dữ liệu không hợp lệ');
+                    break;
+                case 404:
+                    alert('Quay đầu là bờ');
+                    break;
+            }
+        })
     }
 
+    //#region các hàm liên quan đến xử lý validate trong form
     //Hàm kiểm tra ô nhập trống
     //Author: NQMinh(21/07/2021)
     validateRequired = () => {
         const self = this;
         const required = $('input[required]');
-        if (required.val().trim() === '') return false;
+        // if (required.val().trim() === '') return false;
         required.blur(function () {
             if ($(this).val().trim() === '') {
-                $(this).toggleClass('misa-input--alert');
+                $(this).addClass('misa-input--alert');
                 $(this).attr('title', 'Thông tin này bắt buộc nhập!');
                 self.showError($(this), 'Thông tin này bắt buộc nhập');
                 return false;
@@ -346,6 +362,46 @@ class EmployeePage {
         console.log(this.validateRequired() && this.validateEmail())
         return this.validateRequired() && this.validateEmail();
     }
+    //#endregion
+
+    //Hàm xóa nhân viên
+    //Author: NQMinh(24/07/2021)
+    deleteEmployee = (id) => {
+        const self = this;
+        try {
+            $.ajax({
+                url: `http://cukcuk.manhnv.net/v1/Employees/${id}`,
+                method: 'DELETE',
+            }).done(function (res) {
+                self.loadData();
+            }).fail(function (res) {
+                switch (res.status) {
+                    case 500:
+                        alert('Code cùi');
+                        break;
+                    case 400:
+                        alert('Dữ liệu không hợp lệ');
+                        break;
+                    case 404:
+                        alert('Quay đầu là bờ');
+                        break;
+                }
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //Hàm gán sự kiện click cho các checkbox mỗi hàng để thực hiện xóa
+    //Author: NQMinh(24/07/2021)
+    assignDelete = (data) => {
+        const self = this;
+        data.click(function() {
+            //delete-box -> td -> tr thì mới lấy được attribute tr-data là id nhân viên
+            const employeeIdToDelete = $(this).parent().parent().attr('tr-data');
+            self.deleteEmployee(employeeIdToDelete);
+        })
+    }
 
     //Hàm render dữ liệu bảng nhân viên
     //@params dữ liệu lấy từ server
@@ -364,6 +420,12 @@ class EmployeePage {
             const salary = employee['Salary'];
             const workStatus = employee['WorkStatus'];
             const trHTML = $(`<tr tr-data="${employee['EmployeeId']}">
+                        <td>
+                            <div class="delete-box">
+                                <input type="checkbox">
+                                <span class="misa-checkmark"></span>                    
+                            </div>                            
+                        </td>
                         <td>${self.examineData(employeeCode)}</td>
                         <td>${self.examineData(fullName)}</td>
                         <td>${self.examineData(gender)}</td>
@@ -377,6 +439,8 @@ class EmployeePage {
                     </tr>`);
             $('tbody').append(trHTML);
         })
+
+        // self.assignDelete($('tbody tr .delete-box'));
     }
 
     //Hàm kiểm tra thông tin có trống không

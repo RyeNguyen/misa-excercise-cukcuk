@@ -11,6 +11,8 @@ class Variables {
     static APIWasCalled = false;
 
     //Các element trên trang chủ
+    //nút xóa nhân viên
+    static buttonDelete = $('#button__delete-employee');
     //nút thêm nhân viên
     static buttonAdd = $('#button__add-employee');
     //nút refresh bảng nhân viên
@@ -26,7 +28,6 @@ class Variables {
 
     //Các element trên table nhân viên
     static employeesTable = $('.misa-content__table');
-    static employeeTableRow = $('.misa-content__table tbody tr');
 
     //Các element trên header
     //header trái (gồm logo)

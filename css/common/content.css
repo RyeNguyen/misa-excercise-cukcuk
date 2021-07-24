@@ -2,136 +2,150 @@
 @import url(../variables.css);
 
 .misa-content {
-    width: calc(100% - 226px);
-    height: calc(100% - 49px);
-    position: absolute;
-    top: 49px;
-    left: 226px;
-    padding: 16px;
-    transition: 0.2s all ease-in-out;
+	width: calc(100% - 226px);
+	height: calc(100% - 49px);
+	position: absolute;
+	top: 49px;
+	left: 226px;
+	padding: 16px;
+	transition: 0.2s all ease-in-out;
 }
 
 .misa-content--extend {
-    width: calc(100% - 64px);
-    left: 64px;
+	width: calc(100% - 64px);
+	left: 64px;
 }
 
-    .misa-content .misa-content__header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.misa-content .misa-content__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 
-        .misa-content .misa-content__header .header__title {
-            font-weight: bold;
-            font-size: 20px;
-            margin: 0;
-            padding: 0;
-        }
+.misa-content .misa-content__header .header__title {
+	font-weight: bold;
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+}
 
-        .misa-content .misa-content__header .button__icon {
-            width: 24px;
-            height: 24px;
-            background-image: url('../../content/icon/add.png');
-            background-position: center;
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
+.misa-content .misa-content__header .button__container {
+	display: flex;
+	gap: 16px;
+}
 
-    .misa-content .misa-content__search {
-        margin-top: 16px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.misa-content .misa-content__header .button__container #button__delete-employee {
+	background-color: var(--color-alert);
+	display: none;
+}
 
-        .misa-content .misa-content__search .misa-content__search--left {
-            display: flex;
-            align-content: center;
-        }
+.misa-content .misa-content__header .button__container #button__delete-employee:hover {
+	background-color: var(--color-alert-hover);
+}
+
+.misa-content .misa-content__header .button__icon {
+	width: 24px;
+	height: 24px;
+	background-image: url('../../content/icon/add.png');
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.misa-content .misa-content__search {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.misa-content .misa-content__search .misa-content__search--left {
+	display: flex;
+	align-content: center;
+}
 
 .misa-content__search--left .misa-text-box--default {
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding: 0;
-    border: none;
+	display: flex;
+	align-items: center;
+	position: relative;
+	padding: 0;
+	border: none;
 }
 
 .misa-content__search--left input {
-    height: 40px;
-    width: 100%;
-    outline: none;
-    border-radius: 4px;
-    border: 1px solid var(--color-hightlight);
+	height: 40px;
+	width: 100%;
+	outline: none;
+	border-radius: 4px;
+	border: 1px solid var(--color-hightlight);
 }
 
 .misa-content__search--left .misa-text-box--default input {
-    padding-left: 40px;
+	padding-left: 40px;
 }
 
 .misa-content__search--left input:focus {
-    border-color: var(--color-primary);
+	border-color: var(--color-primary);
 }
 
 #search-icon {
-    width: 16px;
-    height: 16px;
-    position: absolute;
-    top: 12px;
-    left: 16px;
-    background-image: url('../../content/icon/search.png');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	top: 12px;
+	left: 16px;
+	background-image: url('../../content/icon/search.png');
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover
 }
 
 .misa-content .misa-content__search .misa-content__search--left .misa-dropdown {
-    margin: 0 12px;
+	margin: 0 12px;
 }
 
 .misa-content__footer {
-    width: 100%;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	width: 100%;
+	height: 48px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
-    .misa-content__footer .misa__pagination {
-        width: 20%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
+.misa-content__footer .misa__pagination {
+	width: 20%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 
-        .misa-content__footer .misa__pagination .pagination__button {
-            cursor: pointer;
-        }
+.misa-content__footer .misa__pagination .pagination__button {
+	cursor: pointer;
+}
 
-        .misa-content__footer .misa__pagination .pagination__number {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background-color: var(--color-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: space-evenly;
-            cursor: pointer;
-            transition: 0.2s all ease-in-out;
-        }
+.misa-content__footer .misa__pagination .pagination__number {
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background-color: var(--color-secondary);
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	cursor: pointer;
+	transition: 0.2s all ease-in-out;
+}
 
-            .misa-content__footer .misa__pagination .pagination__number:hover {
-                background-color: var(--color-secondary-hover);
-            }
+.misa-content__footer .misa__pagination .pagination__number:hover {
+	background-color: var(--color-secondary-hover);
+}
 
-            .active {
-                background-color: var(--color-primary) !important;
-                color: var(--color-white) !important;
-            }
+.active {
+	background-color: var(--color-primary) !important;
+	color: var(--color-white) !important;
+}
 
-            @media screen and (max-width: 1280px) {
-                .misa-content__footer .misa__pagination {
-                    width: 40%;
-                }
-            }
+@media screen and (max-width: 1280px) {
+	.misa-content__footer .misa__pagination {
+		width: 40%;
+	}
+}
