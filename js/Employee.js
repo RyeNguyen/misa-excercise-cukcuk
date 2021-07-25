@@ -141,7 +141,6 @@ class EmployeePage {
                     self.deleteEmployee(employeeIdToDelete);
                 }
             })
-            debugger
             self.loadData();
         });
 
@@ -172,7 +171,6 @@ class EmployeePage {
     //Hàm load dữ liệu bảng từ server
     //Author: NQMinh(21/07/2021)
     loadData = () => {
-        console.log('load data nè');
         const self = this;
         try {
             //Clean dữ liệu cũ đã hiển thị trong danh mục

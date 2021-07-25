@@ -1,4 +1,4 @@
-@import url('../variables.css');
+@import url('../Variables.css');
 
 .misa-menu {
     width: 225px;
@@ -55,25 +55,25 @@
 }
 
 .misa-menu .misa-menu__item:first-child .misa-menu__icon {
-    background-image: url('../../content/icon/dashboard.png');
+    background-image: url('../../assets/icon/dashboard.png');
 }
 
 .misa-menu .misa-menu__item:nth-child(2) .misa-menu__icon {
-    background-image: url('../../content/icon/report.png');
+    background-image: url('../../assets/icon/report.png');
 }
 
 .misa-menu .misa-menu__item:nth-child(3) .misa-menu__icon {
-    background-image: url('../../content/icon/dashboard.png');
+    background-image: url('../../assets/icon/dashboard.png');
 }
 
 .misa-menu .misa-menu__item:nth-child(4) .misa-menu__icon {
-    background-image: url('../../content/icon/dic-employee.png');
+    background-image: url('../../assets/icon/dic-employee.png');
 }
 
 .misa-menu .misa-menu__item:nth-child(5) .misa-menu__icon {
-    background-image: url('../../content/icon/dic-employee.png');
+    background-image: url('../../assets/icon/dic-employee.png');
 }
 
 .misa-menu .misa-menu__item:nth-child(6) .misa-menu__icon {
-    background-image: url('../../content/icon/setting.png');
+    background-image: url('../../assets/icon/setting.png');
 }

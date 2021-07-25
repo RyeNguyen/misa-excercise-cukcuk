@@ -1,5 +1,5 @@
-@import url('../base/table.css');
-@import url(../variables.css);
+@import url('../base/Table.css');
+@import url(../Variables.css);
 
 .misa-content {
 	width: calc(100% - 226px);
@@ -46,7 +46,7 @@
 .misa-content .misa-content__header .button__icon {
 	width: 24px;
 	height: 24px;
-	background-image: url('../../content/icon/add.png');
+	background-image: url('../../assets/icon/add.png');
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -94,7 +94,7 @@
 	position: absolute;
 	top: 12px;
 	left: 16px;
-	background-image: url('../../content/icon/search.png');
+	background-image: url('../../assets/icon/search.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover

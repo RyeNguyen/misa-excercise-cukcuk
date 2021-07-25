@@ -1,4 +1,4 @@
-@import url('../variables.css');
+@import url('../Variables.css');
 
 .misa-button--primary,
 .misa-button--secondary {
@@ -54,7 +54,7 @@
 .misa-button--secondary.misa-button__icon .button__icon {
 	width: 24px;
 	height: 24px;
-	background-image: url('../../content/icon/refresh.png');
+	background-image: url('../../assets/icon/refresh.png');
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

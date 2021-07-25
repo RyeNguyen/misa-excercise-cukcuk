@@ -1,4 +1,4 @@
-﻿@import url('../variables.css');
+﻿@import url('../Variables.css');
 
 .misa-modal-container {
     position: fixed;
@@ -50,7 +50,7 @@
             height: 144px;
             border-radius: 50%;
             border: 1px solid var(--color-hightlight);
-            background-image: url('../../content/img/default-avatar.jpg');
+            background-image: url('../../assets/img/default-avatar.jpg');
             background-position: center;
             background-size: cover;
             background-repeat: no-repeat;

@@ -5,31 +5,14 @@
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/common/main.css"/>
-    <link rel="stylesheet" href="css/common/header.css"/>
-    <link rel="stylesheet" href="css/common/menu.css"/>
+    <link rel="stylesheet" href="css/Main.css"/>
+    <link rel="stylesheet" href="css/layout/Header.css"/>
+    <link rel="stylesheet" href="css/layout/Menu.css"/>
 </head>
 <body>
-<div class="misa-popup-container">
-    <div class="misa-popup">
-        <div class="misa-popup__btn-close-container">
-            <img src="./content/icon/x.svg" alt="close button" class="misa-popup__button-close">
-        </div>
-
-        <div class="header__title">Xóa bản ghi A</div>
-        <div class="misa-popup__body">
-            <div class="misa-popup__icon">
-                <i class="fas fa-exclamation-triangle"></i>
-            </div>
-            <div class="misa-popup__text">
-                Bạn có chắc muốn đóng form nhập <strong>"Thông tin chung của thủ tục 603"</strong> hay không?
-            </div>
-        </div>
-        <div class="misa-popup__footer">
-            <div class="misa-button--secondary">Hủy</div>
-            <div class="misa-button--primary">Xóa</div>
-        </div>
-    </div>
-</div>
+<script src="./js/common/Toast.js"></script>
+<script>
+    const test = new Toast('404', 'Dữ liệu không hợp lệ, vui lòng xem lại');
+</script>
 </body>
 </html>

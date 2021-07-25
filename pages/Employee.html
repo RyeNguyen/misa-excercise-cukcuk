@@ -5,13 +5,11 @@
     <meta charset="utf-8" />
     <title>CUK CUK CUK CUK</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
-    <link href="../css/common/main.css" rel="stylesheet">
-    <link href="../css/common/menu.css" rel="stylesheet">
-    <link href="../css/common/modal.css" rel="stylesheet" />
-    <link href="../css/common/header.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/common/content.css">
-
-    <link href="../css/pages/employee.css" rel="stylesheet">
+    <link href="../css/Main.css" rel="stylesheet">
+    <link href="../css/layout/Menu.css" rel="stylesheet">
+    <link href="../css/base/Modal.css" rel="stylesheet" />
+    <link href="../css/layout/Header.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/layout/Content.css">
 </head>
 <body>
     <!-- header ở đây -->
@@ -110,7 +108,9 @@
                         <span class="dropdown__title">Tất cả vị trí</span>
                         <i class="fas fa-chevron-down"></i>
                     </button>
-                    <div class="dropdown__content dropdown__content--hidden"></div>
+                    <div class="dropdown__content dropdown__content--hidden">
+
+                    </div>
                 </div>
                 <!--<div class="misa-combobox">
                     <input type="text" name="" placeholder="Tất cả phòng ban" />
@@ -156,14 +156,14 @@
         <div class="misa-content__footer">
             <p>Hiển thị 1-10/10000 nhân viên</p>
             <div class="misa__pagination">
-                <img src="../content/icon/btn-firstpage.svg" alt="First Page" class="pagination__button" />
-                <img src="../content/icon/btn-prev-page.svg" alt="Previous Page" class="pagination__button" />
+                <img src="../assets/icon/btn-firstpage.svg" alt="First Page" class="pagination__button" />
+                <img src="../assets/icon/btn-prev-page.svg" alt="Previous Page" class="pagination__button" />
                 <div class="pagination__number active"><p>1</p></div>
                 <div class="pagination__number"><p>2</p></div>
                 <div class="pagination__number"><p>3</p></div>
                 <div class="pagination__number"><p>4</p></div>
-                <img src="../content/icon/btn-next-page.svg" alt="Next Page" class="pagination__button" />
-                <img src="../content/icon/btn-lastpage.svg" alt="Last Page" class="pagination__button" />
+                <img src="../assets/icon/btn-next-page.svg" alt="Next Page" class="pagination__button" />
+                <img src="../assets/icon/btn-lastpage.svg" alt="Last Page" class="pagination__button" />
             </div>
             <p>10 nhân viên/trang</p>
         </div>
@@ -172,7 +172,7 @@
     <!-- popup modal ở đây, hiện ra khi click vào nút Thêm nhân viên -->
     <div class="misa-modal-container">
         <div class="misa-modal">
-            <img src="../content/icon/x.svg" alt="close button" class="misa-modal__button-close">
+            <img src="../assets/icon/x.svg" alt="close button" class="misa-modal__button-close">
 
             <h1 class="misa-modal__header">Thông tin nhân viên</h1>
 
@@ -349,7 +349,7 @@
                                         <span class="dropdown__title">Chọn tình trạng</span>
                                         <i class="fas fa-chevron-down"></i>
                                     </button>
-                                    <div class="dropdown__content dropdown__content--hidden">
+                                    <div class="dropdown__content dropdown__content--hidden out-of-space">
                                         <a href="#"><i class="fas fa-check"></i>Đang làm việc</a>
                                         <a href="#"><i class="fas fa-check"></i>Đang thử việc</a>
                                         <a href="#"><i class="fas fa-check"></i>Đang nghỉ tạm thời</a>
@@ -376,7 +376,7 @@
     <div class="misa-popup-container">
         <div class="misa-popup">
             <div class="misa-popup__btn-close-container">
-                <img src="../content/icon/x.svg" alt="close button" class="misa-popup__button-close">
+                <img src="../assets/icon/x.svg" alt="close button" class="misa-popup__button-close">
             </div>
 
             <div class="header__title">Xóa bản ghi</div>
@@ -401,6 +401,7 @@
     <script src="../js/common/Variables.js"></script>
 
     <script src="../js/common/Dropdown.js"></script>
+    <script src="../js/common/Toast.js"></script>
     <script src="../js/common/Utility.js"></script>
 
     <script src="../js/services/EmployeesAPI.js"></script>
