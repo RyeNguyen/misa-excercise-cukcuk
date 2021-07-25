@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    const employeePage = new EmployeePage();
+    new EmployeePage();
 })
 
 class EmployeePage {
@@ -43,6 +43,7 @@ class EmployeePage {
 
     //Hàm ẩn form thêm thông tin nhân viên
     initEvent() {
+        const self = this;
         //Xử lý sự kiện khi click vào các button phần footer phân trang
         //Author: NQMinh(20/07/2021)
         Variables.paginationButtons.click(() => {this.paging()});
@@ -51,36 +52,33 @@ class EmployeePage {
         //Author: NQMinh(15/07/2021)
         Variables.textBox.attr('size', Variables.textBox.attr('placeholder').length);
 
-        //TODO: Xử lý sự kiện khi nhấn nút xóa
-        Variables.buttonDelete.click(() => {});
-
         //Hiển thị form thêm mới nhân viên khi nhấn button thêm nhân viên
         //Author: NQMinh(15/07/2021)
         Variables.buttonAdd.click(() => EmployeeIdAPI.getEmployeeCode());
+
+        //Hiển thị popup xóa nhân viên khi nhấn button xóa nhân viên
+        //Author: NQMinh(25/07/2021)
+        Variables.buttonDelete.click(() => this.openPopupAlert());
 
         //Xử lý sự kiện nhấn nút refresh thì load lại data trong bảng
         //Author: NQMinh(21/07/2021)
         Variables.buttonRefresh.click(() => this.loadData());
 
         //Xử lý sự kiện click vào các item trên menu
-        //Author(15/07/2021)
+        //Author: NQMinh(15/07/2021)
         Variables.menuItems.click(function () {
             Variables.menuItems.removeClass('misa-menu__item--active');
             $(this).addClass('misa-menu__item--active');
         })
 
         //Xử lý sự kiện thu gọn menu khi nhấn nút toggle góc trái
-        //Author(17/07/2021)
+        //Author: NQMinh(17/07/2021)
         Variables.menuToggle.click(() => this.toggleMenu());
 
+        //Xử lý sự kiện click vào từng hàng thì checkbox được đánh dấu và nút xóa hiện lên
+        //Author: NQMinh(24/07/2021)
         Variables.employeesTable.on('click', 'tbody tr', function() {
-            const row = $(this).children()[0];
-            const checkbox = $(row).children().children()[0];
-            $(checkbox).attr('checked', !$(checkbox).attr('checked'));
-
-            if ($(checkbox).attr('checked') === 'checked') {
-                Variables.buttonDelete.toggleClass('misa-show');
-            }
+            self.rowActive(this);
         });
 
         //Sự kiện click hai lần vào table row -> lấy dữ liệu cá nhân nhân viên
@@ -124,7 +122,28 @@ class EmployeePage {
 
         //XỬ lý sự kiện click vào nút thêm nhân viên
         //Author: NQMinh(21/07/2021)
-        Variables.submitBtn.click(() => EmployeePage.saveDataOnClick(this));
+        Variables.submitBtn.click(() => self.saveDataOnClick(this));
+
+        //Sự kiện nhấn nút Hủy sẽ thoát popup alert
+        Variables.alertCancelBtn.click(() => this.closePopupAlert());
+
+        //Sự kiện nhấn dấu x sẽ thoát popup alert
+        Variables.alertCloseBtn.click(() => this.closePopupAlert());
+
+        //Sự kiện click cho nút xóa, thực hiện kiểm tra các tr có checkbox active để xóa
+        //Author: NQMinh(24/07/2021)
+        Variables.alertDeleteBtn.click(() => {
+            const checkboxes = $('tbody tr .delete-box input');
+            checkboxes.each((index, box) => {
+                if (box.getAttribute('checked') === 'checked') {
+                    //input -> .delete-box -> td -> tr mới lấy được tr-data
+                    const employeeIdToDelete = $(box).parent().parent().parent().attr('tr-data');
+                    self.deleteEmployee(employeeIdToDelete);
+                }
+            })
+            debugger
+            self.loadData();
+        });
 
         //Sự kiện định dạng ô nhập lương khi gõ
         //Author: NQMinh(22/07/2021)
@@ -141,12 +160,19 @@ class EmployeePage {
                     Variables.popupModal.css('display', 'none');
                 }
             }
+
+            if (Variables.alertMessage.css('display') === 'flex') {
+                if (event.target.matches('.misa-popup-container')) {
+                    Variables.alertMessage.css('display', 'none');
+                }
+            }
         }
     }
 
     //Hàm load dữ liệu bảng từ server
     //Author: NQMinh(21/07/2021)
     loadData = () => {
+        console.log('load data nè');
         const self = this;
         try {
             //Clean dữ liệu cũ đã hiển thị trong danh mục
@@ -189,6 +215,18 @@ class EmployeePage {
         Variables.popupModal.css('display', 'none');
     }
 
+    //Hàm mở thông báo xác nhận xóa
+    //Author: NQMinh(24/07/2021)
+    openPopupAlert = () => {
+        Variables.alertMessage.css('display', 'flex');
+    }
+
+    //Hàm đóng thông báo xác nhận xóa
+    //Author: NQMinh(24/07/2021)
+    closePopupAlert = () => {
+        Variables.alertMessage.css('display', 'none');
+    }
+
     //Hàm binding dữ liệu từ table vào modal
     //Author: NQMinh(22/07/2021)
     static bindingDataFromTable = (data) => {
@@ -211,8 +249,7 @@ class EmployeePage {
 
     //Hàm lưu thông tin nhân viên lên server
     //Author: NQMinh(22/07/2021)
-    static saveDataOnClick = (self) => {
-        console.log(self);
+    saveDataOnClick = (self) => {
         // if (self.validateAll()) {
         //
         // }
@@ -299,6 +336,29 @@ class EmployeePage {
         })
     }
 
+    //Hàm kích hoạt checkbox của từng hàng
+    //Author: NQMinh(22/07/2021)
+    rowActive = (self) => {
+        //chọn một lượt tất cả check box để duyệt mảng
+        const deleteBoxes = document.querySelectorAll('.delete-box input');
+        //chọn một hàng cụ thể
+        const row = $(self).children()[0];
+        //chọn checkbox từ hàng đó
+        const checkbox = $(row).children().children()[0];
+        $(checkbox).attr('checked', !$(checkbox).attr('checked'));
+
+        let allUnchecked = true;
+        deleteBoxes.forEach(box => {
+            if (box.getAttribute('checked') === 'checked') {
+                allUnchecked =  false;
+                Variables.buttonDelete.css('display', 'flex');
+            }
+            if (allUnchecked) {
+                Variables.buttonDelete.css('display', 'none');
+            }
+        })
+    }
+
     //#region các hàm liên quan đến xử lý validate trong form
     //Hàm kiểm tra ô nhập trống
     //Author: NQMinh(21/07/2021)
@@ -367,13 +427,15 @@ class EmployeePage {
     //Hàm xóa nhân viên
     //Author: NQMinh(24/07/2021)
     deleteEmployee = (id) => {
-        const self = this;
         try {
             $.ajax({
                 url: `http://cukcuk.manhnv.net/v1/Employees/${id}`,
                 method: 'DELETE',
-            }).done(function (res) {
-                self.loadData();
+            }).done(function () {
+                //xóa thành công thì ẩn cảnh báo
+                Variables.alertMessage.css('display', 'none');
+                //xóa thành công thì ẩn nút xóa
+                Variables.buttonDelete.css('display', 'none');
             }).fail(function (res) {
                 switch (res.status) {
                     case 500:
@@ -390,17 +452,6 @@ class EmployeePage {
         } catch (error) {
             console.log(error);
         }
-    }
-
-    //Hàm gán sự kiện click cho các checkbox mỗi hàng để thực hiện xóa
-    //Author: NQMinh(24/07/2021)
-    assignDelete = (data) => {
-        const self = this;
-        data.click(function() {
-            //delete-box -> td -> tr thì mới lấy được attribute tr-data là id nhân viên
-            const employeeIdToDelete = $(this).parent().parent().attr('tr-data');
-            self.deleteEmployee(employeeIdToDelete);
-        })
     }
 
     //Hàm render dữ liệu bảng nhân viên
@@ -439,13 +490,11 @@ class EmployeePage {
                     </tr>`);
             $('tbody').append(trHTML);
         })
-
-        // self.assignDelete($('tbody tr .delete-box'));
     }
 
     //Hàm kiểm tra thông tin có trống không
     //@params dữ liệu bất kỳ
-    //@returns '' nếu dữ liệu không tồn tại, không thì trả về đúng dữ liệu đó
+    //@returns ' ' nếu dữ liệu không tồn tại, không thì trả về đúng dữ liệu đó
     //Author: NQMinh(17/07/2021)
     examineData = data => {
         return data ? data : '';

@@ -372,18 +372,42 @@
         </div>
     </div>
 
+    <!-- popup message ở đây, hiện ra cảnh báo người dùng trước khi xóa nhân viên -->
+    <div class="misa-popup-container">
+        <div class="misa-popup">
+            <div class="misa-popup__btn-close-container">
+                <img src="../content/icon/x.svg" alt="close button" class="misa-popup__button-close">
+            </div>
+
+            <div class="header__title">Xóa bản ghi</div>
+            <div class="misa-popup__body">
+                <div class="misa-popup__icon">
+                    <i class="fas fa-exclamation-triangle"></i>
+                </div>
+                <div class="misa-popup__text">
+                    Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại
+                    dữ liệu.
+                </div>
+            </div>
+            <div class="misa-popup__footer">
+                <div class="misa-button--secondary">Hủy</div>
+                <div class="misa-button--primary">Xóa</div>
+            </div>
+        </div>
+    </div>
+
     <script src="../js/lib/jquery-3.6.0.min.js"></script>
 
-    <script src="../js/common/variables.js"></script>
+    <script src="../js/common/Variables.js"></script>
 
-    <script src="../js/common/dropdown.js"></script>
-    <script src="../js/common/utility.js"></script>
+    <script src="../js/common/Dropdown.js"></script>
+    <script src="../js/common/Utility.js"></script>
 
-    <script src="../js/services/employeesAPI.js"></script>
-    <script src="../js/services/employeeIdAPI.js"></script>
-    <script src="../js/services/positionsOptionsAPI.js"></script>
-    <script src="../js/services/departmentsOptionsAPI.js"></script>
+    <script src="../js/services/EmployeesAPI.js"></script>
+    <script src="../js/services/EmployeeIdAPI.js"></script>
+    <script src="../js/services/PositionsOptionsAPI.js"></script>
+    <script src="../js/services/DepartmentsOptionsAPI.js"></script>
 
-    <script src="../js/employee-oop.js"></script>
+    <script src="../js/Employee.js"></script>
 </body>
 </html>

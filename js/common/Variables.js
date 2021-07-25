@@ -1,5 +1,5 @@
 $(document).ready(() => {
-    const original = new Variables();
+    new Variables();
 })
 
 class Variables {
@@ -69,4 +69,10 @@ class Variables {
     static submitBtn = $('#button__submit');
     static cancelBtn = $('#button__cancel');
     static popupModalCloseBtn = $('.misa-modal__button-close');
+
+    //Element popup message
+    static alertMessage = $('.misa-popup-container');
+    static alertCloseBtn = $('.misa-popup__btn-close-container');
+    static alertCancelBtn = $('.misa-popup__footer .misa-button--secondary');
+    static alertDeleteBtn = $('.misa-popup__footer .misa-button--primary');
 }

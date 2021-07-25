@@ -152,3 +152,91 @@ p {
     margin-left: -20px;
     margin-bottom: -20px;
 }
+
+/*#region popup message*/
+.misa-popup-container {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    z-index: 10;
+}
+
+.misa-popup {
+    width: 27%;
+    height: 25%;
+    background-color: var(--color-white);
+    padding: 24px;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
+}
+
+.misa-popup__btn-close-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 8px;
+    cursor: pointer;
+    transition: 0.2s all ease-in-out;
+}
+
+.misa-popup__btn-close-container:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.misa-popup .header__title {
+    color: var(--color-black);
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.misa-popup__body {
+    margin: 24px 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.misa-popup__body .misa-popup__icon {
+    background-color: var(--color-secondary);
+    border-radius: 50%;
+    padding: 8px;
+    color: var(--color-alert);
+}
+
+.misa-popup__footer {
+    width: 100%;
+    padding: 10px 24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-secondary);
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.misa-popup__footer .misa-button--secondary {
+    border: none;
+}
+
+.misa-popup__footer .misa-button--secondary:hover {
+    background-color: var(--color-hightlight);
+}
+
+.misa-popup__footer .misa-button--secondary:active {
+    background-color: transparent;
+}
+
+.misa-popup__footer .misa-button--primary {
+    background-color: var(--color-alert);
+}
+/*#endregion*/
