@@ -77,3 +77,9 @@
 	opacity: 1;
 	visibility: visible;
 }
+
+@media screen and (max-width: 1080px) {
+	.misa-toast__container {
+		width: 45vw;
+	}
+}

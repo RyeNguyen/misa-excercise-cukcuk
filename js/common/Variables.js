@@ -15,6 +15,8 @@ class Variables {
     static buttonDelete = $('#button__delete-employee');
     //nút thêm nhân viên
     static buttonAdd = $('#button__add-employee');
+    //thanh tìm kiếm nhân viên
+    static inputSearch = $('#search-input');
     //nút refresh bảng nhân viên
     static buttonRefresh = $('#button__refresh');
     //nội dung chính của web (gồm các mục tìm kiếm, bảng nhân viên, etc)

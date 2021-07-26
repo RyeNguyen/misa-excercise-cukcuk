@@ -96,10 +96,10 @@ class Toast {
     assignIcon = (response) => {
         let icon;
         switch (response) {
-            case '400': case '404': case '500':
+            case 400: case 404: case 500:
                 icon = '<span class="misa-toast__icon--main"><i class="fas fa-exclamation-triangle"></i></span>';
                 break;
-            case '0':
+            case 0: case 1: case 2:
                 icon = '<span class="misa-toast__icon--main"><i class="fas fa-check"></i></span>';
                 break;
             default:

@@ -3,6 +3,8 @@ $(document).ready(function () {
 })
 
 class EmployeePage {
+    listName;
+
     //Biến kiểm tra xem user khi click vào nút lưu là muốn sửa hay thêm mới nhân viên
     //Author: NQMinh(22/7/2021)
     static wantToCreateNewEmployee = false;
@@ -51,6 +53,12 @@ class EmployeePage {
         //Dãn width text-box căn theo placeholder
         //Author: NQMinh(15/07/2021)
         Variables.textBox.attr('size', Variables.textBox.attr('placeholder').length);
+
+        //Sự kiện tìm kiếm của search input
+        //Author: NQMinh(26/07/2021)
+        Variables.inputSearch.on('input', () => {
+            this.searchEmployee();
+        });
 
         //Hiển thị form thêm mới nhân viên khi nhấn button thêm nhân viên
         //Author: NQMinh(15/07/2021)
@@ -174,14 +182,37 @@ class EmployeePage {
                 url: 'http://cukcuk.manhnv.net/v1/Employees',
                 method: 'GET',
             }).done(function (res) {
+                self.listName = res;
                 new Toast('ok');
-                self.renderTable(res)
+                self.renderTable(res);
             }).fail(function (res) {
                 new Toast(res.status);
             })
         } catch (error) {
             console.log(error)
         }
+    }
+
+    //Hàm tìm kiếm nhân viên bằng cách gõ tên, mã nv hoặc sđt
+    searchEmployee = () => {
+        const tableBody = $('tbody');
+        const keyword = Variables.inputSearch.val();
+        //nếu ô nhập trống thì render toàn bộ dữ liệu
+        // if (keyword.trim() === '') {
+        //     tableBody.empty();
+        //     this.renderTable(this.listName);
+        // }
+
+        //tạo một mảng mới được lọc dữ liệu từ mảng dữ liệu toàn cục
+        const filteredList = this.listName.filter(item => {
+            return (item['FullName'].toLowerCase().includes(keyword.toLowerCase()) ||
+                item['EmployeeCode'].toLowerCase().includes(keyword.toLowerCase()) ||
+                item['PhoneNumber'].includes(keyword)
+            );
+        })
+        //phải làm trống bảng trước khi render bảng mới
+        tableBody.empty();
+        this.renderTable(filteredList);
     }
 
     //Hàm mở popup modal
@@ -240,9 +271,6 @@ class EmployeePage {
     //Hàm lưu thông tin nhân viên lên server
     //Author: NQMinh(22/07/2021)
     saveDataOnClick = (self) => {
-        // if (self.validateAll()) {
-        //
-        // }
         //fix tạm dữ liệu
         let employee = {
             // "EmployeeId": "f44d3bec-ea01-11eb-94eb-42010a8c0002",
@@ -429,6 +457,7 @@ class EmployeePage {
     //@params dữ liệu lấy từ server
     //Author: NQMinh(17/07/2021)
     renderTable = (tableData) => {
+        console.log(tableData);
         const self = this;
         tableData.forEach(employee => {
             const employeeCode = employee['EmployeeCode'];
@@ -448,11 +477,11 @@ class EmployeePage {
                                 <span class="misa-checkmark"></span>                    
                             </div>                            
                         </td>
-                        <td>${self.examineData(employeeCode)}</td>
-                        <td>${self.examineData(fullName)}</td>
+                        <td class="misa__table-code">${self.examineData(employeeCode)}</td>
+                        <td class="misa__table-fullname">${self.examineData(fullName)}</td>
                         <td>${self.examineData(gender)}</td>
                         <td>${Utility.dateFormatter(self.examineData(dob), false)}</td>
-                        <td>${self.examineData(phone)}</td>
+                        <td class="misa__table-phone">${self.examineData(phone)}</td>
                         <td>${self.examineData(email)}</td>
                         <td>${self.examineData(position)}</td>
                         <td>${self.examineData(department)}</td>
