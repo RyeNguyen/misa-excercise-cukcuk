@@ -10,9 +10,20 @@
     <link rel="stylesheet" href="css/layout/Menu.css"/>
 </head>
 <body>
+<button class="misa-button--primary" style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+">Toast nè</button>
 <script src="./js/common/Toast.js"></script>
 <script>
-    const test = new Toast('404', 'Dữ liệu không hợp lệ, vui lòng xem lại');
+    const button = document.querySelector('.misa-button--primary');
+
+    document.addEventListener('click', (event) => {
+        if (event.target.matches('.misa-button--primary'))
+        new Toast('0', 'Dữ liệu không hợp lệ, vui lòng xem lại');
+    })
 </script>
 </body>
 </html>

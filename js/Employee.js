@@ -94,20 +94,11 @@ class EmployeePage {
                     url: `http://cukcuk.manhnv.net/v1/Employees/${Variables.employeeId}`,
                     method: 'GET',
                 }).done(function (res) {
+                    new Toast('ok');
                     //binding dữ liệu lên form
                     EmployeePage.bindingDataFromTable(res);
                 }).fail(function (res) {
-                    switch (res.status) {
-                        case 500:
-                            alert('Code cùi');
-                            break;
-                        case 400:
-                            alert('Dữ liệu không hợp lệ');
-                            break;
-                        case 404:
-                            alert('Quay đầu là bờ');
-                            break;
-                    }
+                    new Toast(res.status);
                 })
             } catch (error) {
                 console.log(error)
@@ -141,6 +132,7 @@ class EmployeePage {
                     self.deleteEmployee(employeeIdToDelete);
                 }
             })
+            new Toast(2);
             self.loadData();
         });
 
@@ -182,10 +174,10 @@ class EmployeePage {
                 url: 'http://cukcuk.manhnv.net/v1/Employees',
                 method: 'GET',
             }).done(function (res) {
+                new Toast('ok');
                 self.renderTable(res)
             }).fail(function (res) {
-                console.log(res)
-                alert('ERRORRRRRRRRRRRRRR');
+                new Toast(res.status);
             })
         } catch (error) {
             console.log(error)
@@ -315,22 +307,13 @@ class EmployeePage {
             data: JSON.stringify(employee),
             dataType: 'json',
             contentType: 'application/json',
-        }).done(function (res) {
-            alert('OK bạn')
+        }).done(function () {
+            EmployeePage.wantToCreateNewEmployee ?
+                new Toast(0) : new Toast(1);
             self.loadData();
             self.closeModal();
         }).fail(function (res) {
-            switch (res.status) {
-                case 500:
-                    alert('Code cùi');
-                    break;
-                case 400:
-                    alert('Dữ liệu không hợp lệ');
-                    break;
-                case 404:
-                    alert('Quay đầu là bờ');
-                    break;
-            }
+            new Toast(res.status);
         })
     }
 
@@ -435,17 +418,7 @@ class EmployeePage {
                 //xóa thành công thì ẩn nút xóa
                 Variables.buttonDelete.css('display', 'none');
             }).fail(function (res) {
-                switch (res.status) {
-                    case 500:
-                        alert('Code cùi');
-                        break;
-                    case 400:
-                        alert('Dữ liệu không hợp lệ');
-                        break;
-                    case 404:
-                        alert('Quay đầu là bờ');
-                        break;
-                }
+                new Toast(res.status);
             })
         } catch (error) {
             console.log(error);

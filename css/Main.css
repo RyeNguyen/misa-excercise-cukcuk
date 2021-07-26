@@ -3,6 +3,7 @@
 @import url('base/Combobox.css');
 @import url('base/Dropdown.css');
 @import url('base/Popup.css');
+@import url('base/Toast.css');
 @import url('base/TextBox.css');
 @import url('Variables.css');
 
@@ -124,66 +125,4 @@ p {
 @font-face {
     font-family: 'GoogleSans-ThinItalic';
     src: url('../assets/font/GoogleSans-ThinItalic.otf') format('opentype');
-}
-
-.misa-toast__container {
-    position: fixed;
-    z-index: 20;
-    top: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.misa-toast {
-    position: relative;
-    width: auto;
-    height: 48px;
-    min-width: 300px;
-    background-color: #fff;
-    border-radius: 5px;
-    padding: 15px;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.16);
-    /*opacity: 0;*/
-    /*visibility: hidden;*/
-    transition: all 0.3s ease-in-out;
-}
-
-.misa-toast__title {
-    width: 80%;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    gap: 10px;
-}
-
-.misa-toast__icon--main {
-    background-color: var(--color-info);
-    color: var(--color-white);
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.misa-toast.misa-404 .misa-toast__icon--main,
-.misa-toast.misa-400 .misa-toast__icon--main,
-.misa-toast.misa-500 .misa-toast__icon--main {
-    background-color: var(--color-alert);
-}
-
-.misa-toast__close {
-    font-size: 16px;
-    color: var(--color-info);
-}
-
-.misa-toast.misa-404 .misa-toast__close,
-.misa-toast.misa-400 .misa-toast__close,
-.misa-toast.misa-500 .misa-toast__close {
-    color: var(--color-alert);
 }
