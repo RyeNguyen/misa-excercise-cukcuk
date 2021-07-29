@@ -1,5 +1,5 @@
 <template>
-  <div class="misa-modal-container">
+  <div class="misa-modal-container" :class="{'misa-modal-container--open': modalIsOpened}">
     <div class="misa-modal">
       <img src="../../assets/icon/x.svg" alt="close button" class="misa-modal__button-close" @click="closeModal">
 
@@ -170,21 +170,35 @@
 </template>
 
 <script>
-import MisaDropdown from "@/components/base/MisaDropdown";
+import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 
 export default {
   name: "MisaPopupModal",
+  data() {
+    return {
+      showModal: this.modalIsOpened
+    }
+  },
+  props: {
+    modalIsOpened: Boolean
+  },
   components: {
     MisaDropdown
   },
+  emits: ['btn-close-clicked'],
   methods: {
     closeModal() {
-      document.querySelector('.misa-modal-container').style.display = 'none';
+      this.showModal = false;
+      this.$emit('btn-close-clicked', this.showModal);
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 @import url('../../css/base/Modal.css');
+
+.misa-modal-container--open {
+  display: flex;
+}
 </style>

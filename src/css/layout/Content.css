@@ -43,14 +43,14 @@
 	background-color: var(--color-alert-hover);
 }
 
-.misa-content .misa-content__header .button__icon {
-	width: 24px;
-	height: 24px;
-	background-image: url('../../assets/icon/add.png');
-	background-position: center;
-	background-size: cover;
-	background-repeat: no-repeat;
-}
+/*.misa-content .misa-content__header .button__icon {*/
+/*	width: 24px;*/
+/*	height: 24px;*/
+/*	background-image: url('../../assets/icon/add.png');*/
+/*	background-position: center;*/
+/*	background-size: cover;*/
+/*	background-repeat: no-repeat;*/
+/*}*/
 
 .misa-content .misa-content__search {
 	margin-top: 16px;

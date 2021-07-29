@@ -11,19 +11,25 @@
       <MisaDropdown id="dropdown__position" title="Tất cả vị trí"></MisaDropdown>
     </div>
     <div class="misa-content__search--right">
-      <div class="misa-button--secondary misa-button__icon" id="button__refresh">
-        <div class="button__icon"></div>
-      </div>
+      <MisaButtonSecondary
+          id="button__refresh"
+          img="refresh.png"
+      />
+<!--      <div class="misa-button&#45;&#45;secondary misa-button__icon" id="button__refresh">-->
+<!--        <div class="button__icon"></div>-->
+<!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import MisaDropdown from "@/components/base/MisaDropdown";
+import MisaButtonSecondary from "@/components/base/button/MisaButtonSecondary";
+import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 
 export default {
   name: "MisaContentSearch",
   components: {
+    MisaButtonSecondary,
     MisaDropdown
   }
 }

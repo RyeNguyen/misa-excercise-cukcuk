@@ -6,20 +6,28 @@
         <div class="button__text">Xóa nhân viên</div>
       </div>
 
-      <MisaButton id="button__add-employee" text="Thêm nhân viên" @click.native="openModal"></MisaButton>
+      <MisaButton
+          id="button__add-employee"
+          text="Thêm nhân viên"
+          img="add.png"
+          @click.native="openModal"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import MisaButton from "@/components/base/Button/MisaButton";
+import MisaButton from "@/components/base/button/MisaButtonPrimary";
 
 export default {
   name: "MisaContentHeader",
   data() {
     return {
-      modalIsOpened: true
+      hideModal: !this.modalIsOpened
     }
+  },
+  props: {
+    modalIsOpened: Boolean
   },
   components: {
     MisaButton
@@ -27,7 +35,7 @@ export default {
   emits: ['btn-add-clicked'],
   methods: {
     openModal() {
-      document.querySelector('.misa-modal-container').style.display = 'flex';
+      this.$emit('btn-add-clicked', this.hideModal);
     }
   }
 }

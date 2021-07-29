@@ -10,15 +10,16 @@
 
 <script>
 
+
 export default {
   name: "MisaDropdown",
+  created() {
+
+  },
   data() {
     return {
 
     }
-  },
-  created() {
-
   },
   props: {
     id: {
