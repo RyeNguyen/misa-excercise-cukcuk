@@ -1,0 +1,128 @@
+@import url('base/Bubble.css');
+@import url('base/Button.css');
+@import url('base/Combobox.css');
+@import url('base/Dropdown.css');
+@import url('base/Popup.css');
+@import url('base/Toast.css');
+@import url('base/TextBox.css');
+@import url('Variables.css');
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: GoogleSans-Regular, sans-serif;
+    font-size: 13px;
+    color: var(--color-content-text);
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-secondary);
+    border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-hightlight);
+    border-radius: 16px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+h2 {
+    margin: 0;
+    font-size: 15px;
+}
+
+p {
+    margin: 0;
+}
+
+.misa-show {
+    display: block;
+}
+
+.misa-hidden {
+    display: none;
+}
+
+.misa-rotate180 {
+    transform: rotateZ(180deg);
+}
+
+.misa-input--alert {
+    border: 1px solid var(--color-alert);
+}
+
+@font-face {
+    font-family: 'GoogleSans-Black';
+    src: url('../assets/font/GoogleSans-Black.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-BlackItalic';
+    src: url('../assets/font/GoogleSans-BlackItalic.otf') format('opentype'), url('../assets/font/GoogleSans-Bold.otf') format('opentype'), url('../assets/font/GoogleSans-BoldItalic.otf') format('opentype'), url('../assets/font/GoogleSans-Italic.otf') format('opentype'), url('../assets/font/GoogleSans-Light.otf') format('opentype'), url('../assets/font/GoogleSans-LightItalic.otf') format('opentype'), url('../assets/font/GoogleSans-Medium.otf') format('opentype'), url('../assets/font/GoogleSans-MediumItalic.otf') format('opentype'), url('../assets/font/GoogleSans-Regular.otf') format('opentype'), url('../assets/font/GoogleSans-Thin.otf') format('opentype'), url('../assets/font/GoogleSans-ThinItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Bold';
+    src: url('../assets/font/GoogleSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-BoldItalic';
+    src: url('../assets/font/GoogleSans-BoldItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Italic';
+    src: url('../assets/font/GoogleSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Light';
+    src: url('../assets/font/GoogleSans-Light.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-LightItalic';
+    src: url('../assets/font/GoogleSans-LightItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Medium';
+    src: url('../assets/font/GoogleSans-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-MediumItalic';
+    src: url('../assets/font/GoogleSans-MediumItalic.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Regular';
+    src: url('../assets/font/GoogleSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-Thin';
+    src: url('../assets/font/GoogleSans-Thin.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'GoogleSans-ThinItalic';
+    src: url('../assets/font/GoogleSans-ThinItalic.otf') format('opentype');
+}

@@ -1,0 +1,166 @@
+﻿@import url('../Variables.css');
+
+.misa-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: none;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.misa-modal {
+    width: 50%;
+    height: 95vh;
+    background-color: var(--color-white);
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 24px;
+    position: relative;
+}
+
+.misa-modal__button-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+}
+
+.misa-modal__header {
+    text-transform: uppercase;
+}
+
+.misa-modal__content {
+    margin-top: 24px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+}
+
+    .misa-modal__content .misa-modal__img-picker {
+        width: 30%;
+    }
+
+        .misa-modal__content .misa-modal__img-picker .img-picker__placeholder {
+            width: 144px;
+            height: 144px;
+            border-radius: 50%;
+            border: 1px solid var(--color-hightlight);
+            background-image: url('../../assets/img/default-avatar.jpg');
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .misa-modal__content .misa-modal__img-picker .img-picker__text {
+            width: 50%;
+            text-align: center;
+            font-size: 11px;
+        }
+
+    .misa-modal__content .misa-modal__form {
+        width: 75%;
+    }
+
+        .misa-modal__content .misa-modal__form .misa-modal__info {
+            margin-bottom: 16px;
+        }
+
+        .misa-modal__content .misa-modal__form .info__title {
+            text-transform: uppercase;
+        }
+
+        .misa-modal__content .misa-modal__form .misa__divider {
+            width: 80px;
+            height: 4px;
+            background-color: var(--color-primary);
+            margin: 8px 0;
+        }
+
+        .misa-modal__content .misa-modal__form .misa-modal__fields {
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+            .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+                width: 49%;
+                margin-bottom: 16px;
+                position: relative;
+            }
+
+.misa-modal__form .misa-modal__field .misa-label-text {
+    display: block;
+    margin-bottom: 4px;
+}
+
+.misa-modal__form .misa-modal__field input,
+.misa-modal__form .misa-modal__field .misa-dropdown {
+    width: 100%;
+}
+
+.misa__asterisk {
+    color: var(--color-alert);
+}
+
+.misa-modal .misa-modal__footer {
+    width: 100%;
+    padding: 8px 24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.misa-modal .misa-modal__footer .misa-button--secondary {
+    border: none;
+}
+
+    .misa-modal .misa-modal__footer .misa-button--primary {
+        margin-left: 16px;
+    }
+
+    @media screen and (max-width: 1920px) {
+        .misa-modal__form .misa-modal__field .misa-label-text {
+            margin-bottom: 0;
+        }
+
+        .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+            margin-bottom: 6px;
+        }
+    }
+
+#income-container {
+    position: relative;
+}
+
+#income-container input {
+    text-align: right;
+    padding-right: 52px;
+}
+
+#income-container #income-container__label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-style: italic;
+}
+
+@media screen and (max-width: 1080px) {
+    .misa-modal {
+        width: 90%;
+    }
+}
