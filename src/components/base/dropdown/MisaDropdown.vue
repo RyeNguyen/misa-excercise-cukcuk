@@ -1,24 +1,33 @@
 <template>
-  <div class="misa-dropdown" :id="id">
-    <button class="dropdown__button" @click="showDropdownOptions">
-      <span class="dropdown__title">{{ title }}</span>
-      <i class="fas fa-chevron-down"></i>
+  <div class="misa-dropdown" :id="id" :value="value">
+    <button
+        class="dropdown__button"
+        @click="showDropdownOptions"
+    >
+      <span class="dropdown__title">{{ dropdownTitle }}</span>
+      <i class="fas fa-chevron-down" :class="{'misa-rotate180': iconRotate}"></i>
     </button>
-    <div class="dropdown__content dropdown__content--hidden"></div>
+    <MisaDropdownOptions
+        :contentHidden="contentHidden"
+        :dropdownTitle="title"
+        :dropdownType="dropdownType"
+        @dropdown-item-active="assignDropdown"
+    />
   </div>
 </template>
 
 <script>
-
+import MisaDropdownOptions from "@/components/base/dropdown/MisaDropdownOptions";
 
 export default {
   name: "MisaDropdown",
-  created() {
-
-  },
   data() {
     return {
-
+      contentHidden: true,
+      dropdownTitle: this.title,
+      dropdownType: this.type,
+      iconRotate: false,
+      value: ''
     }
   },
   props: {
@@ -29,20 +38,42 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    type: {
+      type: String,
+      required: true
     }
   },
+  components: {
+    MisaDropdownOptions
+  },
   methods: {
-    test() {
-      console.log(this.btn, this.id, this.content, this.icon, this.options, this.title)
-    },
+    //Hàm xổ dropdown content khi click (click lần 2 để đóng)
+    //Author: NQMinh(29/07/2021)
     showDropdownOptions() {
-      // const btn = document.querySelector(`#${this.id} .dropdown__button`);
-      const content = document.querySelector(`#${this.id} .dropdown__content`);
-      const icon = document.querySelector(`#${this.id} .dropdown__button i`);
-      // const options = document.querySelector(`#${this.id} a`);
+      this.contentHidden = !this.contentHidden;
+      this.iconRotate = !this.iconRotate;
+    },
 
-      icon.classList.toggle('misa-rotate180');
-      content.classList.toggle('dropdown__content--showed');
+    hideDropdownOptions() {
+      this.contentHidden = true;
+    },
+
+    //Hàm chuyển title của button dropdown
+    //@params dropdown item
+    //Author: NQMinh(29/07/2021)
+    assignDropdown(item) {
+      //nếu có chọn item thì chuyển title thành tên item
+      if (item) {
+        this.dropdownTitle = item[`${this.type}Name`];
+        this.value = item[`${this.type}Id`];
+      } else {
+        this.dropdownTitle = this.title;
+        this.value = '';
+      }
+      //ẩn dropdown content vaf xoay mũi tên
+      this.contentHidden = !this.contentHidden;
+      this.iconRotate = false;
     }
   }
 }

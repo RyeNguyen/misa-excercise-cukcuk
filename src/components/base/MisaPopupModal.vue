@@ -1,6 +1,10 @@
 <template>
-  <div class="misa-modal-container" :class="{'misa-modal-container--open': modalIsOpened}">
-    <div class="misa-modal">
+  <div
+      class="misa-modal-container"
+      :class="{'misa-modal-container--open': modalIsOpened}"
+      @click="closeModal"
+  >
+    <div class="misa-modal" @click.stop.prevent>
       <img src="../../assets/icon/x.svg" alt="close button" class="misa-modal__button-close" @click="closeModal">
 
       <h1 class="misa-modal__header">Thông tin nhân viên</h1>
@@ -49,7 +53,7 @@
                 <label class="misa-label-text">
                   Giới tính
                 </label>
-                <MisaDropdown id="dropdown__gender" title="Chọn giới tính"></MisaDropdown>
+                <MisaDropdown id="dropdown__gender" title="Chọn giới tính" type="Position"></MisaDropdown>
               </div>
 
               <!-- Nhập CMT ở đây -->
@@ -107,7 +111,7 @@
                 <label class="misa-label-text">
                   Vị trí
                 </label>
-                <MisaDropdown id="dropdown__position-modal" title="Chọn vị trí"></MisaDropdown>
+                <MisaDropdown id="dropdown__position-modal" title="Chọn vị trí" type="Position"></MisaDropdown>
               </div>
 
               <!-- Nhập phòng ban ở đây -->
@@ -115,7 +119,7 @@
                 <label class="misa-label-text">
                   Phòng ban
                 </label>
-                <MisaDropdown id="dropdown__department-modal" title="Chọn phòng ban"></MisaDropdown>
+                <MisaDropdown id="dropdown__department-modal" title="Chọn phòng ban" type="Position"></MisaDropdown>
               </div>
 
               <!-- Nhập mã số thuế ở đây -->
@@ -151,7 +155,7 @@
                 <label class="misa-label-text">
                   Tình trạng làm việc
                 </label>
-                <MisaDropdown id="dropdown__work-status" title="Tình trạng làm việc"></MisaDropdown>
+                <MisaDropdown id="dropdown__work-status" title="Tình trạng làm việc" type="Position"></MisaDropdown>
               </div>
             </div>
           </div>
@@ -187,6 +191,8 @@ export default {
   },
   emits: ['btn-close-clicked'],
   methods: {
+    //Hàm ẩn form thêm/sửa nhân viên
+    //Author: NQMinh(29/07/2021)
     closeModal() {
       this.showModal = false;
       this.$emit('btn-close-clicked', this.showModal);

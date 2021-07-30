@@ -24,16 +24,16 @@
             <span class="misa-checkmark"></span>
           </div>
         </td>
-        <td>{{employee.EmployeeCode}}</td>
-        <td>{{employee.FullName}}</td>
-        <td>{{employee.GenderName}}</td>
-        <td>{{employee.DateOfBirth}}</td>
-        <td>{{employee.PhoneNumber}}</td>
-        <td>{{employee.Email}}</td>
-        <td>{{employee.PositionName}}</td>
-        <td>{{employee.DepartmentName}}</td>
-        <td>{{employee.Salary}}</td>
-        <td>{{employee.WorkStatus}}</td>
+        <td>{{employee['EmployeeCode']}}</td>
+        <td>{{employee['FullName']}}</td>
+        <td>{{employee['GenderName']}}</td>
+        <td>{{employee['DateOfBirth']}}</td>
+        <td>{{employee['PhoneNumber']}}</td>
+        <td>{{employee['Email']}}</td>
+        <td>{{employee['PositionName']}}</td>
+        <td>{{employee['DepartmentName']}}</td>
+        <td>{{employee['Salary']}}</td>
+        <td>{{employee['WorkStatus']}}</td>
       </tr>
       </tbody>
     </table>

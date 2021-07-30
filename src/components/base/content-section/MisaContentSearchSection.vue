@@ -7,8 +7,16 @@
           <input type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại" id="search-input">
         </label>
       </div>
-      <MisaDropdown id="dropdown__department" title="Tất cả phòng ban"></MisaDropdown>
-      <MisaDropdown id="dropdown__position" title="Tất cả vị trí"></MisaDropdown>
+      <MisaDropdown
+          id="dropdown__department"
+          title="Tất cả phòng ban"
+          type="Department"
+      />
+      <MisaDropdown
+          id="dropdown__position"
+          title="Tất cả vị trí"
+          type="Position"
+      />
     </div>
     <div class="misa-content__search--right">
       <MisaButtonSecondary
