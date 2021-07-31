@@ -3,7 +3,12 @@
     <table class="misa-content__table">
       <thead>
       <tr class="table__header">
-        <th></th>
+        <th>
+          <div class="delete-box">
+            <input type="checkbox">
+            <span class="misa-checkmark"></span>
+          </div>
+        </th>
         <th>Mã nhân viên</th>
         <th>Họ và tên</th>
         <th>Giới tính</th>
@@ -18,13 +23,18 @@
       </thead>
       <tbody>
       <tr
-          v-for="employee in data"
+          v-for="(employee, index) in tableData"
           :key="employee['EmployeeId']"
+          @click="rowActive(index)"
           @dblclick="bindingDataFromTable(employee)"
       >
         <td>
           <div class="delete-box">
-            <input type="checkbox">
+            <input
+                ref="deleteBox"
+                type="checkbox"
+                :value="employee['EmployeeId']"
+            >
             <span class="misa-checkmark"></span>
           </div>
         </td>
@@ -55,11 +65,27 @@ export default {
   data() {
     return {
       showModal: true,
-      wantToCreateNewEmployee: false
+      wantToCreateNewEmployee: false,
+      tableData: this.data,
+      employeesToDelete: []
     }
   },
-  props: ['data'],
+  props: {
+    data: {
+      type: Array,
+      required: true
+    }
+  },
+
   emits: ['row-double-clicked'],
+
+  watch: {
+    data: function() {
+      this.tableData = this.data;
+      this.$forceUpdate();
+    }
+  },
+
   methods: {
     //Hàm định dạng mức lương
     //Author: NQMinh(30/07/2021)
@@ -86,6 +112,42 @@ export default {
       }).catch(res => {
         console.log(res);
       })
+    },
+
+    //TODO: Hàm phức tạp và khó hiểu
+    //Hàm kích hoạt checkbox khi click vào mỗi hàng
+    //Author: NQMinh(31/07/2021)
+    rowActive(index) {
+      this.$refs.deleteBox[index].defaultChecked = !this.$refs.deleteBox[index].defaultChecked;
+      if (this.$refs.deleteBox[index].defaultChecked) {
+        this.employeesToDelete.push(this.$refs.deleteBox[index].defaultValue);
+      } else {
+        if (this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue) > -1) {
+          this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue), 1);
+        }
+      }
+      this.showButtonDelete();
+    },
+
+    //Kiểm tra các checkbox được kích hoạt chưa để hiện nút xóa
+    //Author: NQMinh(31/07/2021)
+    showButtonDelete() {
+      //List toàn bộ checkbox
+      const checkboxList = this.$refs.deleteBox;
+      //Biến kiểm tra có checkbox nào được kích hoạt không
+      let allUnchecked = true;
+
+      //Nếu có ít nhất 1 checkbox được kích hoạt thì hiện nút xóa
+      checkboxList.forEach(checkbox => {
+        if (checkbox.defaultChecked === true) {
+          allUnchecked = false;
+        }
+      })
+      if (!allUnchecked) {
+        this.$emit('show-btn-delete', this.employeesToDelete);
+      } else {
+        this.$emit('hide-btn-delete');
+      }
     }
   }
 }

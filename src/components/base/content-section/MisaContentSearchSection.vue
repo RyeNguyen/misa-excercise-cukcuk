@@ -22,6 +22,7 @@
       <MisaButtonSecondary
           id="button__refresh"
           img="refresh.png"
+          @click.native="reloadData"
       />
 <!--      <div class="misa-button&#45;&#45;secondary misa-button__icon" id="button__refresh">-->
 <!--        <div class="button__icon"></div>-->
@@ -39,6 +40,12 @@ export default {
   components: {
     MisaButtonSecondary,
     MisaDropdown
+  },
+
+  methods: {
+    reloadData: function () {
+      this.$emit("reload");
+    }
   }
 }
 </script>

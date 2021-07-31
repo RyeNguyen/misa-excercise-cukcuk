@@ -2,9 +2,12 @@
   <div class="misa-content__header">
     <h1 class="misa-content__header header__title">Danh sách nhân viên</h1>
     <div class="button__container">
-      <div class="misa-button--primary" id="button__delete-employee">
-        <div class="button__text">Xóa nhân viên</div>
-      </div>
+      <MisaButton
+          id="button__delete-employee"
+          text="Xóa nhân viên"
+          :buttonDeleteShown="buttonDeleteShown"
+          @click.native="deleteEmployee"
+      />
 
       <MisaButton
           id="button__add-employee"
@@ -30,6 +33,7 @@ export default {
       console.log(res);
     })
   },
+
   data() {
     return {
       hideModal: !this.modalIsOpened,
@@ -37,13 +41,24 @@ export default {
       wantToCreateNewEmployee: true
     }
   },
+
   props: {
-    modalIsOpened: Boolean
+    buttonDeleteShown: {
+      type: Boolean,
+      required: true
+    },
+
+    modalIsOpened: Boolean,
+
+    employeesToDelete: Array
   },
+
   components: {
     MisaButton
   },
+
   emits: ['btn-add-clicked'],
+
   methods: {
     openModal() {
       this.$emit(
@@ -52,6 +67,17 @@ export default {
           this.newEmployeeCode,
           this.wantToCreateNewEmployee
       );
+    },
+
+    deleteEmployee() {
+      console.log(this.employeesToDelete)
+      this.employeesToDelete.forEach(employeeId => {
+        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(res => {
+          console.log(res);
+        }).catch(res => {
+          console.log(res);
+        })
+      })
     }
   }
 }

@@ -340,7 +340,7 @@ export default {
         this.employee = this.employeeData;
         this.employee['DateOfBirth'] = this.formatDate(this.employee['DateOfBirth']);
         this.employee['IdentityDate'] = this.formatDate(this.employee['IdentityDate']);
-        this.employee['Salary'] = this.formatSalary(this.employee['Salary']);
+        // this.employee['Salary'] = this.formatSalary(this.employee['Salary']);
       } else {
         this.employee = {};
       }
@@ -372,8 +372,34 @@ export default {
     //Hàm lưu dữ liệu nv lên database
     //Author: NQMinh(30/07/2021)
     submitData() {
-      console.log(this.employee);
-      axios.post('http://cukcuk.manhnv.net/v1/Employees', this.employee).then(res => {
+      if (this.wantToCreateNewEmployee) {
+        this.addEmployee();
+      } else {
+        this.updateEmployee();
+      }
+      this.closeModal();
+      this.employee = {};
+
+      //TODO: Vẫn chưa reload được table, cần xem lại
+      this.$emit('modal-submitted');
+    },
+
+    addEmployee() {
+      axios.post(
+          'http://cukcuk.manhnv.net/v1/Employees',
+          this.employee
+      ).then(res => {
+        console.log(res);
+      }).catch(res => {
+        console.log(res);
+      })
+    },
+
+    updateEmployee() {
+      axios.put(
+          `http://cukcuk.manhnv.net/v1/Employees/${this.employee['EmployeeId']}`,
+          this.employee
+      ).then(res => {
         console.log(res);
       }).catch(res => {
         console.log(res);
