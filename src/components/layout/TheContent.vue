@@ -22,6 +22,7 @@
         :employeeData="individualData"
         :modalIsOpened="modalIsOpened"
         :newEmployeeCode="employeeCode"
+        :wantToCreateNewEmployee="wantToCreateNewEmployee"
         @btn-close-clicked="toggleModal"
     />
   </div>
@@ -54,6 +55,7 @@ export default {
       employeeCode: '',
       individualData: null,
       modalIsOpened: false,
+      wantToCreateNewEmployee: true
     }
   },
 
@@ -66,13 +68,20 @@ export default {
   },
 
   methods: {
-    bindingDataFromTable(employee) {
+    //Hàm binding dữ liệu từ bảng vào modal
+    //Author: NQMinh(31/07/2021)
+    bindingDataFromTable(state, employee, createNew) {
+      this.modalIsOpened = state;
       this.individualData = employee;
+      this.wantToCreateNewEmployee = createNew;
     },
 
-    toggleModal(state, newEmployeeCode) {
+    //Hàm ẩn hiện và truyền mã nv mới vào modal
+    //Author: NQMinh(29/07/2021)
+    toggleModal(state, newEmployeeCode, createNew) {
       this.employeeCode = newEmployeeCode;
       this.modalIsOpened = state;
+      this.wantToCreateNewEmployee = createNew;
     }
   }
 }

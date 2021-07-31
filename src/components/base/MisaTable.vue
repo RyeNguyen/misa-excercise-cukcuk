@@ -54,7 +54,8 @@ export default {
   name: 'MisaTable',
   data() {
     return {
-
+      showModal: true,
+      wantToCreateNewEmployee: false
     }
   },
   props: ['data'],
@@ -76,8 +77,12 @@ export default {
     //Author: NQMinh(30/07/2021)
     bindingDataFromTable(employee) {
       axios.get(`http://cukcuk.manhnv.net/v1/Employees/${employee['EmployeeId']}`).then(res => {
-        console.table(res.data);
-        this.$emit('row-double-clicked', res.data);
+        this.$emit(
+            'row-double-clicked',
+            this.showModal,
+            res.data,
+            this.wantToCreateNewEmployee
+        );
       }).catch(res => {
         console.log(res);
       })

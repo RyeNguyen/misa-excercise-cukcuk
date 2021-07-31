@@ -33,7 +33,8 @@ export default {
   data() {
     return {
       hideModal: !this.modalIsOpened,
-      newEmployeeCode: ''
+      newEmployeeCode: '',
+      wantToCreateNewEmployee: true
     }
   },
   props: {
@@ -45,7 +46,12 @@ export default {
   emits: ['btn-add-clicked'],
   methods: {
     openModal() {
-      this.$emit('btn-add-clicked', this.hideModal, this.newEmployeeCode);
+      this.$emit(
+          'btn-add-clicked',
+          this.hideModal,
+          this.newEmployeeCode,
+          this.wantToCreateNewEmployee
+      );
     }
   }
 }
