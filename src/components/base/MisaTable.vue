@@ -17,7 +17,11 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="employee in data" :key="employee.EmployeeId">
+      <tr
+          v-for="employee in data"
+          :key="employee['EmployeeId']"
+          @dblclick="bindingDataFromTable(employee)"
+      >
         <td>
           <div class="delete-box">
             <input type="checkbox">
@@ -27,12 +31,12 @@
         <td>{{employee['EmployeeCode']}}</td>
         <td>{{employee['FullName']}}</td>
         <td>{{employee['GenderName']}}</td>
-        <td>{{employee['DateOfBirth']}}</td>
+        <td>{{formatDate(employee['DateOfBirth'])}}</td>
         <td>{{employee['PhoneNumber']}}</td>
         <td>{{employee['Email']}}</td>
         <td>{{employee['PositionName']}}</td>
         <td>{{employee['DepartmentName']}}</td>
-        <td>{{employee['Salary']}}</td>
+        <td>{{formatSalary(employee['Salary'])}}</td>
         <td>{{employee['WorkStatus']}}</td>
       </tr>
       </tbody>
@@ -41,7 +45,43 @@
 </template>
 
 <script>
+import axios from "axios";
+
+import CurrencyFormatter from "@/utils/CurrencyFormatter";
+import DateFormatter from "@/utils/DateFormatter";
+
 export default {
-  props: ['data']
+  name: 'MisaTable',
+  data() {
+    return {
+
+    }
+  },
+  props: ['data'],
+  emits: ['row-double-clicked'],
+  methods: {
+    //Hàm định dạng mức lương
+    //Author: NQMinh(30/07/2021)
+    formatSalary(salary) {
+      return CurrencyFormatter.format(salary);
+    },
+
+    //Hàm định dạng ngày tháng
+    //Author: NQMinh(30/07/2021)
+    formatDate(date) {
+      return DateFormatter.format(date, false);
+    },
+
+    //Hàm truyền dữ liệu từ table vào modal
+    //Author: NQMinh(30/07/2021)
+    bindingDataFromTable(employee) {
+      axios.get(`http://cukcuk.manhnv.net/v1/Employees/${employee['EmployeeId']}`).then(res => {
+        console.table(res.data);
+        this.$emit('row-double-clicked', res.data);
+      }).catch(res => {
+        console.log(res);
+      })
+    }
+  }
 }
 </script>

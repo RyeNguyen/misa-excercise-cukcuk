@@ -17,13 +17,23 @@
 </template>
 
 <script>
+import axios from "axios";
+
 import MisaButton from "@/components/base/button/MisaButtonPrimary";
 
 export default {
   name: "MisaContentHeader",
+  mounted() {
+    axios.get(`http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode`).then(res => {
+      this.newEmployeeCode = res.data;
+    }).catch(res => {
+      console.log(res);
+    })
+  },
   data() {
     return {
-      hideModal: !this.modalIsOpened
+      hideModal: !this.modalIsOpened,
+      newEmployeeCode: ''
     }
   },
   props: {
@@ -35,7 +45,7 @@ export default {
   emits: ['btn-add-clicked'],
   methods: {
     openModal() {
-      this.$emit('btn-add-clicked', this.hideModal);
+      this.$emit('btn-add-clicked', this.hideModal, this.newEmployeeCode);
     }
   }
 }

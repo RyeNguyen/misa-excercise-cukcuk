@@ -10,13 +10,18 @@
     <MisaContentSearchSection></MisaContentSearchSection>
 
     <!-- bảng chính của content ở đây -->
-    <MisaTable :data="employees"></MisaTable>
+    <MisaTable
+        :data="employees"
+        @row-double-clicked="bindingDataFromTable"
+    />
 
     <!-- footer của content ở đây -->
     <MisaContentFooter></MisaContentFooter>
 
     <MisaPopupModal
+        :employeeData="individualData"
         :modalIsOpened="modalIsOpened"
+        :newEmployeeCode="employeeCode"
         @btn-close-clicked="toggleModal"
     />
   </div>
@@ -33,14 +38,7 @@ import MisaTable from "@/components/base/MisaTable";
 
 export default {
   name: 'TheContent',
-  components: {
-    MisaContentFooter,
-    MisaContentHeader,
-    MisaContentSearchSection,
-    MisaPopupModal,
-    MisaTable
-  },
-  created() {
+  mounted() {
     const vm = this;
     //Gọi API lấy dữ liệu
     axios.get('http://cukcuk.manhnv.net/v1/Employees').then(res => {
@@ -49,15 +47,32 @@ export default {
       console.log(res);
     })
   },
-  methods: {
-    toggleModal(state) {
-      this.modalIsOpened = state;
-    }
-  },
+
   data() {
     return {
       employees: [],
-      modalIsOpened: false
+      employeeCode: '',
+      individualData: null,
+      modalIsOpened: false,
+    }
+  },
+
+  components: {
+    MisaContentFooter,
+    MisaContentHeader,
+    MisaContentSearchSection,
+    MisaPopupModal,
+    MisaTable
+  },
+
+  methods: {
+    bindingDataFromTable(employee) {
+      this.individualData = employee;
+    },
+
+    toggleModal(state, newEmployeeCode) {
+      this.employeeCode = newEmployeeCode;
+      this.modalIsOpened = state;
     }
   }
 }

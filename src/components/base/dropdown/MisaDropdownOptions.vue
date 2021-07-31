@@ -27,6 +27,8 @@ export default {
   name: "MisaDropdownOptions",
   created() {
     let apiUrl = '';
+
+    //TODO: Hiện tại đang fix cứng call API của phòng ban và vị trí ở đây
     switch (this.dropdownType) {
       case 'Department':
         apiUrl = 'http://cukcuk.manhnv.net/api/Department';
@@ -62,10 +64,15 @@ export default {
     }
   },
   methods: {
+    //Hàm chọn một option trong số các options được xổ ra bởi dropdown
+    //Author: NQMinh(29/07/2021)
     optionActive(index) {
       this.currentIndex = index;
       this.$emit('dropdown-item-active', this.dropdownOptions[this.currentIndex]);
     },
+
+    //Hàm chuyển dropdown về trạng thái ban đầu (không chọn gì cả)
+    //Author: NQMinh(29/07/2021)
     resetDropdown() {
       this.currentIndex = -1;
       this.$emit('dropdown-item-active');
