@@ -78,3 +78,37 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.misa-dropdown {
+  width: 200px;
+  height: 40px;
+  position: relative;
+  background-color: var(--color-white);
+  border-radius: 4px;
+
+  & .dropdown__button {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-black);
+    background-color: transparent;
+    padding: 0 12px 0 16px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    border: 1px solid var(--color-hightlight);
+    cursor: pointer;
+
+    & i {
+      margin-left: 12px;
+      transition: 0.2s all ease-in-out;
+    }
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+  }
+}
+</style>

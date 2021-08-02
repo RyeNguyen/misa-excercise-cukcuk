@@ -27,9 +27,10 @@
               <!-- Nhập mã nhân viên ở đây -->
               <div class="misa-modal__field">
                 <label for="input-employee-code" class="misa-label-text">
-                  Mã nhân viên (<span class="misa__asterisk">*</span>)
+                  Mã nhân viên (<span class="misa-asterisk">*</span>)
                 </label>
                 <input
+                    ref="inputCode"
                     class="misa-text-box--default"
                     type="text" id="input-employee-code"
                     v-model="employee['EmployeeCode']"
@@ -40,7 +41,7 @@
               <!-- Nhập tên ở đây -->
               <div class="misa-modal__field">
                 <label for="input-employee-name" class="misa-label-text">
-                  Họ và tên (<span class="misa__asterisk">*</span>)
+                  Họ và tên (<span class="misa-asterisk">*</span>)
                 </label>
                 <input
                     class="misa-text-box--default"
@@ -79,7 +80,7 @@
               <!-- Nhập CMT ở đây -->
               <div class="misa-modal__field">
                 <label for="input-employee-id" class="misa-label-text">
-                  Số CMTND/Căn cước (<span class="misa__asterisk">*</span>)
+                  Số CMTND/Căn cước (<span class="misa-asterisk">*</span>)
                 </label>
                 <input
                     class="misa-text-box--default"
@@ -120,7 +121,7 @@
               <!-- Nhập email ở đây -->
               <div class="misa-modal__field">
                 <label for="input-employee-email" class="misa-label-text">
-                  Email (<span class="misa__asterisk">*</span>)
+                  Email (<span class="misa-asterisk">*</span>)
                 </label>
                 <input
                     class="misa-text-box--default"
@@ -132,7 +133,7 @@
               <!-- Nhập SĐT ở đây -->
               <div class="misa-modal__field">
                 <label for="input-employee-phone" class="misa-label-text">
-                  Số điện thoại (<span class="misa__asterisk">*</span>)
+                  Số điện thoại (<span class="misa-asterisk">*</span>)
                 </label>
                 <input
                     class="misa-text-box--default"
@@ -259,42 +260,7 @@ export default {
       showModal: this.modalIsOpened,
 
       //Biến chứa dữ liệu nv để thêm hoặc sửa
-      employee: {
-        // "EmployeeId": "f44d3bec-ea01-11eb-94eb-42010a8c0002",
-        // "EmployeeCode": this.newEmployeeCode,
-        // "FirstName": null,
-        // "LastName": null,
-        // "FullName": null,
-        // "Gender": 1,
-        // "DateOfBirth": "3232-12-03",
-        // "PhoneNumber": "21423524124",
-        // "Email": "DTH@gmail.com",
-        // "Address": null,
-        // "IdentityNumber": "123124134230",
-        // "IdentityDate": "3333-12-03",
-        // "IdentityPlace": "HĐ-HN",
-        // "JoinDate": null,
-        // "MartialStatus": null,
-        // "EducationalBackground": null,
-        // "QualificationId": null,
-        // "DepartmentId": "17120d02-6ab5-3e43-18cb-66948daf6128",
-        // "PositionId": "548dce5f-5f29-4617-725d-e2ec561b0f41",
-        // "WorkStatus": 0,
-        // "PersonalTaxCode": "31231212321",
-        // "Salary": 2132132,
-        // "PositionCode": "P94",
-        // "PositionName": "Nhân viên",
-        // "DepartmentCode": "PB89",
-        // "DepartmentName": "Phòng đào tạo",
-        // "QualificationName": null,
-        // "GenderName": "Nam",
-        // "EducationalBackgroundName": null,
-        // "MartialStatusName": null,
-        // "CreatedDate": "2021-07-21",
-        // "CreatedBy": null,
-        // "ModifiedDate": "2021-07-21",
-        // "ModifiedBy": null
-      }
+      employee: {}
     }
   },
   props: {
@@ -331,6 +297,9 @@ export default {
       if (this.wantToCreateNewEmployee) {
         this.employee['EmployeeCode'] = this.newEmployeeCode;
       }
+
+      console.log(this.$refs)
+      this.$refs.inputCode.focus();
     },
 
     //Hàm kiểm tra user muốn sửa thông tin nv hay không -> binding data
@@ -347,7 +316,7 @@ export default {
     }
   },
 
-  emits: ['btn-close-clicked'],
+  emits: ['btn-close-clicked', 'modal-submitted'],
 
   methods: {
     //Hàm định dạng mức lương
@@ -379,9 +348,6 @@ export default {
       }
       this.closeModal();
       this.employee = {};
-
-      //TODO: Vẫn chưa reload được table, cần xem lại
-      this.$emit('modal-submitted');
     },
 
     addEmployee() {
@@ -390,6 +356,7 @@ export default {
           this.employee
       ).then(res => {
         console.log(res);
+        this.$emit('modal-submitted');
       }).catch(res => {
         console.log(res);
       })
@@ -401,6 +368,7 @@ export default {
           this.employee
       ).then(res => {
         console.log(res);
+        this.$emit('modal-submitted');
       }).catch(res => {
         console.log(res);
       })
@@ -409,10 +377,173 @@ export default {
 }
 </script>
 
-<style scoped>
-@import url('../../css/base/Modal.css');
+<style lang="scss">
+.misa-modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: none;
+  align-items: center;
+  justify-content: space-evenly;
 
-.misa-modal-container--open {
-  display: flex;
+  &--open {
+    display: flex;
+  }
+}
+
+.misa-modal {
+  width: 50%;
+  height: 95vh;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  overflow: hidden;
+  padding: 24px;
+  position: relative;
+
+  &__button-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+  }
+
+  &__header {
+    text-transform: uppercase;
+  }
+
+  &__content {
+    margin-top: 24px;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+  }
+
+  &__img-picker {
+    width: 30%;
+
+    & .img-picker__placeholder {
+      width: 144px;
+      height: 144px;
+      border-radius: 50%;
+      border: 1px solid var(--color-hightlight);
+      background-image: url('../../assets/img/default-avatar.jpg');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+
+    & .img-picker__text {
+      width: 50%;
+      text-align: center;
+      font-size: 11px;
+    }
+  }
+
+  &__form {
+    width: 75%;
+
+    & .info__title {
+      text-transform: uppercase;
+    }
+
+    & .misa__divider {
+      width: 80px;
+      height: 4px;
+      background-color: var(--color-primary);
+      margin: 8px 0;
+    }
+  }
+
+  &__info {
+    margin-bottom: 16px;
+  }
+
+  &__fields {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__field {
+    width: 49%;
+    margin-bottom: 16px;
+    position: relative;
+
+    & .misa-label-text {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    & input,
+    & .misa-dropdown {
+      width: 100%;
+    }
+  }
+
+  &__footer {
+    width: 100%;
+    padding: 8px 24px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+}
+
+.misa-asterisk {
+  color: var(--color-alert);
+}
+
+#income-container {
+  position: relative;
+
+  & input {
+    text-align: right;
+    padding-right: 52px;
+  }
+
+  &__label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    font-style: italic;
+  }
+}
+
+.misa-modal .misa-modal__footer .misa-button--secondary {
+  border: none;
+}
+
+.misa-modal .misa-modal__footer .misa-button--primary {
+  margin-left: 16px;
+}
+
+@media screen and (max-width: 1920px) {
+  .misa-modal__form .misa-modal__field .misa-label-text {
+    margin-bottom: 0;
+  }
+
+  .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+    margin-bottom: 6px;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .misa-modal {
+    width: 90%;
+  }
 }
 </style>

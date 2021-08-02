@@ -57,9 +57,13 @@ export default {
     MisaButton
   },
 
-  emits: ['btn-add-clicked'],
+  emits: ['btn-add-clicked', 'delete-success'],
 
   methods: {
+    /**
+     * Hàm mở modal khi click thêm nhân viên
+     Author: NQMinh(30/07/2021)
+     */
     openModal() {
       this.$emit(
           'btn-add-clicked',
@@ -69,11 +73,16 @@ export default {
       );
     },
 
+    /**
+     * Hàm xóa nhân viên
+     Author: NQMinh(31/07/2021)
+     */
     deleteEmployee() {
-      console.log(this.employeesToDelete)
-      this.employeesToDelete.forEach(employeeId => {
+      const vm = this;
+      vm.employeesToDelete.forEach(employeeId => {
         axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(res => {
           console.log(res);
+          vm.$emit('delete-success');
         }).catch(res => {
           console.log(res);
         })
@@ -82,3 +91,23 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.misa-content__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .header__title {
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+  }
+
+  & .button__container {
+    display: flex;
+    gap: 16px;
+  }
+}
+</style>

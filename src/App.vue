@@ -7,12 +7,18 @@
 </template>
 
 <script>
+import EventIniter from "@/utils/EventDeclarator";
 import Header from "./components/layout/TheHeader";
 import Menu from "./components/layout/TheMenu";
 import Content from "./components/layout/TheContent";
 
 export default {
   name: 'App',
+
+  mounted() {
+    new EventIniter()
+  },
+
   components: {
     Header,
     Menu,
@@ -21,6 +27,8 @@ export default {
 }
 </script>
 
-<style>
-@import url('css/Main.css');
+<style lang="scss">
+@import './css/Fonts.css';
+@import 'css/layout/Variables.css';
+@import './css/Main';
 </style>

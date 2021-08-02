@@ -1,0 +1,67 @@
+/*@import url('base/Bubble.css');
+@import url('base/Button.css');
+@import url('base/Combobox.css');
+@import url('base/Popup.css');
+@import url('base/Toast.css');*/
+@import './base/Button';
+@import './base/TextBox';
+
+* {
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: GoogleSans-Regular, sans-serif;
+  font-size: 13px;
+  color: var(--color-content-text);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--color-secondary);
+  border-radius: 16px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-hightlight);
+  border-radius: 16px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+h2 {
+  margin: 0;
+  font-size: 15px;
+}
+
+p {
+  margin: 0;
+}
+
+.misa-show {
+  display: block;
+}
+
+.misa-hidden {
+  display: none;
+}
+
+.misa-rotate180 {
+  transform: rotateZ(180deg);
+}
+
+.misa-input--alert {
+  border: 1px solid var(--color-alert);
+}

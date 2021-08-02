@@ -23,6 +23,7 @@
       </thead>
       <tbody>
       <tr
+          ref="tableRow"
           v-for="(employee, index) in tableData"
           :key="employee['EmployeeId']"
           @click="rowActive(index)"
@@ -67,9 +68,10 @@ export default {
       showModal: true,
       wantToCreateNewEmployee: false,
       tableData: this.data,
-      employeesToDelete: []
+      employeesToDelete: [],
     }
   },
+
   props: {
     data: {
       type: Array,
@@ -77,30 +79,45 @@ export default {
     }
   },
 
-  emits: ['row-double-clicked'],
+  emits: [
+      'row-double-clicked',
+      'show-btn-delete',
+      'hide-btn-delete'
+  ],
 
   watch: {
     data: function() {
       this.tableData = this.data;
-      this.$forceUpdate();
-    }
+      this.employeesToDelete = [];
+    },
   },
 
   methods: {
-    //Hàm định dạng mức lương
-    //Author: NQMinh(30/07/2021)
+    /**
+     * Hàm định dạng mức lương
+     * @param salary
+     * @returns {string|string}
+     * Author: NQMinh(30/07/2021)
+     */
     formatSalary(salary) {
       return CurrencyFormatter.format(salary);
     },
 
-    //Hàm định dạng ngày tháng
-    //Author: NQMinh(30/07/2021)
+    /**
+     * Hàm định dạng ngày tháng
+     * @param date
+     * @returns {string}
+     * Author: NQMinh(30/07/2021)
+     */
     formatDate(date) {
       return DateFormatter.format(date, false);
     },
 
-    //Hàm truyền dữ liệu từ table vào modal
-    //Author: NQMinh(30/07/2021)
+    /**
+     * Hàm truyền dữ liệu từ table vào modal
+     * @param employee
+     * Author: NQMinh(30/07/2021)
+     */
     bindingDataFromTable(employee) {
       axios.get(`http://cukcuk.manhnv.net/v1/Employees/${employee['EmployeeId']}`).then(res => {
         this.$emit(
@@ -115,8 +132,11 @@ export default {
     },
 
     //TODO: Hàm phức tạp và khó hiểu
-    //Hàm kích hoạt checkbox khi click vào mỗi hàng
-    //Author: NQMinh(31/07/2021)
+    /**
+     * Hàm kích hoạt checkbox khi click vào mỗi hàng
+     * @param index
+     * Author: NQMinh(31/07/2021)
+     */
     rowActive(index) {
       this.$refs.deleteBox[index].defaultChecked = !this.$refs.deleteBox[index].defaultChecked;
       if (this.$refs.deleteBox[index].defaultChecked) {
@@ -129,8 +149,10 @@ export default {
       this.showButtonDelete();
     },
 
-    //Kiểm tra các checkbox được kích hoạt chưa để hiện nút xóa
-    //Author: NQMinh(31/07/2021)
+    /**
+     * Kiểm tra các checkbox được kích hoạt chưa để hiện nút xóa
+     Author: NQMinh(31/07/2021)
+     */
     showButtonDelete() {
       //List toàn bộ checkbox
       const checkboxList = this.$refs.deleteBox;
@@ -152,3 +174,191 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+/*
+Text căn trái
+tiền căn phải
+date căn giữa
+*/
+.misa-content__table-container {
+  width: 100%;
+  height: calc(100vh - 240px);
+  margin-top: 16px;
+  overflow: auto;
+}
+
+.misa-content__table {
+  width: 100%;
+  min-width: 1366px;
+  text-align: left;
+  font-weight: normal;
+  position: relative;
+  border-collapse: collapse;
+  background-color: var(--color-white);
+
+  & .table__header th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: var(--color-white);
+    z-index: 6;
+
+    &:first-child {
+      min-width: 80px;
+      max-width: 100px;
+      padding-left: 16px;
+    }
+
+    &:nth-child(10) {
+      text-align: right;
+      padding-right: 24px;
+    }
+  }
+
+  & tr {
+    height: 40px;
+    border-bottom: 1px solid var(--color-hightlight);
+  }
+
+  & tbody tr {
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--color-secondary-hover);
+    }
+
+    &:nth-child(odd) {
+      background-color: rgba(229, 229, 229, 0.5);
+    }
+  }
+
+  /*#region chỉnh size của table*/
+  & td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-right: 24px;
+
+    &:first-child {
+      min-width: 80px;
+      max-width: 100px;
+      padding-left: 16px;
+    }
+
+    &:nth-child(2) {
+      min-width: 100px;
+    }
+
+    &:nth-child(3) {
+      min-width: 150px;
+    }
+
+    &:nth-child(4) {
+      min-width: 150px;
+    }
+
+    &:nth-child(5) {
+      min-width: 150px;
+    }
+
+    &:nth-child(6) {
+      min-width: 100px;
+    }
+
+    &:nth-child(7) {
+      min-width: 200px;
+      max-width: 350px;
+    }
+
+    &:nth-child(8) {
+      min-width: 150px;
+    }
+
+    &:nth-child(9) {
+      min-width: 150px;
+    }
+
+    &:nth-child(10) {
+      min-width: 150px;
+      text-align: right;
+      padding-right: 24px;
+    }
+
+    &:last-child {
+      min-width: 150px;
+    }
+  }
+  /*#endregion*/
+
+  /*#region checkbox*/
+  & .delete-box {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 0.1px solid var(--color-hightlight);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+
+    & input {
+      position: absolute;
+      opacity: 0;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      top: 0;
+      left: 0;
+      z-index: 3;
+      cursor: pointer;
+
+      &:checked ~ .misa-checkmark {
+        background-color: var(--color-primary);
+
+        &:after {
+          display: block;
+        }
+      }
+    }
+
+    & .misa-checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 24px;
+      width: 24px;
+      background-color: var(--color-secondary-hover);
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 8px;
+        top: 3px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(45deg);
+      }
+    }
+
+    //&:hover input ~ .misa-checkmark {
+    //  background-color: var(--color-hightlight);
+    //}
+  }
+  /*#endregion*/
+}
+
+.misa-row {
+  &--active {
+    background-color: var(--color-hightlight);
+  }
+}
+</style>

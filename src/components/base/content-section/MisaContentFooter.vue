@@ -20,3 +20,40 @@ export default {
   name: 'MisaFooter'
 }
 </script>
+
+<style lang="scss">
+.misa-content__footer {
+  width: 100%;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & .misa__pagination {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & .pagination__button {
+      cursor: pointer;
+    }
+
+    & .pagination__number {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--color-secondary);
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      cursor: pointer;
+      transition: 0.2s all ease-in-out;
+
+      &:hover {
+        background-color: var(--color-secondary-hover);
+      }
+    }
+  }
+}
+</style>

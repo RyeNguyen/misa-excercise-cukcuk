@@ -24,18 +24,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .misa-button {
   color: var(--color-white);
   background-color: var(--color-primary);
-}
 
-.misa-button:hover {
-  background-color: var(--color-primary-hover);
-}
+  &:hover {
+    background-color: var(--color-primary-hover);
+  }
 
-.misa-button:active {
-  background-color: var(--color-primary-active);
+  &:active {
+    background-color: var(--color-primary-active);
+  }
 }
 
 #button__delete-employee {

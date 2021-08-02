@@ -1,0 +1,16 @@
+.misa-text-box {
+  &--default {
+    height: 40px;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border: 1px solid var(--color-hightlight);
+    padding: 0 16px;
+    outline: none;
+    display: inline-block;
+    transition: 0.2s all ease-in-out;
+
+    &:focus {
+      border-color: var(--color-primary);
+    }
+  }
+}

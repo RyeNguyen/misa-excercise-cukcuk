@@ -43,6 +43,7 @@ export default {
       console.log(res);
     })
   },
+
   data() {
     return {
       currentIndex: -1,
@@ -63,6 +64,9 @@ export default {
       required: true
     }
   },
+
+  emits: ['dropdown-item-active'],
+
   methods: {
     //Hàm chọn một option trong số các options được xổ ra bởi dropdown
     //Author: NQMinh(29/07/2021)
@@ -80,3 +84,67 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.dropdown__content {
+  width: 100%;
+  position: absolute;
+  display: block;
+  z-index: 8;
+  padding: 4px 0;
+  background-color: var(--color-white);
+  border-radius: 4px;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.25);
+
+  &.out-of-space {
+    bottom: 40px;
+  }
+
+  &--hidden {
+    display: none;
+  }
+
+  &--show {
+    display: block;
+  }
+
+  & a {
+    height: 40px;
+    padding: 0 10px 0 33px;
+    color: var(--color-content-text);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: 0.2s all ease-in-out;
+
+    &:hover {
+      background-color: var(--color-secondary-hover);
+      color: var(--color-content-text);
+    }
+  }
+
+  &-link--active {
+    background-color: var(--color-primary);
+    color: var(--color-white) !important;
+
+    &:hover {
+      background-color: var(--color-primary-hover) !important;
+      color: var(--color-white) !important;
+    }
+
+    & i {
+      display: block !important;
+    }
+  }
+
+  & a i {
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    font-size: 13px;
+    display: none;
+    color: var(--color-white);
+  }
+}
+</style>
