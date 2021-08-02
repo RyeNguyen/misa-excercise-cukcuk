@@ -19,26 +19,24 @@
       />
     </div>
     <div class="misa-content__search--right">
-      <MisaButtonSecondary
-          id="button__refresh"
-          img="refresh.png"
+      <MisaButton
+          buttonId="button__refresh"
+          buttonIcon="refresh.png"
+          buttonType="secondary"
           @click.native="reloadData"
       />
-<!--      <div class="misa-button&#45;&#45;secondary misa-button__icon" id="button__refresh">-->
-<!--        <div class="button__icon"></div>-->
-<!--      </div>-->
     </div>
   </div>
 </template>
 
 <script>
-import MisaButtonSecondary from "@/components/base/button/MisaButtonSecondary";
+import MisaButton from "@/components/base/MisaButton";
 import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 
 export default {
   name: "MisaContentSearch",
   components: {
-    MisaButtonSecondary,
+    MisaButton,
     MisaDropdown
   },
 

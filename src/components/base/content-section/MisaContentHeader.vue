@@ -3,16 +3,19 @@
     <h1 class="misa-content__header header__title">Danh sách nhân viên</h1>
     <div class="button__container">
       <MisaButton
-          id="button__delete-employee"
-          text="Xóa nhân viên"
+          buttonId="button__delete-employee"
+          buttonIconFontAwesome="fas fa-trash"
+          buttonText="Xóa nhân viên"
+          buttonType="alert"
           :buttonDeleteShown="buttonDeleteShown"
           @click.native="deleteEmployee"
       />
 
       <MisaButton
-          id="button__add-employee"
-          text="Thêm nhân viên"
-          img="add.png"
+          buttonId="button__add-employee"
+          buttonText="Thêm nhân viên"
+          buttonType="primary"
+          buttonIcon="add.png"
           @click.native="openModal"
       />
     </div>
@@ -22,7 +25,7 @@
 <script>
 import axios from "axios";
 
-import MisaButton from "@/components/base/button/MisaButtonPrimary";
+import MisaButton from "@/components/base/MisaButton";
 
 export default {
   name: "MisaContentHeader",
@@ -80,8 +83,7 @@ export default {
     deleteEmployee() {
       const vm = this;
       vm.employeesToDelete.forEach(employeeId => {
-        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(res => {
-          console.log(res);
+        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(() => {
           vm.$emit('delete-success');
         }).catch(res => {
           console.log(res);

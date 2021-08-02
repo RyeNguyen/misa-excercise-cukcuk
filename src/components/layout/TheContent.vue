@@ -35,28 +35,10 @@
     />
 
     <!-- popup message ở đây, hiện ra cảnh báo người dùng trước khi xóa nhân viên -->
-    <div class="misa-popup-container" style="display: none">
-      <div class="misa-popup">
-        <div class="misa-popup__btn-close-container">
-          <img src="@/assets/icon/x.svg" alt="close button" class="misa-popup__button-close">
-        </div>
-
-        <div class="header__title">Xóa bản ghi</div>
-        <div class="misa-popup__body">
-          <div class="misa-popup__icon">
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-          <div class="misa-popup__text">
-            Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại
-            dữ liệu.
-          </div>
-        </div>
-        <div class="misa-popup__footer">
-          <div class="misa-button--secondary">Hủy</div>
-          <div class="misa-button--primary">Xóa</div>
-        </div>
-      </div>
-    </div>
+    <MisaPopupMessage
+        popupTitle='Xóa bản ghi'
+        popupDescription='Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
+    />
   </div>
 </template>
 
@@ -66,6 +48,7 @@ import axios from "axios";
 import MisaContentFooter from "@/components/base/content-section/MisaContentFooter";
 import MisaContentHeader from "@/components/base/content-section/MisaContentHeader";
 import MisaContentSearchSection from "@/components/base/content-section/MisaContentSearchSection";
+import MisaPopupMessage from "@/components/base/popup/MisaPopupMessage";
 import MisaPopupModal from "@/components/base/MisaPopupModal";
 import MisaTable from "@/components/base/MisaTable";
 
@@ -105,6 +88,7 @@ export default {
     MisaContentFooter,
     MisaContentHeader,
     MisaContentSearchSection,
+    MisaPopupMessage,
     MisaPopupModal,
     MisaTable
   },

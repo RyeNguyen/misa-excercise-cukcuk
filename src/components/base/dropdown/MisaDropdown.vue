@@ -21,6 +21,7 @@ import MisaDropdownOptions from "@/components/base/dropdown/MisaDropdownOptions"
 
 export default {
   name: "MisaDropdown",
+
   data() {
     return {
       contentHidden: true,
@@ -47,6 +48,7 @@ export default {
   components: {
     MisaDropdownOptions
   },
+
   methods: {
     //Hàm xổ dropdown content khi click (click lần 2 để đóng)
     //Author: NQMinh(29/07/2021)
@@ -56,7 +58,7 @@ export default {
     },
 
     hideDropdownOptions() {
-      this.contentHidden = true;
+      return this.contentHidden = true;
     },
 
     //Hàm chuyển title của button dropdown

@@ -233,11 +233,20 @@
       </div>
 
       <div class="misa-modal__footer">
-        <div class="misa-button" id="button__cancel" @click="closeModal">Hủy</div>
-        <div class="misa-button misa-button__icon" id="button__submit" @click="submitData">
-          <div class="button__icon"><i class="far fa-save"></i></div>
-          <div class="button__text">Lưu</div>
-        </div>
+        <MisaButton
+          buttonId="button__cancel"
+          buttonType="secondary"
+          buttonText="Hủy"
+          @click.native="closeModal"
+        />
+
+        <MisaButton
+          buttonId="button__submit"
+          buttonType="primary"
+          buttonText="Lưu"
+          buttonIconFontAwesome="far fa-save"
+          @click.native="submitData"
+        />
       </div>
     </div>
   </div>
@@ -249,6 +258,7 @@ import axios from "axios";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
 
+import MisaButton from "@/components/base/MisaButton";
 import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 
 export default {
@@ -287,6 +297,7 @@ export default {
   },
 
   components: {
+    MisaButton,
     MisaDropdown
   },
 
@@ -495,6 +506,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+
+    & .misa-button--primary {
+      margin-left: 16px;
+    }
+
+    & .misa-button--secondary {
+      border: none;
+    }
   }
 }
 
@@ -523,21 +542,13 @@ export default {
   }
 }
 
-.misa-modal .misa-modal__footer .misa-button--secondary {
-  border: none;
-}
-
-.misa-modal .misa-modal__footer .misa-button--primary {
-  margin-left: 16px;
-}
-
 @media screen and (max-width: 1920px) {
   .misa-modal__form .misa-modal__field .misa-label-text {
-    margin-bottom: 0;
+    margin-bottom: 4px;
   }
 
   .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 }
 

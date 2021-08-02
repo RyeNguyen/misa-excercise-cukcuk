@@ -1,5 +1,8 @@
 <template>
-  <div class="dropdown__content" :class="{'dropdown__content--hidden': contentHidden}">
+  <div
+      class="dropdown__content"
+      :class="{'dropdown__content--hidden': contentHidden}"
+  >
     <a
         href="#"
         :class="{'dropdown__content-link--active': currentIndex === -1}"
