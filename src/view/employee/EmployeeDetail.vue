@@ -253,15 +253,14 @@
 </template>
 
 <script>
-import axios from "axios";
+import EmployeesAPI from "@/api/components/EmployeesAPI";
 
+//#region import utils
 import DataValidator from "@/utils/DataValidator";
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
-
-import MisaButton from "@/components/base/MisaButton";
-import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
+//#endregion
 
 export default {
   name: "EmployeeDetail",
@@ -302,11 +301,6 @@ export default {
       required: true,
       default: true
     }
-  },
-
-  components: {
-    MisaButton,
-    MisaDropdown
   },
 
   watch: {
@@ -381,10 +375,7 @@ export default {
     },
 
     addEmployee() {
-      axios.post(
-          'http://cukcuk.manhnv.net/v1/Employees',
-          this.employee
-      ).then(() => {
+      EmployeesAPI.add(this.employee).then(() => {
         new Toast(0);
         this.$emit('modal-submitted');
       }).catch(res => {
@@ -393,10 +384,7 @@ export default {
     },
 
     updateEmployee() {
-      axios.put(
-          `http://cukcuk.manhnv.net/v1/Employees/${this.employee['EmployeeId']}`,
-          this.employee
-      ).then(() => {
+      EmployeesAPI.update(this.employee['EmployeeId'], this.employee).then(() => {
         new Toast(1);
         this.$emit('modal-submitted');
       }).catch(res => {

@@ -14,6 +14,26 @@ export default class BaseAPI {
     }
 
     /**
+     * Hàm lấy dữ liệu bằng id
+     * @param id
+     * @returns {Promise<AxiosResponse<any>>}
+     * Author: NQMinh(04/08/2021)
+     */
+    getById(id) {
+        return BaseAPIConfig.get(`${this.controller}/${id}`);
+    }
+
+    /**
+     * Hàm thêm mới dữ liệu
+     * @param body
+     * @returns {Promise<AxiosResponse<any>>}
+     * Author: NQMinh(04/08/2021)
+     */
+    add(body) {
+        return BaseAPIConfig.post(`${this.controller}`, body);
+    }
+
+    /**
      * Hàm lấy dữ liệu phân trang
      * @param {*} payload
      * createdBy: NQMinh(02/08/2021)
@@ -29,7 +49,7 @@ export default class BaseAPI {
      * createdBy: NQMinh(02/08/2021)
      */
     update(id, body) {
-        return BaseAPIConfig.update(`${this.controller}/update/${id}`, body);
+        return BaseAPIConfig.put(`${this.controller}/${id}`, body);
     }
 
     /**
@@ -39,6 +59,6 @@ export default class BaseAPI {
      * createdBy: NQMinh(02/08/2021)
      */
     delete(id) {
-        return BaseAPIConfig.delete(`${this.controller}/delete/${id}`);
+        return BaseAPIConfig.delete(`${this.controller}/${id}`);
     }
 }

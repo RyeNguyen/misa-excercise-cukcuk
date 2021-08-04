@@ -29,7 +29,6 @@ export default {
 
 <style lang="scss">
 @import './css/Fonts.css';
-@import './css/base/Bubble.css';
 @import './css/Variables.css';
 @import './css/Main';
 </style>

@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import EmployeesAPI from "@/api/components/EmployeesAPI";
 
 import Toast from "@/utils/ToastsCreator";
 
@@ -58,8 +58,6 @@ import EmployeeDetail from "@/view/employee/EmployeeDetail";
 import MisaContentFooter from "@/components/layout/content/MisaContentFooter";
 import MisaContentHeader from "@/components/layout/content/MisaContentHeader";
 import MisaContentSearchSection from "@/components/layout/content/MisaContentSearchSection";
-import MisaPopupMessage from "@/components/base/popup/MisaPopupMessage";
-import MisaTable from "@/components/base/MisaTable";
 
 export default {
   name: 'EmployeeList',
@@ -105,9 +103,7 @@ export default {
     EmployeeDetail,
     MisaContentFooter,
     MisaContentHeader,
-    MisaContentSearchSection,
-    MisaPopupMessage,
-    MisaTable
+    MisaContentSearchSection
   },
 
   methods: {
@@ -117,7 +113,7 @@ export default {
      */
     loadData() {
       this.isLoading = true;
-      axios.get('http://cukcuk.manhnv.net/v1/Employees').then(res => {
+      EmployeesAPI.getAll().then(res => {
         this.isLoading = false;
         new Toast('okay');
         this.employees = res.data;
