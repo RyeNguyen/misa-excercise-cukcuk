@@ -55,9 +55,9 @@ import axios from "axios";
 import Toast from "@/utils/ToastsCreator";
 
 import EmployeeDetail from "@/view/employee/EmployeeDetail";
-import MisaContentFooter from "@/components/base/content-section/MisaContentFooter";
-import MisaContentHeader from "@/components/base/content-section/MisaContentHeader";
-import MisaContentSearchSection from "@/components/base/content-section/MisaContentSearchSection";
+import MisaContentFooter from "@/components/layout/content/MisaContentFooter";
+import MisaContentHeader from "@/components/layout/content/MisaContentHeader";
+import MisaContentSearchSection from "@/components/layout/content/MisaContentSearchSection";
 import MisaPopupMessage from "@/components/base/popup/MisaPopupMessage";
 import MisaTable from "@/components/base/MisaTable";
 
@@ -116,6 +116,7 @@ export default {
      * Author: NQMinh(31/07/2021)
      */
     loadData() {
+      this.isLoading = true;
       axios.get('http://cukcuk.manhnv.net/v1/Employees').then(res => {
         this.isLoading = false;
         new Toast('okay');
@@ -178,10 +179,6 @@ export default {
 
     toggleAlertMessage(state) {
       this.openAlertPopupMessage = state;
-    },
-
-    toggleWarningMessage(state) {
-      this.openWarningPopupMessage = state;
     }
   }
 }

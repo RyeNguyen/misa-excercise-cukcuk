@@ -198,7 +198,7 @@
                       class="misa-text-box--default"
                       type="text"
                       id="input-employee-income"
-                      v-model="employee['Salary']"
+                      v-model="formattedSalary"
                   />
                   <div id="income-container__label">VNĐ</div>
                 </div>
@@ -255,6 +255,7 @@
 <script>
 import axios from "axios";
 
+import DataValidator from "@/utils/DataValidator";
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
@@ -266,6 +267,8 @@ export default {
   name: "EmployeeDetail",
 
   mounted() {
+    DataValidator.validateRequired();
+    DataValidator.validateEmail();
     this.$refs.inputCode.focus();
   },
 
@@ -332,6 +335,18 @@ export default {
   },
 
   emits: ['close-modal', 'modal-submitted'],
+
+  computed: {
+    formattedSalary: {
+      get: function () {
+        return this.result;
+      },
+
+      set: function (newValue) {
+        this.result = this.formatSalary(newValue);
+      }
+    }
+  },
 
   methods: {
     //Hàm định dạng mức lương
@@ -431,6 +446,7 @@ export default {
   }
 
   &__content {
+    height: 100%;
     margin-top: 24px;
     display: flex;
     align-items: start;
@@ -460,6 +476,9 @@ export default {
 
   &__form {
     width: 75%;
+    height: 85%;
+    overflow: auto;
+    padding-right: 16px;
 
     & .info__title {
       text-transform: uppercase;

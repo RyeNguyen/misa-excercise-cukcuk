@@ -10,7 +10,7 @@
 import EventIniter from "@/utils/EventDeclarator";
 import Header from "./components/layout/TheHeader";
 import Menu from "./components/layout/TheMenu";
-import Content from "./components/layout/TheContent";
+import Content from "./components/layout/content/TheContent";
 
 export default {
   name: 'App',
@@ -29,6 +29,7 @@ export default {
 
 <style lang="scss">
 @import './css/Fonts.css';
-@import 'css/layout/Variables.css';
+@import './css/base/Bubble.css';
+@import './css/Variables.css';
 @import './css/Main';
 </style>

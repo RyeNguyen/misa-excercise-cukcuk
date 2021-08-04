@@ -1,6 +1,6 @@
 <template>
   <div class="misa-content__table-container">
-    <table class="misa-content__table">
+    <table v-if="!isLoading" class="misa-content__table">
       <thead>
       <tr class="table__header">
         <th>
@@ -71,6 +71,7 @@ import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
+import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
 
@@ -82,7 +83,7 @@ export default {
       showModal: true,
       wantToCreateNewEmployee: false,
       tableData: this.data,
-      employeesToDelete: [],
+      employeesToDelete: []
     }
   },
 
@@ -143,6 +144,7 @@ export default {
      */
     bindingDataFromTable(employee) {
       axios.get(`http://cukcuk.manhnv.net/v1/Employees/${employee['EmployeeId']}`).then(res => {
+        new Toast('okay');
         this.$emit(
             'row-double-clicked',
             this.showModal,
@@ -150,7 +152,7 @@ export default {
             this.wantToCreateNewEmployee
         );
       }).catch(res => {
-        console.log(res);
+        new Toast(res);
       })
     },
 

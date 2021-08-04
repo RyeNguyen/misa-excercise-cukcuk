@@ -52,8 +52,11 @@
 </template>
 
 <script>
-import MisaButton from "@/components/base/MisaButton";
 import axios from "axios";
+
+import Toast from "@/utils/ToastsCreator";
+
+import MisaButton from "@/components/base/MisaButton";
 
 export default {
   name: "MisaPopupMessage",
@@ -118,6 +121,10 @@ export default {
   },
 
   methods: {
+    /**
+     * Hàm ẩn popup
+     * Author: NQMinh(02/08/2021)
+     */
     closePopup() {
       this.$emit('open-popup', false);
     },
@@ -127,16 +134,25 @@ export default {
      Author: NQMinh(31/07/2021)
      */
     deleteEmployee() {
+      let deleteCount = 0;
       const vm = this;
       vm.employeesToDelete.forEach(employeeId => {
         axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(() => {
-          vm.$emit('delete-success');
+          deleteCount += 1;
+          if (deleteCount === vm.employeesToDelete.length) {
+            new Toast(2);
+            vm.$emit('delete-success');
+          }
         }).catch(res => {
-          console.log(res);
+          new Toast(res);
         })
       })
     },
 
+    /**
+     * Hàm ẩn modal
+     * Author: NQMinh (29/07/2021)
+     */
     closeModal() {
       this.$emit('open-popup', false);
     }

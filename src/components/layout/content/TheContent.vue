@@ -43,7 +43,7 @@ export default {
   position: absolute;
   top: 12px;
   left: 16px;
-  background-image: url('../../assets/icon/search.png');
+  background-image: url('../../../assets/icon/search.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover

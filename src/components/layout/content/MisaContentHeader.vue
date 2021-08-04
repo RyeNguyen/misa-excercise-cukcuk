@@ -31,11 +31,12 @@ import MisaButton from "@/components/base/MisaButton";
 
 export default {
   name: "MisaContentHeader",
+
   mounted() {
     axios.get(`http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode`).then(res => {
       this.newEmployeeCode = res.data;
     }).catch(res => {
-      console.log(res);
+      new Toast(res);
     })
   },
 
@@ -72,7 +73,6 @@ export default {
      Author: NQMinh(30/07/2021)
      */
     openModal() {
-      new Toast('400');
       this.$emit(
           'btn-add-clicked',
           this.hideModal,
