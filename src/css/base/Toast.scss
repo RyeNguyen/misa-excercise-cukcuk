@@ -1,0 +1,87 @@
+.misa-toast__container {
+  position: fixed;
+  z-index: 20;
+  top: 24px;
+  left: 50%;
+  width: 22vw;
+  transform: translateX(-50%);
+}
+
+.misa-toast {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  background-color: var(--color-white);
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.16);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease-in-out;
+
+  &__title {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+
+  &__icon {
+    &--main {
+      background-color: var(--color-info);
+      color: var(--color-white);
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+  }
+
+  &.misa-404,
+  &.misa-400,
+  &.misa-500 {
+    & .misa-toast__icon--main {
+      background-color: var(--color-alert);
+    }
+
+    & .misa-toast__close {
+      color: var(--color-alert);
+    }
+  }
+
+  &.misa-0,
+  &.misa-1,
+  &.misa-2 {
+    & .misa-toast__icon--main {
+      background-color: var(--color-primary);
+    }
+
+    & .misa-toast__close {
+      color: var(--color-primary);
+    }
+  }
+
+  &__close {
+    font-size: 16px;
+    color: var(--color-info);
+    cursor: pointer;
+  }
+
+  &--active {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  .misa-toast__container {
+    width: 45vw;
+  }
+}

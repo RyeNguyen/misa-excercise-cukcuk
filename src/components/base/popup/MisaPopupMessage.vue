@@ -1,13 +1,26 @@
 <template>
-  <div class="misa-popup-container">
-    <div class="misa-popup">
+  <div
+      class="misa-popup-container"
+      :class="{'misa-popup-container--open': openPopupClass}"
+      @click="closePopup"
+  >
+    <div class="misa-popup" @click.stop.prevent>
       <div class="misa-popup__btn-close-container">
-        <img src="@/assets/icon/x.svg" alt="close button" class="misa-popup__button-close">
+        <img
+            src="@/assets/icon/x.svg"
+            alt="close button"
+            class="misa-popup__button-close"
+            @click="closePopup"
+        >
       </div>
 
       <div class="header__title">{{ popupTitle }}</div>
       <div class="misa-popup__body">
-        <div class="misa-popup__icon">
+        <div
+            v-if="popupIcon"
+            class="misa-popup__icon"
+            :class=iconClass
+        >
           <i class="fas fa-exclamation-triangle"></i>
         </div>
         <div class="misa-popup__text">
@@ -17,12 +30,21 @@
       <div class="misa-popup__footer">
         <MisaButton
             buttonType="secondary"
-            buttonText="Hủy"
+            :buttonText=buttonSecondaryText
+            @click.native="closePopup"
         />
 
         <MisaButton
-            buttonType="alert"
-            buttonText="Xóa"
+            v-if="popupType === 'alert'"
+            :buttonType="popupType"
+            :buttonText=buttonPrimaryText
+            @click.native="deleteEmployee"
+        />
+        <MisaButton
+            v-if="popupType === 'primary'"
+            :buttonType="popupType"
+            :buttonText=buttonPrimaryText
+            @click.native="deleteEmployee"
         />
       </div>
     </div>
@@ -31,6 +53,7 @@
 
 <script>
 import MisaButton from "@/components/base/MisaButton";
+import axios from "axios";
 
 export default {
   name: "MisaPopupMessage",
@@ -40,6 +63,10 @@ export default {
   },
 
   props: {
+    popupIcon: {
+      type: Boolean
+    },
+
     popupTitle: {
       type: String,
       required: true
@@ -48,16 +75,76 @@ export default {
     popupDescription: {
       type: String,
       required: true
-    }
+    },
+
+    popupType: {
+      type: String,
+      require: true
+    },
+
+    openAlertPopup: {
+      type: Boolean
+    },
+
+    openWarningPopup: {
+      type: Boolean
+    },
+
+    employeesToDelete: Array
   },
 
   components: {
     MisaButton
+  },
+
+  emits: ['open-popup'],
+
+  computed: {
+    iconClass: function() {
+      return `misa-popup__icon--${this.popupType}`;
+    },
+
+    openPopupClass: function() {
+      return this.openAlertPopup || this.openWarningPopup;
+    },
+
+    buttonSecondaryText: function() {
+      return this.popupType === 'alert' ? 'Hủy' : 'Tiếp tục nhập';
+    },
+
+    buttonPrimaryText: function() {
+      return this.popupType === 'alert' ? 'Xóa' : 'Đóng';
+    }
+  },
+
+  methods: {
+    closePopup() {
+      this.$emit('open-popup', false);
+    },
+
+    /**
+     * Hàm xóa nhân viên
+     Author: NQMinh(31/07/2021)
+     */
+    deleteEmployee() {
+      const vm = this;
+      vm.employeesToDelete.forEach(employeeId => {
+        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(() => {
+          vm.$emit('delete-success');
+        }).catch(res => {
+          console.log(res);
+        })
+      })
+    },
+
+    closeModal() {
+      this.$emit('open-popup', false);
+    }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .misa-popup-container {
   width: 100vw;
   height: 100vh;
@@ -67,8 +154,12 @@ export default {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  z-index: 10;
+  display: none;
+  z-index: 15;
+
+  &--open {
+    display: flex;
+  }
 }
 
 .misa-popup {
@@ -110,7 +201,14 @@ export default {
       background-color: var(--color-secondary);
       border-radius: 50%;
       padding: 8px;
-      color: var(--color-alert);
+
+      &--alert {
+        color: var(--color-alert);
+      }
+
+      &--warning {
+        color: var(--color-warning);
+      }
     }
   }
 
@@ -125,28 +223,24 @@ export default {
     gap: 16px;
     align-items: center;
     justify-content: flex-end;
+
+    & .misa-button--secondary {
+      border: none;
+
+      &:hover {
+        background-color: var(--color-hightlight);
+      }
+
+      &:active {
+        background-color: transparent;
+      }
+    }
   }
-}
-
-.misa-popup__footer .misa-button--secondary {
-  border: none;
-}
-
-.misa-popup__footer .misa-button--secondary:hover {
-  background-color: var(--color-hightlight);
-}
-
-.misa-popup__footer .misa-button--secondary:active {
-  background-color: transparent;
-}
-
-.misa-popup__footer .misa-button--primary {
-  background-color: var(--color-alert);
 }
 
 @media screen and (max-width: 1080px) {
   .misa-popup {
-    width: 80%;
+    width: 60%;
   }
 }
 </style>

@@ -52,17 +52,31 @@
       </tr>
       </tbody>
     </table>
+    <Loading
+        color="#019160"
+        :height=64
+        :width=64
+        loader="spinner"
+        :z-index=17
+        blur="4px"
+        :active="isLoading"
+        :can-cancel="false"
+        :is-full-page="false"
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
 
 export default {
   name: 'MisaTable',
+
   data() {
     return {
       showModal: true,
@@ -76,7 +90,16 @@ export default {
     data: {
       type: Array,
       required: true
+    },
+
+    isLoading: {
+      type: Boolean,
+      required: true
     }
+  },
+
+  components: {
+    Loading
   },
 
   emits: [

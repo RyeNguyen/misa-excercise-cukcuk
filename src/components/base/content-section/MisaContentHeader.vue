@@ -8,7 +8,7 @@
           buttonText="Xóa nhân viên"
           buttonType="alert"
           :buttonDeleteShown="buttonDeleteShown"
-          @click.native="deleteEmployee"
+          @click.native="openAlertMessage"
       />
 
       <MisaButton
@@ -24,6 +24,8 @@
 
 <script>
 import axios from "axios";
+
+import Toast from "@/utils/ToastsCreator";
 
 import MisaButton from "@/components/base/MisaButton";
 
@@ -51,16 +53,18 @@ export default {
       required: true
     },
 
-    modalIsOpened: Boolean,
-
-    employeesToDelete: Array
+    modalIsOpened: Boolean
   },
 
   components: {
     MisaButton
   },
 
-  emits: ['btn-add-clicked', 'delete-success'],
+  emits: [
+    'btn-add-clicked',
+    'delete-success',
+    'open-popup'
+  ],
 
   methods: {
     /**
@@ -68,6 +72,7 @@ export default {
      Author: NQMinh(30/07/2021)
      */
     openModal() {
+      new Toast('400');
       this.$emit(
           'btn-add-clicked',
           this.hideModal,
@@ -76,19 +81,8 @@ export default {
       );
     },
 
-    /**
-     * Hàm xóa nhân viên
-     Author: NQMinh(31/07/2021)
-     */
-    deleteEmployee() {
-      const vm = this;
-      vm.employeesToDelete.forEach(employeeId => {
-        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(() => {
-          vm.$emit('delete-success');
-        }).catch(res => {
-          console.log(res);
-        })
-      })
+    openAlertMessage() {
+      this.$emit('open-popup', true);
     }
   }
 }

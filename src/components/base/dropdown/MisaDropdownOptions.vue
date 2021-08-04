@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import Toast from "@/utils/ToastsCreator";
+
 import axios from "axios";
 
 export default {
@@ -43,7 +45,7 @@ export default {
     axios.get(apiUrl).then(res => {
       this.dropdownOptions = res.data;
     }).catch(res => {
-      console.log(res);
+      new Toast(res);
     })
   },
 
