@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <Header></Header>
-    <Menu></Menu>
-    <Content></Content>
+    <Header
+        @toggle-menu="menuToggled = !menuToggled"
+    />
+    <Menu
+        :menuToggled="menuToggled"
+    />
+    <Content
+        :menuToggled="menuToggled"
+    />
   </div>
 </template>
 
 <script>
 import EventIniter from "@/utils/EventDeclarator";
 import Header from "./components/layout/TheHeader";
-import Menu from "./components/layout/TheMenu";
+import Menu from "./components/layout/menu/TheMenu";
 import Content from "./components/layout/content/TheContent";
 
 export default {
@@ -17,6 +23,12 @@ export default {
 
   mounted() {
     new EventIniter()
+  },
+
+  data() {
+    return {
+      menuToggled: false
+    }
   },
 
   components: {
@@ -28,7 +40,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import './css/Fonts.css';
-@import './css/Variables.css';
-@import './css/Main';
+@import './assets/css/Fonts.css';
+@import './assets/css/Variables.css';
+@import './assets/css/Main';
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <EmployeeList/>
+  <EmployeeList :menuToggled="menuToggled"/>
 </template>
 
 <script>
@@ -11,6 +11,12 @@ export default {
   data() {
     return {
 
+    }
+  },
+
+  props: {
+    menuToggled: {
+      type: Boolean
     }
   },
 

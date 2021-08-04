@@ -1,0 +1,59 @@
+@font-face {
+	font-family: 'GoogleSans-Black';
+	src: url('../font/GoogleSans-Black.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-BlackItalic';
+	src: url('../font/GoogleSans-BlackItalic.otf') format('opentype'), url('../font/GoogleSans-Bold.otf') format('opentype'), url('../font/GoogleSans-BoldItalic.otf') format('opentype'), url('../font/GoogleSans-Italic.otf') format('opentype'), url('../font/GoogleSans-Light.otf') format('opentype'), url('../font/GoogleSans-LightItalic.otf') format('opentype'), url('../font/GoogleSans-Medium.otf') format('opentype'), url('../font/GoogleSans-MediumItalic.otf') format('opentype'), url('../font/GoogleSans-Regular.otf') format('opentype'), url('../font/GoogleSans-Thin.otf') format('opentype'), url('../font/GoogleSans-ThinItalic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Bold';
+	src: url('../font/GoogleSans-Bold.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-BoldItalic';
+	src: url('../font/GoogleSans-BoldItalic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Italic';
+	src: url('../font/GoogleSans-Italic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Light';
+	src: url('../font/GoogleSans-Light.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-LightItalic';
+	src: url('../font/GoogleSans-LightItalic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Medium';
+	src: url('../font/GoogleSans-Medium.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-MediumItalic';
+	src: url('../font/GoogleSans-MediumItalic.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Regular';
+	src: url('../font/GoogleSans-Regular.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-Thin';
+	src: url('../font/GoogleSans-Thin.otf') format('opentype');
+}
+
+@font-face {
+	font-family: 'GoogleSans-ThinItalic';
+	src: url('../font/GoogleSans-ThinItalic.otf') format('opentype');
+}

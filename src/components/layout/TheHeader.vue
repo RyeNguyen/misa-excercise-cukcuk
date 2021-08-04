@@ -1,10 +1,23 @@
 <template>
   <div class="misa-header">
-    <div class="misa-header--left">
-      <div class="header__toggle"></div>
-      <div class="header__logo"></div>
+    <div
+        class="misa-header--left"
+        :class="{'misa-header--left-shrink': menuToggled}"
+    >
+      <div
+          class="header__toggle"
+          :class="{'header__toggled': menuToggled}"
+          @click="toggleMenu"
+      />
+      <div
+          class="header__logo"
+          :class="{'misa-hidden': menuToggled}"
+      />
     </div>
-    <div class="misa-header--right">
+    <div
+        class="misa-header--right"
+        :class="{'misa-header--right-extend': menuToggled}"
+    >
       <div class="header__title">
         <div class="misa-dropdown" id="dropdown__restaurant">
           <button class="dropdown__button">
@@ -30,7 +43,22 @@
 
 <script>
 export default {
-  name: 'TheHeader'
+  name: 'TheHeader',
+
+  data() {
+    return {
+      menuToggled: false
+    }
+  },
+
+  emits: ['toggle-menu'],
+
+  methods: {
+    toggleMenu: function() {
+      this.menuToggled = !this.menuToggled;
+      this.$emit('toggle-menu');
+    }
+  }
 }
 </script>
 
@@ -54,7 +82,7 @@ export default {
     }
 
     & .header {
-      &__togle {
+      &__toggle {
         width: 24px;
         height: 24px;
         margin: 12px 10px 12px 16px;

@@ -1,5 +1,8 @@
 <template>
-  <div class="misa-content">
+  <div
+      class="misa-content"
+      :class="{'misa-content--extend': menuToggled}"
+  >
     <!-- header của content ở đây, bao gồm title và nút thêm nhân viên -->
     <MisaContentHeader
         :modalIsOpened="modalIsOpened"
@@ -96,6 +99,12 @@ export default {
 
       //Biến kiểm tra user muốn thêm hay sửa thông tin nv
       wantToCreateNewEmployee: true
+    }
+  },
+
+  props: {
+    menuToggled: {
+      type: Boolean
     }
   },
 
