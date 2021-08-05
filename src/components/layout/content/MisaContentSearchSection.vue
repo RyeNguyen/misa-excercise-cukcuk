@@ -4,7 +4,12 @@
       <div class="misa-text-box--default">
         <div id="search-icon"></div>
         <label>
-          <input type="text" placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại" id="search-input">
+          <input
+              type="text"
+              placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
+              id="search-input"
+              v-model="searchKeyword"
+          >
         </label>
       </div>
       <MisaDropdown
@@ -35,9 +40,24 @@ import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 
 export default {
   name: "MisaContentSearch",
+
+  data() {
+    return {
+      searchKeyword: ''
+    }
+  },
+
   components: {
     MisaButton,
     MisaDropdown
+  },
+
+  emits: ['search-input-changed'],
+
+  watch: {
+    searchKeyword: function() {
+      this.$emit('search-input-changed', this.searchKeyword);
+    }
   },
 
   methods: {

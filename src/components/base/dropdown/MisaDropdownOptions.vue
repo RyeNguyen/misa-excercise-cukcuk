@@ -24,9 +24,10 @@
 </template>
 
 <script>
-import Toast from "@/utils/ToastsCreator";
+import GenderModel from "@/models/GenderModel";
+import WorkStatusModel from "@/models/WorkStatusModel";
 
-import axios from "axios";
+import Toast from "@/utils/ToastsCreator";
 
 export default {
   name: "MisaDropdownOptions",
@@ -41,12 +42,21 @@ export default {
       case 'Position':
         apiUrl = 'http://cukcuk.manhnv.net/v1/Positions';
         break;
+      case 'Gender':
+        this.dropdownOptions = GenderModel.initData();
+        break;
+      case 'WorkStatus':
+        this.dropdownOptions = WorkStatusModel.initData();
+        break;
     }
-    axios.get(apiUrl).then(res => {
-      this.dropdownOptions = res.data;
-    }).catch(res => {
-      new Toast(res);
-    })
+
+    if (this.dropdownType === 'Department' || this.dropdownType === 'Position') {
+      this.$api.get(apiUrl).then(res => {
+        this.dropdownOptions = res.data;
+      }).catch(res => {
+        new Toast(res);
+      })
+    }
   },
 
   data() {

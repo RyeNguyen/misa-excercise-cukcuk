@@ -24,7 +24,7 @@
       <tbody>
       <tr
           ref="tableRow"
-          v-for="(employee, index) in tableData"
+          v-for="(employee, index) in filteredList"
           :key="employee['EmployeeId']"
           @click="rowActive(index)"
           @dblclick="bindingDataFromTable(employee)"
@@ -78,12 +78,16 @@ import DateFormatter from "@/utils/DateFormatter";
 export default {
   name: 'MisaTable',
 
+  created() {
+    this.filteredList = this.data;
+  },
+
   data() {
     return {
       showModal: true,
       wantToCreateNewEmployee: false,
-      tableData: this.data,
-      employeesToDelete: []
+      employeesToDelete: [],
+      filteredList: []
     }
   },
 
@@ -96,6 +100,10 @@ export default {
     isLoading: {
       type: Boolean,
       required: true
+    },
+
+    searchKeyword: {
+      type: String
     }
   },
 
@@ -111,9 +119,18 @@ export default {
 
   watch: {
     data: function() {
-      this.tableData = this.data;
+      this.filteredList = this.data;
       this.employeesToDelete = [];
     },
+
+    searchKeyword: function() {
+      this.filteredList = this.data.filter(item => {
+        return (item['FullName'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+            item['EmployeeCode'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+            item['PhoneNumber'].includes(this.searchKeyword)
+        );
+      })
+    }
   },
 
   methods: {

@@ -22,7 +22,7 @@ export default {
 
   props: {
     activeClass: {
-      type: String
+      type: Object
     },
 
     itemIcon: {

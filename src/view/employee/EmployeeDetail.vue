@@ -73,7 +73,7 @@
                 <MisaDropdown
                     id="dropdown__gender"
                     title="Chọn giới tính"
-                    type="Position"
+                    type="Gender"
                 />
               </div>
 
@@ -171,7 +171,7 @@
                 <MisaDropdown
                     id="dropdown__department-modal"
                     title="Chọn phòng ban"
-                    type="Position"
+                    type="Department"
                 />
               </div>
 
@@ -224,7 +224,7 @@
                 <MisaDropdown
                     id="dropdown__work-status"
                     title="Tình trạng làm việc"
-                    type="Position"
+                    type="WorkStatus"
                 />
               </div>
             </div>
@@ -379,6 +379,7 @@ export default {
         new Toast(0);
         this.$emit('modal-submitted');
       }).catch(res => {
+        console.log(res);
         new Toast(res);
       })
     },
@@ -466,7 +467,7 @@ export default {
     width: 75%;
     height: 85%;
     overflow: auto;
-    padding-right: 16px;
+    padding: 0 16px 200px 0;
 
     & .info__title {
       text-transform: uppercase;

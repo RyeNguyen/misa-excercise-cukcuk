@@ -14,6 +14,7 @@
 
     <!-- mục tìm kiếm của content ở đây -->
     <MisaContentSearchSection
+        @search-input-changed="searchEmployee"
         @reload="loadData"
     />
 
@@ -21,6 +22,7 @@
     <MisaTable
         :data="employees"
         :isLoading="isLoading"
+        :searchKeyword="searchKeyword"
         @row-double-clicked="bindingDataFromTable"
         @show-btn-delete="showButtonDelete"
         @hide-btn-delete="hideButtonDelete"
@@ -98,7 +100,9 @@ export default {
       openWarningPopupMessage: false,
 
       //Biến kiểm tra user muốn thêm hay sửa thông tin nv
-      wantToCreateNewEmployee: true
+      wantToCreateNewEmployee: true,
+
+      searchKeyword: ''
     }
   },
 
@@ -184,6 +188,10 @@ export default {
 
     toggleAlertMessage(state) {
       this.openAlertPopupMessage = state;
+    },
+
+    searchEmployee(keyword) {
+      this.searchKeyword = keyword;
     }
   }
 }

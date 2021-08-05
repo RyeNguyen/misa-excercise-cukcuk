@@ -69,7 +69,7 @@ export default {
   display: flex;
 
   &--left {
-    width: 226px;
+    width: 227px;
     height: 49px;
     border-right: 1px solid var(--color-hightlight);
     display: flex;
