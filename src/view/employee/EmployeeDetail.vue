@@ -19,12 +19,12 @@
         :max-width="maxWidth | checkEmpty"
         :left="left"
         :top="top"
-        @resize:move="eHandler"
-        @resize:start="eHandler"
-        @resize:end="eHandler"
-        @drag:move="eHandler"
-        @drag:start="eHandler"
-        @drag:end="eHandler"
+        @resize:move="ResizeAndDragHandler"
+        @resize:start="ResizeAndDragHandler"
+        @resize:end="ResizeAndDragHandler"
+        @drag:move="ResizeAndDragHandler"
+        @drag:start="ResizeAndDragHandler"
+        @drag:end="ResizeAndDragHandler"
     >
       <div class="misa-modal" @click.stop.prevent>
         <img src="../../assets/icon/x.svg" alt="close button" class="misa-modal__button-close" @click="closeModal">
@@ -40,7 +40,7 @@
           </div>
 
           <div class="misa-modal__form">
-            <!-- Thông tin nhân viên -->
+            <!-- Thông tin chung -->
             <div class="misa-modal__info">
               <h2 class="info__title">a. thông tin chung:</h2>
               <div class="misa__divider"></div>
@@ -297,6 +297,7 @@ export default {
   },
 
   data() {
+    //Kích thước form mặc định
     const resizerWidth = 860;
     const resizerHeight = 730;
 
@@ -309,6 +310,7 @@ export default {
 
       resizing: false,
 
+      //#region Các thông số cần thiết để thực hiện resize form
       handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
       left: 0,
       top: 0,
@@ -320,6 +322,7 @@ export default {
       maxWidth: 1076,
       dragSelector: '.misa-modal__header',
       fit: true,
+      //#endregion
     }
   },
 
@@ -357,9 +360,9 @@ export default {
       if (this.wantToCreateNewEmployee) {
         this.employee['EmployeeCode'] = this.newEmployeeCode;
       }
-
-      this.$refs.inputCode.focus();
-    },
+      this.$nextTick(() => {
+        this.$refs.inputCode.focus();
+      })},
 
     //Hàm kiểm tra user muốn sửa thông tin nv hay không -> binding data
     //Author: NQMinh(31/07/2021)
@@ -377,6 +380,7 @@ export default {
 
   emits: ['close-modal', 'modal-submitted'],
 
+  //TODO: Format ngày tháng và tiền tệ
   computed: {
     formattedSalary: {
       get: function () {
@@ -390,13 +394,21 @@ export default {
   },
 
   filters: {
+    /**
+     * Kiểm tra dữ liệu kích thước form
+     */
     checkEmpty(value) {
       return typeof value !== "number" ? 0 : value;
     }
   },
 
   methods: {
-    eHandler(data) {
+    /**
+     * Hàm xử lý sự kiện thay đổi kích thước và kéo thả form nhập
+     * @params dữ liệu sự kiện
+     * Author: NQMinh (05/08/2021)
+     */
+    ResizeAndDragHandler(data) {
       this.resizing = true;
       this.width = data.width;
       this.height = data.height;
@@ -435,6 +447,10 @@ export default {
       this.employee = {};
     },
 
+    /**
+     * Hàm call API để thêm dữ liệu nv lên server
+     * Author: NQMinh(03/08/2021)
+     */
     addEmployee() {
       EmployeesAPI.add(this.employee).then(() => {
         new Toast(0);
@@ -445,6 +461,10 @@ export default {
       })
     },
 
+    /**
+     * Hàm call API để sửa đổi dữ liệu nv
+     * Author: NQMinh(03/08/2021)
+     */
     updateEmployee() {
       EmployeesAPI.update(this.employee['EmployeeId'], this.employee).then(() => {
         new Toast(1);
@@ -452,16 +472,12 @@ export default {
       }).catch(res => {
         new Toast(res);
       })
-    },
-
-    handleResize() {
-
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .misa-modal-container {
   position: fixed;
   top: 0;

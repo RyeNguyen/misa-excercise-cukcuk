@@ -1,4 +1,7 @@
 export default class DataValidator {
+    constructor() {
+    }
+
     //Hàm hiện thông báo lỗi khi nhập sai input
     //@params ô nhập và text thông báo cần hiện
     //Author: NQMinh(23/07/2021)
@@ -9,9 +12,11 @@ export default class DataValidator {
         input.parentElement.append(errorBubble);
     }
 
+    //Hàm kiểm tra dữ liệu email
+    //Author: NQMinh(22/07/2021)
     static validateEmail = () => {
         const self = this;
-        const  inputEmail = document.getElementById('input-employee-email');
+        const inputEmail = document.getElementById('input-employee-email');
         // eslint-disable-next-line
         const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         inputEmail.addEventListener('input', () => {
@@ -20,6 +25,10 @@ export default class DataValidator {
                 self.showError(inputEmail, 'Email không đúng định dạng');
             }
         })
+    }
+
+    static validateLength = () => {
+
     }
     
     //Hàm kiểm tra ô nhập trống
