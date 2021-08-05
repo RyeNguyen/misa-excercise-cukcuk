@@ -24,7 +24,7 @@
       <tbody>
       <tr
           ref="tableRow"
-          v-for="(employee, index) in filteredList"
+          v-for="(employee, index) in filteredData"
           :key="employee['EmployeeId']"
           @click="rowActive(index)"
           @dblclick="bindingDataFromTable(employee)"
@@ -39,16 +39,16 @@
             <span class="misa-checkmark"></span>
           </div>
         </td>
-        <td>{{employee['EmployeeCode']}}</td>
-        <td>{{employee['FullName']}}</td>
-        <td>{{employee['GenderName']}}</td>
-        <td>{{formatDate(employee['DateOfBirth'])}}</td>
-        <td>{{employee['PhoneNumber']}}</td>
-        <td>{{employee['Email']}}</td>
-        <td>{{employee['PositionName']}}</td>
-        <td>{{employee['DepartmentName']}}</td>
-        <td>{{formatSalary(employee['Salary'])}}</td>
-        <td>{{employee['WorkStatus']}}</td>
+        <td>{{ employee['EmployeeCode'] }}</td>
+        <td>{{ employee['FullName'] }}</td>
+        <td>{{ employee['GenderName'] }}</td>
+        <td>{{ formatDate(employee['DateOfBirth']) }}</td>
+        <td>{{ employee['PhoneNumber'] }}</td>
+        <td>{{ employee['Email'] }}</td>
+        <td>{{ employee['PositionName'] }}</td>
+        <td>{{ employee['DepartmentName'] }}</td>
+        <td>{{ formatSalary(employee['Salary']) }}</td>
+        <td>{{ employee['WorkStatus'] }}</td>
       </tr>
       </tbody>
     </table>
@@ -67,9 +67,10 @@
 </template>
 
 <script>
-import axios from "axios";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+
+import EmployeesAPI from "@/api/components/EmployeesAPI";
 
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
@@ -79,7 +80,7 @@ export default {
   name: 'MisaTable',
 
   created() {
-    this.filteredList = this.data;
+    this.filteredData = this.data;
   },
 
   data() {
@@ -87,7 +88,7 @@ export default {
       showModal: true,
       wantToCreateNewEmployee: false,
       employeesToDelete: [],
-      filteredList: []
+      filteredData: []
     }
   },
 
@@ -112,19 +113,19 @@ export default {
   },
 
   emits: [
-      'row-double-clicked',
-      'show-btn-delete',
-      'hide-btn-delete'
+    'row-double-clicked',
+    'show-btn-delete',
+    'hide-btn-delete'
   ],
 
   watch: {
-    data: function() {
-      this.filteredList = this.data;
+    data: function () {
+      this.filteredData = this.data;
       this.employeesToDelete = [];
     },
 
-    searchKeyword: function() {
-      this.filteredList = this.data.filter(item => {
+    searchKeyword: function () {
+      this.filteredData = this.data.filter(item => {
         return (item['FullName'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
             item['EmployeeCode'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
             item['PhoneNumber'].includes(this.searchKeyword)
@@ -160,7 +161,7 @@ export default {
      * Author: NQMinh(30/07/2021)
      */
     bindingDataFromTable(employee) {
-      axios.get(`http://cukcuk.manhnv.net/v1/Employees/${employee['EmployeeId']}`).then(res => {
+      EmployeesAPI.getById(employee['EmployeeId']).then(res => {
         new Toast('okay');
         this.$emit(
             'row-double-clicked',
@@ -168,8 +169,8 @@ export default {
             res.data,
             this.wantToCreateNewEmployee
         );
-      }).catch(res => {
-        new Toast(res);
+      }).catch(error => {
+        new Toast(error.response.status);
       })
     },
 
@@ -331,6 +332,7 @@ date căn giữa
       min-width: 150px;
     }
   }
+
   /*#endregion*/
 
   /*#region checkbox*/
@@ -395,6 +397,7 @@ date căn giữa
     //  background-color: var(--color-hightlight);
     //}
   }
+
   /*#endregion*/
 }
 

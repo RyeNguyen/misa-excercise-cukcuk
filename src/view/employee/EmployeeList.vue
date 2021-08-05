@@ -14,6 +14,7 @@
 
     <!-- mục tìm kiếm của content ở đây -->
     <MisaContentSearchSection
+        :isLoading="isLoading"
         @search-input-changed="searchEmployee"
         @reload="loadData"
     />
@@ -88,6 +89,7 @@ export default {
       //Thông tin 1 nv được chọn
       individualData: null,
 
+      //Biến check trạng thái load dữ liệu
       isLoading: true,
 
       //Biến check trạng thái đóng/mở của modal
@@ -102,6 +104,7 @@ export default {
       //Biến kiểm tra user muốn thêm hay sửa thông tin nv
       wantToCreateNewEmployee: true,
 
+      //Từ khóa tìm kiếm nv của người dùng
       searchKeyword: ''
     }
   },
@@ -125,13 +128,14 @@ export default {
      * Author: NQMinh(31/07/2021)
      */
     loadData() {
+      this.searchKeyword = '';
       this.isLoading = true;
       EmployeesAPI.getAll().then(res => {
         this.isLoading = false;
         new Toast('okay');
         this.employees = res.data;
-      }).catch(res => {
-        new Toast(res);
+      }).catch(error => {
+        new Toast(error.response.status);
       })
     },
 
@@ -179,6 +183,10 @@ export default {
       this.buttonDeleteShown = false;
     },
 
+    /**
+     * Hàm xử lý các sự kiện sau khi xóa nhân viên, bao gồm ẩn popup và nút xóa, clear mảng nv cần xóa, load lại dữ liệu
+     * Author: NQMinh(01/08/2021)
+     */
     afterDelete() {
       this.toggleAlertMessage(false);
       this.hideButtonDelete();
@@ -186,10 +194,20 @@ export default {
       this.loadData();
     },
 
+    /**
+     * Hảm kích hoạt ẩn hiện popup cảnh báo trước khi xóa
+     * @param state
+     * Author: NQMinh(01/08/2021)
+     */
     toggleAlertMessage(state) {
       this.openAlertPopupMessage = state;
     },
 
+    /**
+     * Hàm tìm kiếm nv, pass keyword người dùng gõ vào component MisaTable
+     * @param keyword
+     * Author: NQMinh(01/08/2021)
+     */
     searchEmployee(keyword) {
       this.searchKeyword = keyword;
     }

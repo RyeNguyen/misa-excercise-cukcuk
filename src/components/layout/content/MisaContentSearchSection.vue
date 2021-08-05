@@ -47,6 +47,12 @@ export default {
     }
   },
 
+  props: {
+    isLoading: {
+      type: Boolean
+    }
+  },
+
   components: {
     MisaButton,
     MisaDropdown
@@ -57,10 +63,20 @@ export default {
   watch: {
     searchKeyword: function() {
       this.$emit('search-input-changed', this.searchKeyword);
+    },
+
+    isLoading: function() {
+      if(this.isLoading === true) {
+        this.searchKeyword = '';
+      }
     }
   },
 
   methods: {
+    /**
+     * Hàm gọi cha reload dữ liệu
+     * Author: NQMinh(02/08/2021)
+     */
     reloadData: function () {
       this.$emit("reload");
     }

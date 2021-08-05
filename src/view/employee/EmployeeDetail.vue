@@ -1,258 +1,283 @@
 <template>
   <div
       class="misa-modal-container"
-      :class="{'misa-modal-container--open': modalIsOpened}"
-      @click="closeModal"
+      :class="[
+          {'misa-modal-container--open': modalIsOpened},
+          {'misa-modal-container--no-constraints': resizing}
+      ]"
   >
-    <div class="misa-modal" @click.stop.prevent>
-      <img src="../../assets/icon/x.svg" alt="close button" class="misa-modal__button-close" @click="closeModal">
+    <vue-resizable
+        class="misa-resizer"
+        :drag-selector="dragSelector"
+        :active="handlers"
+        :fit-parent="fit"
+        :width="width"
+        :height="height"
+        :min-height="minHeight | checkEmpty"
+        :max-height="maxHeight | checkEmpty"
+        :min-width="minWidth | checkEmpty"
+        :max-width="maxWidth | checkEmpty"
+        :left="left"
+        :top="top"
+        @resize:move="eHandler"
+        @resize:start="eHandler"
+        @resize:end="eHandler"
+        @drag:move="eHandler"
+        @drag:start="eHandler"
+        @drag:end="eHandler"
+    >
+      <div class="misa-modal" @click.stop.prevent>
+        <img src="../../assets/icon/x.svg" alt="close button" class="misa-modal__button-close" @click="closeModal">
 
-      <h1 class="misa-modal__header">Thông tin nhân viên</h1>
+        <h1 class="misa-modal__header">Thông tin nhân viên</h1>
 
-      <div class="misa-modal__content">
-        <div class="misa-modal__img-picker">
-          <div style="display: flex; flex-direction: column; align-items: center; width: 80%">
-            <div class="img-picker__placeholder"></div>
-            <div class="img-picker__text">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif.)</div>
-          </div>
-        </div>
-
-        <div class="misa-modal__form">
-          <!-- Thông tin nhân viên -->
-          <div class="misa-modal__info">
-            <h2 class="info__title">a. thông tin chung:</h2>
-            <div class="misa__divider"></div>
-
-            <div class="misa-modal__fields">
-              <!-- Nhập mã nhân viên ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-code" class="misa-label-text">
-                  Mã nhân viên (<span class="misa-asterisk">*</span>)
-                </label>
-                <input
-                    ref="inputCode"
-                    class="misa-text-box--default"
-                    type="text" id="input-employee-code"
-                    v-model="employee['EmployeeCode']"
-                    required
-                />
-              </div>
-
-              <!-- Nhập tên ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-name" class="misa-label-text">
-                  Họ và tên (<span class="misa-asterisk">*</span>)
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="text"
-                    id="input-employee-name"
-                    v-model="employee['FullName']"
-                    required
-                />
-              </div>
-
-              <!-- Nhập ngày sinh ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-date-born" class="misa-label-text">
-                  Ngày sinh
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="date"
-                    id="input-employee-date-born"
-                    v-model="employee['DateOfBirth']"
-                />
-              </div>
-
-              <!-- Nhaaph giới tính ở đây -->
-              <div class="misa-modal__field">
-                <label class="misa-label-text">
-                  Giới tính
-                </label>
-                <MisaDropdown
-                    id="dropdown__gender"
-                    title="Chọn giới tính"
-                    type="Gender"
-                />
-              </div>
-
-              <!-- Nhập CMT ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-id" class="misa-label-text">
-                  Số CMTND/Căn cước (<span class="misa-asterisk">*</span>)
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    id="input-employee-id"
-                    v-model="employee['IdentityNumber']"
-                    required
-                />
-              </div>
-
-              <!-- Nhập ngày cấp CMT ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-id-date" class="misa-label-text">
-                  Ngày cấp
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="date"
-                    id="input-employee-id-date"
-                    v-model="employee['IdentityDate']"
-                />
-              </div>
-
-              <!-- Nhập nơi cấp CMT ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-id-place" class="misa-label-text">
-                  Nơi cấp
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="text"
-                    id="input-employee-id-place"
-                    v-model="employee['IdentityPlace']"
-                />
-              </div>
-            </div>
-
-            <div class="misa-modal__fields">
-              <!-- Nhập email ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-email" class="misa-label-text">
-                  Email (<span class="misa-asterisk">*</span>)
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="email" id="input-employee-email"
-                    v-model="employee['Email']"
-                    required/>
-              </div>
-
-              <!-- Nhập SĐT ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-phone" class="misa-label-text">
-                  Số điện thoại (<span class="misa-asterisk">*</span>)
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="tel"
-                    id="input-employee-phone"
-                    v-model="employee['PhoneNumber']"
-                    required />
-              </div>
+        <div class="misa-modal__content">
+          <div class="misa-modal__img-picker">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 80%">
+              <div class="img-picker__placeholder"></div>
+              <div class="img-picker__text">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif.)</div>
             </div>
           </div>
 
-          <!-- Thông tin công việc -->
-          <div class="misa-modal__info">
-            <h2 class="info__title">b. thông tin công việc:</h2>
-            <div class="misa__divider"></div>
+          <div class="misa-modal__form">
+            <!-- Thông tin nhân viên -->
+            <div class="misa-modal__info">
+              <h2 class="info__title">a. thông tin chung:</h2>
+              <div class="misa__divider"></div>
 
-            <div class="misa-modal__fields">
-              <!-- Nhập vị trí ở đây -->
-              <div class="misa-modal__field">
-                <label class="misa-label-text">
-                  Vị trí
-                </label>
-                <MisaDropdown
-                    id="dropdown__position-modal"
-                    title="Chọn vị trí"
-                    type="Position"
-                />
-              </div>
+              <div class="misa-modal__fields">
+                <!-- Nhập mã nhân viên ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-code" class="misa-label-text">
+                    Mã nhân viên (<span class="misa-asterisk">*</span>)
+                  </label>
+                  <input
+                      ref="inputCode"
+                      class="misa-text-box--default"
+                      type="text" id="input-employee-code"
+                      v-model="employee['EmployeeCode']"
+                      required
+                  />
+                </div>
 
-              <!-- Nhập phòng ban ở đây -->
-              <div class="misa-modal__field">
-                <label class="misa-label-text">
-                  Phòng ban
-                </label>
-                <MisaDropdown
-                    id="dropdown__department-modal"
-                    title="Chọn phòng ban"
-                    type="Department"
-                />
-              </div>
-
-              <!-- Nhập mã số thuế ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-wage" class="misa-label-text">
-                  Mã số thuế cá nhân
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="text"
-                    id="input-employee-wage"
-                    v-model="employee['PersonalTaxCode']"
-                />
-              </div>
-
-              <!-- Nhập lương ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-income" class="misa-label-text">
-                  Mức lương cơ bản
-                </label>
-                <div id="income-container">
+                <!-- Nhập tên ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-name" class="misa-label-text">
+                    Họ và tên (<span class="misa-asterisk">*</span>)
+                  </label>
                   <input
                       class="misa-text-box--default"
                       type="text"
-                      id="input-employee-income"
-                      v-model="formattedSalary"
+                      id="input-employee-name"
+                      v-model="employee['FullName']"
+                      required
                   />
-                  <div id="income-container__label">VNĐ</div>
+                </div>
+
+                <!-- Nhập ngày sinh ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-date-born" class="misa-label-text">
+                    Ngày sinh
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="date"
+                      id="input-employee-date-born"
+                      v-model="employee['DateOfBirth']"
+                  />
+                </div>
+
+                <!-- Nhaaph giới tính ở đây -->
+                <div class="misa-modal__field">
+                  <label class="misa-label-text">
+                    Giới tính
+                  </label>
+                  <MisaDropdown
+                      id="dropdown__gender"
+                      title="Chọn giới tính"
+                      type="Gender"
+                  />
+                </div>
+
+                <!-- Nhập CMT ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-id" class="misa-label-text">
+                    Số CMTND/Căn cước (<span class="misa-asterisk">*</span>)
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      id="input-employee-id"
+                      v-model="employee['IdentityNumber']"
+                      required
+                  />
+                </div>
+
+                <!-- Nhập ngày cấp CMT ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-id-date" class="misa-label-text">
+                    Ngày cấp
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="date"
+                      id="input-employee-id-date"
+                      v-model="employee['IdentityDate']"
+                  />
+                </div>
+
+                <!-- Nhập nơi cấp CMT ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-id-place" class="misa-label-text">
+                    Nơi cấp
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="text"
+                      id="input-employee-id-place"
+                      v-model="employee['IdentityPlace']"
+                  />
                 </div>
               </div>
 
-              <!-- Nhập ngày vào công ty ở đây -->
-              <div class="misa-modal__field">
-                <label for="input-employee-date-company" class="misa-label-text">
-                  Ngày gia nhập công ty
-                </label>
-                <input
-                    class="misa-text-box--default"
-                    type="date"
-                    id="input-employee-date-company"
-                />
-              </div>
+              <div class="misa-modal__fields">
+                <!-- Nhập email ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-email" class="misa-label-text">
+                    Email (<span class="misa-asterisk">*</span>)
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="email" id="input-employee-email"
+                      v-model="employee['Email']"
+                      required/>
+                </div>
 
-              <!-- Nhập tình trạng làm việc ở đây -->
-              <div class="misa-modal__field">
-                <label class="misa-label-text">
-                  Tình trạng làm việc
-                </label>
-                <MisaDropdown
-                    id="dropdown__work-status"
-                    title="Tình trạng làm việc"
-                    type="WorkStatus"
-                />
+                <!-- Nhập SĐT ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-phone" class="misa-label-text">
+                    Số điện thoại (<span class="misa-asterisk">*</span>)
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="tel"
+                      id="input-employee-phone"
+                      v-model="employee['PhoneNumber']"
+                      required/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Thông tin công việc -->
+            <div class="misa-modal__info">
+              <h2 class="info__title">b. thông tin công việc:</h2>
+              <div class="misa__divider"></div>
+
+              <div class="misa-modal__fields">
+                <!-- Nhập vị trí ở đây -->
+                <div class="misa-modal__field">
+                  <label class="misa-label-text">
+                    Vị trí
+                  </label>
+                  <MisaDropdown
+                      id="dropdown__position-modal"
+                      title="Chọn vị trí"
+                      type="Position"
+                  />
+                </div>
+
+                <!-- Nhập phòng ban ở đây -->
+                <div class="misa-modal__field">
+                  <label class="misa-label-text">
+                    Phòng ban
+                  </label>
+                  <MisaDropdown
+                      id="dropdown__department-modal"
+                      title="Chọn phòng ban"
+                      type="Department"
+                  />
+                </div>
+
+                <!-- Nhập mã số thuế ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-wage" class="misa-label-text">
+                    Mã số thuế cá nhân
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="text"
+                      id="input-employee-wage"
+                      v-model="employee['PersonalTaxCode']"
+                  />
+                </div>
+
+                <!-- Nhập lương ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-income" class="misa-label-text">
+                    Mức lương cơ bản
+                  </label>
+                  <div id="income-container">
+                    <input
+                        class="misa-text-box--default"
+                        type="text"
+                        id="input-employee-income"
+                        v-model="formattedSalary"
+                    />
+                    <div id="income-container__label">VNĐ</div>
+                  </div>
+                </div>
+
+                <!-- Nhập ngày vào công ty ở đây -->
+                <div class="misa-modal__field">
+                  <label for="input-employee-date-company" class="misa-label-text">
+                    Ngày gia nhập công ty
+                  </label>
+                  <input
+                      class="misa-text-box--default"
+                      type="date"
+                      id="input-employee-date-company"
+                  />
+                </div>
+
+                <!-- Nhập tình trạng làm việc ở đây -->
+                <div class="misa-modal__field">
+                  <label class="misa-label-text">
+                    Tình trạng làm việc
+                  </label>
+                  <MisaDropdown
+                      id="dropdown__work-status"
+                      title="Tình trạng làm việc"
+                      type="WorkStatus"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="misa-modal__footer">
-        <MisaButton
-            buttonId="button__cancel"
-            buttonType="secondary"
-            buttonText="Hủy"
-            @click.native="closeModal"
-        />
+        <div class="misa-modal__footer">
+          <MisaButton
+              buttonId="button__cancel"
+              buttonType="secondary"
+              buttonText="Hủy"
+              @click.native="closeModal"
+          />
 
-        <MisaButton
-            buttonId="button__submit"
-            buttonType="primary"
-            buttonText="Lưu"
-            buttonIconFontAwesome="far fa-save"
-            @click.native="submitData"
-        />
+          <MisaButton
+              buttonId="button__submit"
+              buttonType="primary"
+              buttonText="Lưu"
+              buttonIconFontAwesome="far fa-save"
+              @click.native="submitData"
+          />
+        </div>
       </div>
-    </div>
+    </vue-resizable>
   </div>
 </template>
 
 <script>
+import VueResizable from 'vue-resizable';
+
 import EmployeesAPI from "@/api/components/EmployeesAPI";
 
 //#region import utils
@@ -272,14 +297,32 @@ export default {
   },
 
   data() {
+    const resizerWidth = 860;
+    const resizerHeight = 730;
+
     return {
       //Biến kiểm tra modal có mở hay không
       showModal: this.modalIsOpened,
 
       //Biến chứa dữ liệu nv để thêm hoặc sửa
-      employee: {}
+      employee: {},
+
+      resizing: false,
+
+      handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
+      left: 0,
+      top: 0,
+      height: resizerHeight,
+      width: resizerWidth,
+      minHeight: 514,
+      minWidth: 644,
+      maxHeight: 730,
+      maxWidth: 1076,
+      dragSelector: '.misa-modal__header',
+      fit: true,
     }
   },
+
   props: {
     //Biến dữ liệu cá nhân một nv khi click 2 lần vào table row
     employeeData: Object,
@@ -303,10 +346,14 @@ export default {
     }
   },
 
+  components: {
+    VueResizable
+  },
+
   watch: {
     //Hàm kiểm tra user muốn thêm nv hay không -> thêm mã nv mới
     //Author: NQMinh(31/07/2021)
-    modalIsOpened: function() {
+    modalIsOpened: function () {
       if (this.wantToCreateNewEmployee) {
         this.employee['EmployeeCode'] = this.newEmployeeCode;
       }
@@ -316,7 +363,7 @@ export default {
 
     //Hàm kiểm tra user muốn sửa thông tin nv hay không -> binding data
     //Author: NQMinh(31/07/2021)
-    wantToCreateNewEmployee: function() {
+    wantToCreateNewEmployee: function () {
       if (!this.wantToCreateNewEmployee) {
         this.employee = this.employeeData;
         this.employee['DateOfBirth'] = this.formatDate(this.employee['DateOfBirth']);
@@ -342,7 +389,21 @@ export default {
     }
   },
 
+  filters: {
+    checkEmpty(value) {
+      return typeof value !== "number" ? 0 : value;
+    }
+  },
+
   methods: {
+    eHandler(data) {
+      this.resizing = true;
+      this.width = data.width;
+      this.height = data.height;
+      this.left = data.left;
+      this.top = data.top;
+    },
+
     //Hàm định dạng mức lương
     //Author: NQMinh(30/07/2021)
     formatSalary(salary) {
@@ -391,6 +452,10 @@ export default {
       }).catch(res => {
         new Toast(res);
       })
+    },
+
+    handleResize() {
+
     }
   }
 }
@@ -409,14 +474,27 @@ export default {
   align-items: center;
   justify-content: space-evenly;
 
+  &--no-constraints {
+    align-items: normal;
+    justify-content: normal;
+  }
+
   &--open {
     display: flex;
   }
 }
 
+.misa-resizer {
+  background-position: top left;
+  width: auto;
+  height: auto;
+  border: 2px solid red;
+  position: relative;
+}
+
 .misa-modal {
-  width: 50%;
-  height: 95vh;
+  width: 100%;
+  height: 100%;
   background-color: var(--color-white);
   border-radius: 4px;
   overflow: hidden;

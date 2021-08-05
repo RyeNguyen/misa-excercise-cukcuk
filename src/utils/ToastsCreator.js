@@ -57,7 +57,7 @@ export default class Toast {
                 text = 'Lỗi server, vui lòng đợi ít phút';
                 break;
             case 400:
-                text = 'Dữ liệu nhập vào không hợp lệ, vui lòng kiểm tra lại';
+                text = 'Dữ liệu không hợp lệ, vui lòng kiểm tra lại';
                 break;
             case 404:
                 text = 'Địa chỉ không tồn tại, vui lòng quay về trang chủ';
