@@ -2,15 +2,15 @@ export default class GenderModel {
     static initData() {
         return [
             {
-                GenderId: 0,
+                GenderId: 1,
                 GenderName: "Nam"
             },
             {
-                GenderId: 1,
+                GenderId: 2,
                 GenderName: "Nữ"
             },
             {
-                GenderId: 2,
+                GenderId: 3,
                 GenderName: "Không xác định"
             },
         ]

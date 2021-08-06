@@ -40,6 +40,7 @@
             :buttonText=buttonPrimaryText
             @click.native="deleteEmployee"
         />
+
         <MisaButton
             v-if="popupType === 'primary'"
             :buttonType="popupType"
@@ -52,7 +53,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import EmployeesAPI from "@/api/components/EmployeesAPI";
 
 import Toast from "@/utils/ToastsCreator";
 
@@ -137,14 +138,14 @@ export default {
       let deleteCount = 0;
       const vm = this;
       vm.employeesToDelete.forEach(employeeId => {
-        axios.delete(`http://cukcuk.manhnv.net/v1/Employees/${employeeId}`).then(() => {
+        EmployeesAPI.delete(employeeId).then(() => {
           deleteCount += 1;
           if (deleteCount === vm.employeesToDelete.length) {
             new Toast(2);
             vm.$emit('delete-success');
           }
-        }).catch(res => {
-          new Toast(res);
+        }).catch(error => {
+          new Toast(error.response.status);
         })
       })
     },

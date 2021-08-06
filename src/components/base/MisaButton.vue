@@ -1,6 +1,11 @@
 <template>
   <div
-      :class="['misa-button', 'misa-button--' + buttonType, buttonClass]"
+      :class=
+      "[
+          'misa-button',
+          'misa-button--' + buttonType,
+          buttonClass
+      ]"
       :id="buttonId"
   >
     <img
