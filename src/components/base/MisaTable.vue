@@ -271,9 +271,9 @@ date căn giữa
       background-color: var(--color-secondary-hover);
     }
 
-    &:nth-child(odd) {
-      background-color: rgba(229, 229, 229, 0.5);
-    }
+    //&:nth-child(odd) {
+    //  background-color: rgba(229, 229, 229, 0.5);
+    //}
   }
 
   /*#region chỉnh size của table*/
@@ -375,7 +375,8 @@ date căn giữa
       left: 0;
       height: 24px;
       width: 24px;
-      background-color: var(--color-secondary-hover);
+      //background-color: var(--color-secondary-hover);
+      background-color: var(--color-white);
 
       &:after {
         content: "";

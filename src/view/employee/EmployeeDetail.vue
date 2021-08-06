@@ -220,7 +220,7 @@
                         class="misa-text-box--default"
                         type="text"
                         id="input-employee-income"
-                        v-model="formattedSalary"
+                        v-model="employee['Salary']"
                     />
                     <div id="income-container__label">VNĐ</div>
                   </div>
@@ -312,8 +312,8 @@ export default {
 
       //#region Các thông số cần thiết để thực hiện resize form
       handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      left: 0,
-      top: 0,
+      left: `calc(50% - ${resizerWidth / 2}px)`,
+      top: `calc(50% - ${resizerHeight / 2}px)`,
       height: resizerHeight,
       width: resizerWidth,
       minHeight: 514,
@@ -360,9 +360,11 @@ export default {
       if (this.wantToCreateNewEmployee) {
         this.employee['EmployeeCode'] = this.newEmployeeCode;
       }
+
       this.$nextTick(() => {
         this.$refs.inputCode.focus();
-      })},
+      })
+    },
 
     //Hàm kiểm tra user muốn sửa thông tin nv hay không -> binding data
     //Author: NQMinh(31/07/2021)
@@ -371,27 +373,20 @@ export default {
         this.employee = this.employeeData;
         this.employee['DateOfBirth'] = this.formatDate(this.employee['DateOfBirth']);
         this.employee['IdentityDate'] = this.formatDate(this.employee['IdentityDate']);
-        // this.employee['Salary'] = this.formatSalary(this.employee['Salary']);
       } else {
         this.employee = {};
       }
+    },
+
+    //Watcher kiểm tra sự thay đổi của tiền lương để định dạng khi nhập
+    //Author: NQMinh(06/08/2021)
+    'employee.Salary': function(salary) {
+      let formatted = String(salary).replaceAll('.', '');
+      this.employee['Salary'] = this.formatSalary(formatted);
     }
   },
 
   emits: ['close-modal', 'modal-submitted'],
-
-  //TODO: Format ngày tháng và tiền tệ
-  computed: {
-    formattedSalary: {
-      get: function () {
-        return this.result;
-      },
-
-      set: function (newValue) {
-        this.result = this.formatSalary(newValue);
-      }
-    }
-  },
 
   filters: {
     /**
@@ -438,6 +433,9 @@ export default {
     //Hàm lưu dữ liệu nv lên database
     //Author: NQMinh(30/07/2021)
     submitData() {
+      //TODO: Trước khi submit data cần:
+      //1. Validate 1 lượt dữ liệu
+      //2. Chuyển tiền lương về number vì hiện tại đang là string
       if (this.wantToCreateNewEmployee) {
         this.addEmployee();
       } else {
@@ -504,7 +502,6 @@ export default {
   background-position: top left;
   width: auto;
   height: auto;
-  border: 2px solid red;
   position: relative;
 }
 
@@ -561,7 +558,7 @@ export default {
     width: 75%;
     height: 85%;
     overflow: auto;
-    padding: 0 16px 200px 0;
+    padding: 0 16px 16px 0;
 
     & .info__title {
       text-transform: uppercase;
@@ -648,15 +645,15 @@ export default {
   }
 }
 
-@media screen and (max-width: 1920px) {
-  .misa-modal__form .misa-modal__field .misa-label-text {
-    margin-bottom: 4px;
-  }
-
-  .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
-    margin-bottom: 8px;
-  }
-}
+//@media screen and (max-width: 1920px) {
+//  .misa-modal__form .misa-modal__field .misa-label-text {
+//    margin-bottom: 4px;
+//  }
+//
+//  .misa-modal__content .misa-modal__form .misa-modal__fields .misa-modal__field {
+//    margin-bottom: 8px;
+//  }
+//}
 
 @media screen and (max-width: 1080px) {
   .misa-modal {

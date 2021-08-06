@@ -1,7 +1,10 @@
 <template>
   <div
       class="dropdown__content"
-      :class="{'dropdown__content--hidden': contentHidden}"
+      :class="[
+          {'dropdown__content--hidden': contentHidden},
+          {'out-of-space': dropdownType === 'WorkStatus'}
+      ]"
   >
     <a
         href="#"
