@@ -23,33 +23,35 @@ export default class DataValidator {
             const email = inputEmail.value;
             if (!re.test(String(email).toLowerCase())) {
                 self.showError(inputEmail, 'Email không đúng định dạng');
+                return false;
             }
         })
-    }
-
-    static validateLength = () => {
-
+        return true;
     }
     
     //Hàm kiểm tra ô nhập trống
     //Author: NQMinh(21/07/2021)
     static validateRequired = () => {
         const self = this;
+        let result = true;
         const requiredFields = document.querySelectorAll('input[required]');
-        // if (required.val().trim() === '') return false;
-        requiredFields.forEach(field => {
+        let checkList = Array(requiredFields.length).fill(false);
+        requiredFields.forEach((field, index) => {
             field.addEventListener('blur', () => {
                 if (field.value.trim() === '') {
+                    checkList[index] = false;
                     field.classList.add('misa-input--alert');
                     field.setAttribute('title', 'Thông tin này bắt buộc nhập!');
                     self.showError(field, 'Thông tin này bắt buộc nhập');
                 } else {
+                    checkList[index] = true;
                     field.classList.remove('misa-input--alert');
                     field.removeAttribute('title');
                 }
             })
 
             field.addEventListener('input', () => {
+                checkList[index] = true;
                 const inputField = field.parentElement;
                 const lastChild = inputField.lastElementChild;
                 if (lastChild.className === 'misa-bubble--alert') {
@@ -57,9 +59,16 @@ export default class DataValidator {
                 }
             })
         })
+
+        for (let i = 0; i < checkList.length; i++) {
+            if(checkList[i] === false) result = false;
+        }
+        return result;
     }
 
     static validateAll = () => {
-
+        // const checkRequired = this.validateRequired();
+        // const checkEmail = this.validateEmail();
+        return true;
     }
 }

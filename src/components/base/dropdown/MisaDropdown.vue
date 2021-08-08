@@ -58,7 +58,7 @@ export default {
     },
 
     hideDropdownOptions() {
-      return this.contentHidden = true;
+      this.contentHidden = true;
     },
 
     //Hàm chuyển title của button dropdown

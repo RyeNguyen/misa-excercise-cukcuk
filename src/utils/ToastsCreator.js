@@ -11,8 +11,11 @@ export default class Toast {
         this.showToast(toastElement);
         this.removeToastOnTime(toastElement, 5000);
 
+        document.querySelector('.misa-toast__close').addEventListener('click', () => {
+            this.removeToastOnTime(toastElement, 0);
+        })
         //TODO: Hàm đang không hoạt động, cần xem lại
-        this.removeToastOnClose();
+        // this.removeToastOnClose();
     }
 
     //Hàm khởi tạo toast element
@@ -128,7 +131,8 @@ export default class Toast {
     //Author: NQMinh(26/07/2021)
     removeToastOnClose = () => {
         document.addEventListener('click', function (event) {
-            if (event.target.matches('.misa-toast__close')) {
+            if (event.target.matches('.misa-toast')) {
+                console.log('what the f*ck')
                 const toastElement = event.target.parentElement;
                 toastElement.classList.remove('misa-toast--active');
                 setTimeout(function(){

@@ -7,7 +7,7 @@ import VueAxios from "vue-axios";
 import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 import MisaPopupMessage from "@/components/base/popup/MisaPopupMessage";
 import MisaButton from "@/components/base/MisaButton";
-import MisaCombobox from "@/components/base/MisaCombobox";
+import MisaCombobox from "@/components/base/combobox/MisaCombobox";
 import MisaTable from "@/components/base/MisaTable";
 
 Vue.component('MisaDropdown', MisaDropdown);

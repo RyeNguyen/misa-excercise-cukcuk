@@ -22,6 +22,14 @@
           title="Tất cả vị trí"
           type="Position"
       />
+
+      <MisaCombobox
+        comboboxId="combobox-department"
+        comboboxPlaceholder="Chọn phòng ban"
+        comboboxDefaultOption="Tất cả phòng ban"
+        comboboxType="Department"
+      />
+
     </div>
     <div class="misa-content__search--right">
       <MisaButton
@@ -35,9 +43,6 @@
 </template>
 
 <script>
-import MisaButton from "@/components/base/MisaButton";
-import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
-
 export default {
   name: "MisaContentSearch",
 
@@ -51,11 +56,6 @@ export default {
     isLoading: {
       type: Boolean
     }
-  },
-
-  components: {
-    MisaButton,
-    MisaDropdown
   },
 
   emits: ['search-input-changed'],

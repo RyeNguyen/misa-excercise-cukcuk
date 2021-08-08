@@ -56,8 +56,8 @@ export default {
     if (this.dropdownType === 'Department' || this.dropdownType === 'Position') {
       this.$api.get(apiUrl).then(res => {
         this.dropdownOptions = res.data;
-      }).catch(res => {
-        new Toast(res);
+      }).catch(error => {
+        new Toast(error.response.status);
       })
     }
   },
@@ -66,17 +66,20 @@ export default {
     return {
       currentIndex: -1,
       dropdownOptions: [],
-      isActive: false,
+      isActive: false
     }
   },
+
   props: {
     contentHidden: {
       type: Boolean
     },
+
     dropdownTitle: {
       type: String,
       required: true
     },
+
     dropdownType: {
       type: String,
       required: true

@@ -3,11 +3,11 @@
       class="misa-modal-container"
       :class="[
           {'misa-modal-container--open': modalIsOpened},
-          {'misa-modal-container--no-constraints': resizing}
       ]"
   >
     <vue-resizable
         class="misa-resizer"
+        :class="{'misa-resizer--no-constraints': resizing}"
         :drag-selector="dragSelector"
         :active="handlers"
         :fit-parent="fit"
@@ -27,6 +27,8 @@
         @drag:end="ResizeAndDragHandler"
     >
       <div class="misa-modal" @click.stop.prevent>
+        <div class="misa-drag-handle"/>
+
         <div class="misa-modal__button-close-container">
           <img
               src="@/assets/icon/x.svg"
@@ -352,15 +354,15 @@ export default {
 
       //#region Các thông số cần thiết để thực hiện resize form
       handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      left: `calc(50% - ${resizerWidth / 2}px)`,
-      top: `calc(50% - ${resizerHeight / 2}px)`,
+      left: `calc(50vw - ${resizerWidth / 2}px)`,
+      top: `calc(50vh - ${resizerHeight / 2}px)`,
       height: resizerHeight,
       width: resizerWidth,
       minHeight: 514,
       minWidth: 644,
       maxHeight: 730,
       maxWidth: 1076,
-      dragSelector: '.misa-modal__header',
+      dragSelector: '.misa-drag-handle',
       fit: true,
       //#endregion
     }
@@ -492,13 +494,17 @@ export default {
       this.employee['DepartmentId'] = this.$refs.dropdownDepartment.value;
       this.employee['WorkStatus'] = this.$refs.dropdowmWorkStatus.value;
       this.employee['Salary'] = parseInt(this.employee['Salary'].split('.').join(''));
-      if (this.wantToCreateNewEmployee) {
-        this.addEmployee();
+      if (DataValidator.validateAll()) {
+        if (this.wantToCreateNewEmployee) {
+          this.addEmployee();
+        } else {
+          this.updateEmployee();
+        }
+        this.closeModal();
+        this.employee = {};
       } else {
-        this.updateEmployee();
+        new Toast(400);
       }
-      this.closeModal();
-      this.employee = {};
     },
 
     /**
@@ -540,17 +546,24 @@ export default {
   z-index: 10;
   background-color: rgba(0, 0, 0, 0.75);
   display: none;
-  align-items: center;
-  justify-content: space-evenly;
-
-  &--no-constraints {
-    align-items: normal;
-    justify-content: normal;
-  }
+  //align-items: center;
+  //justify-content: space-evenly;
 
   &--open {
     display: flex;
   }
+}
+
+.misa-drag-handle {
+  width: 48px;
+  height: 8px;
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 16px;
+  background-color: var(--color-secondary);
+  cursor: move;
 }
 
 .misa-resizer {
@@ -558,6 +571,11 @@ export default {
   width: auto;
   height: auto;
   position: relative;
+  margin: auto;
+
+  &--no-constraints {
+    margin: 0;
+  }
 }
 
 .misa-modal {

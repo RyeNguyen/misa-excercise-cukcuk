@@ -88,7 +88,7 @@ export default {
       showModal: true,
       wantToCreateNewEmployee: false,
       employeesToDelete: [],
-      filteredData: []
+      filteredData: this.data
     }
   },
 
@@ -124,11 +124,15 @@ export default {
       this.employeesToDelete = [];
     },
 
+    //Watcher kiểm tra sự thay đổi của search keyword để thực hiện filter dữ liệu
+    //Author: NQMinh(03/08/2021)
+    //Modified: NQMinh(08/08/2021)
     searchKeyword: function () {
-      this.filteredData = this.data.filter(item => {
-        return (item['FullName'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-            item['EmployeeCode'].toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
-            item['PhoneNumber'].includes(this.searchKeyword)
+      const vm = this;
+      vm.filteredData = vm.data.filter(item => {
+        return (this.checkNullToFilter(item['FullName'], vm.searchKeyword) ||
+            this.checkNullToFilter(item['EmployeeCode'], vm.searchKeyword) ||
+            this.checkNullToFilter(item['PhoneNumber'], vm.searchKeyword)
         );
       })
     }
@@ -156,6 +160,16 @@ export default {
     },
 
     /**
+     * Hàm kiểm tra dữ liệu null để tìm kiếm
+     * @params item: dữ liệu cần kiểm tra, searchWord: từ cần tìm kiếm
+     * @returns {string}
+     * Author: NQMinh(08/08/2021)
+     */
+    checkNullToFilter(item, searchWord) {
+      return item ? item.toLowerCase().includes(searchWord.toLowerCase()) : '';
+    },
+
+    /**
      * Hàm truyền dữ liệu từ table vào modal
      * @param employee
      * Author: NQMinh(30/07/2021)
@@ -170,25 +184,34 @@ export default {
             this.wantToCreateNewEmployee
         );
       }).catch(error => {
+        console.log(error);
         new Toast(error.response.status);
       })
     },
 
-    //TODO: Hàm phức tạp và khó hiểu
+    //TODO: Hàm phức tạp
     /**
      * Hàm kích hoạt checkbox khi click vào mỗi hàng
      * @param index
      * Author: NQMinh(31/07/2021)
      */
     rowActive(index) {
+      //Khi hàng thứ index được click thì checkbox thứ index cũng được kích hoạt
+      this.$refs.tableRow[index].classList.toggle('table-row--active');
+
+      //Đổi màu hàng thứ index thành active
       this.$refs.deleteBox[index].defaultChecked = !this.$refs.deleteBox[index].defaultChecked;
+
+      //Nếu như checkbox thứ index kích hoạt thì đẩy id nv hàng đó vào mảng xóa
       if (this.$refs.deleteBox[index].defaultChecked) {
         this.employeesToDelete.push(this.$refs.deleteBox[index].defaultValue);
       } else {
+        //Nếu như không còn kích hoạt nữa thì kiếm tra mã nv đó có trong mảng xóa không, nếu có thì xóa khỏi mảng
         if (this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue) > -1) {
           this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue), 1);
         }
       }
+      //Hiện nút xóa
       this.showButtonDelete();
     },
 
@@ -253,6 +276,10 @@ date căn giữa
       padding-left: 16px;
     }
 
+    &:nth-child(5) {
+      text-align: center;
+    }
+
     &:nth-child(10) {
       text-align: right;
       padding-right: 24px;
@@ -261,7 +288,8 @@ date căn giữa
 
   & tr {
     height: 40px;
-    border-bottom: 1px solid var(--color-hightlight);
+    border-bottom: 1px solid var(--color-secondary-hover);
+    transition: all 0.07s ease-in-out;
   }
 
   & tbody tr {
@@ -276,6 +304,14 @@ date căn giữa
     //}
   }
 
+  & .table-row--active {
+    background-color: var(--color-primary-focus);
+
+    &:hover {
+      background-color: var(--color-primary-focus);
+    }
+  }
+
   /*#region chỉnh size của table*/
   & td {
     overflow: hidden;
@@ -284,9 +320,11 @@ date căn giữa
     padding-right: 24px;
 
     &:first-child {
-      min-width: 80px;
-      max-width: 100px;
+      min-width: 30px;
+      max-width: 50px;
       padding-left: 16px;
+      padding-right: 0;
+      margin: 0;
     }
 
     &:nth-child(2) {
@@ -295,14 +333,17 @@ date căn giữa
 
     &:nth-child(3) {
       min-width: 150px;
+      max-width: 250px;
     }
 
     &:nth-child(4) {
-      min-width: 150px;
+      min-width: 100px;
     }
 
     &:nth-child(5) {
       min-width: 150px;
+      text-align: center;
+      padding: 0;
     }
 
     &:nth-child(6) {
@@ -310,8 +351,8 @@ date căn giữa
     }
 
     &:nth-child(7) {
-      min-width: 200px;
-      max-width: 350px;
+      min-width: 150px;
+      max-width: 250px;
     }
 
     &:nth-child(8) {
@@ -324,6 +365,7 @@ date căn giữa
 
     &:nth-child(10) {
       min-width: 150px;
+      max-width: 250px;
       text-align: right;
       padding-right: 24px;
     }
@@ -358,6 +400,7 @@ date căn giữa
       top: 0;
       left: 0;
       z-index: 3;
+      pointer-events: none;
       cursor: pointer;
 
       &:checked ~ .misa-checkmark {

@@ -23,8 +23,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 import Toast from "@/utils/ToastsCreator";
 
 import MisaButton from "@/components/base/MisaButton";
@@ -33,10 +31,10 @@ export default {
   name: "MisaContentHeader",
 
   mounted() {
-    axios.get(`http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode`).then(res => {
+    this.$api.get(`http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode`).then(res => {
       this.newEmployeeCode = res.data;
-    }).catch(res => {
-      new Toast(res);
+    }).catch(error => {
+      new Toast(error.response.status);
     })
   },
 
@@ -97,6 +95,7 @@ export default {
   & .header__title {
     font-weight: bold;
     font-size: 20px;
+    color: var(--color-black);
     margin: 0;
     padding: 0;
   }

@@ -43,8 +43,21 @@
 
     <!-- popup message ở đây, hiện ra cảnh báo người dùng -->
     <MisaPopupMessage
+        v-if="employeesToDelete.length > 1"
         popupTitle='Xóa bản ghi'
         popupDescription='Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
+        popupType="alert"
+        :popupIcon="true"
+        :openAlertPopup="openAlertPopupMessage"
+        :employeesToDelete="employeesToDelete"
+        @open-popup="toggleAlertMessage"
+        @delete-success="afterDelete"
+    />
+
+    <MisaPopupMessage
+        v-if="employeesToDelete.length === 1"
+        popupTitle='Xóa bản ghi'
+        :popupDescription="popupText"
         popupType="alert"
         :popupIcon="true"
         :openAlertPopup="openAlertPopupMessage"
@@ -120,6 +133,20 @@ export default {
     MisaContentFooter,
     MisaContentHeader,
     MisaContentSearchSection
+  },
+
+  computed: {
+    // eslint-disable-next-line vue/return-in-computed-property
+    popupText: function() {
+      // eslint-disable-next-line vue/no-async-in-computed-properties
+      EmployeesAPI.getById(this.employeesToDelete[0]).then(res => {
+        const employeeCode = res['EmployeeCode'];
+        return`Bạn có chắc muốn xóa thông tin của nhân viên có mã ${employeeCode} không? Một khi xóa không thể lấy lại dữ liệu.`
+      }).catch((error) => {
+        console.log(error);
+      })
+      return 'Hello';
+    }
   },
 
   methods: {
