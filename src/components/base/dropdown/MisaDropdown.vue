@@ -1,5 +1,10 @@
 <template>
-  <div class="misa-dropdown" :id="id" :value="value">
+  <div
+      class="misa-dropdown"
+      :id="id"
+      :value="value"
+      v-click-outside="hideDropdownOptions"
+  >
     <button
         class="dropdown__button"
         @click="showDropdownOptions"
@@ -27,6 +32,8 @@
 </template>
 
 <script>
+import ClickOutside from "vue-click-outside";
+
 import RestaurantModel from "@/models/RestaurantModel";
 
 import MisaDropdownOptions from "@/components/base/dropdown/MisaDropdownOptions";
@@ -61,6 +68,10 @@ export default {
     MisaDropdownOptions
   },
 
+  directives: {
+    ClickOutside
+  },
+
   methods: {
     //Hàm xổ dropdown content khi click (click lần 2 để đóng)
     //Author: NQMinh(29/07/2021)
@@ -69,13 +80,17 @@ export default {
       this.iconRotate = !this.iconRotate;
     },
 
+    //Hàm ẩn dropdown content khi click ra ngoài
+    //Author: NQMinh(09/08/2021)
     hideDropdownOptions() {
       this.contentHidden = true;
+      this.iconRotate = false;
     },
 
     //Hàm chuyển title của button dropdown
     //@params dropdown item
     //Author: NQMinh(29/07/2021)
+    //Modified: NQMinh (08/08/2021)
     assignDropdown(item) {
       //nếu có chọn item thì chuyển title thành tên item
       if (item) {
@@ -86,8 +101,7 @@ export default {
         this.value = '';
       }
       //ẩn dropdown content vaf xoay mũi tên
-      this.contentHidden = true;
-      this.iconRotate = false;
+      this.hideDropdownOptions();
     }
   }
 }

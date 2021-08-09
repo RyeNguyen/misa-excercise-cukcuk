@@ -265,7 +265,8 @@ date căn giữa
   text-align: left;
   font-weight: normal;
   position: relative;
-  border-collapse: collapse;
+  border-collapse: separate;
+  border-spacing: 0;
   background-color: var(--color-white);
 
   & .table__header th {
@@ -323,6 +324,7 @@ date căn giữa
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-right: 24px;
+    border-bottom: 1px solid var(--color-secondary-hover);
 
     &:first-child {
       padding-left: 16px;

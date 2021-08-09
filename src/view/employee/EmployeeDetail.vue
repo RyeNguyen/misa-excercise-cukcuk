@@ -361,9 +361,9 @@ export default {
       height: resizerHeight,
       width: resizerWidth,
       minHeight: 514,
-      minWidth: 644,
+      minWidth: 730,
       maxHeight: 730,
-      maxWidth: 1076,
+      maxWidth: 1080,
       dragSelector: '.misa-drag-handle',
       fit: true,
       //#endregion
@@ -649,7 +649,7 @@ export default {
       width: 80px;
       height: 4px;
       background-color: var(--color-primary);
-      margin: 8px 0 24px;
+      margin: 8px 0 16px;
     }
   }
 

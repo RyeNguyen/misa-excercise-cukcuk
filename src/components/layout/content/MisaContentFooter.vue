@@ -39,9 +39,12 @@ export default {
     justify-content: space-between;
 
     &__button {
+      width: 40px;
+      height: 40px;
       cursor: pointer;
       border-radius: 4px;
-      padding: 4px;
+      padding: 8px;
+      transition: all 0.2s ease-in-out;
 
       &:hover {
         background-color: var(--color-white);

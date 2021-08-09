@@ -10,7 +10,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "MisaPopupModalField",
@@ -47,6 +46,7 @@ export default {
     position: relative;
 
     & .misa-label-text {
+      font-weight: 600;
       display: block;
       margin-bottom: 4px;
     }
