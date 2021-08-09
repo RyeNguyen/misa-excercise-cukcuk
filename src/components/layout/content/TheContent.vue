@@ -33,7 +33,7 @@ export default {
   position: absolute;
   top: 49px;
   left: 226px;
-  padding: 16px;
+  padding: 16px 16px 0 16px;
   background-color: var(--color-secondary-hover);
   transition: 0.2s all ease-in-out;
 
@@ -53,11 +53,6 @@ export default {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover
-}
-
-.active {
-  background-color: var(--color-primary) !important;
-  color: var(--color-white) !important;
 }
 
 @media screen and (max-width: 1280px) {

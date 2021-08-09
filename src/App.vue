@@ -15,7 +15,7 @@
 <script>
 import EventIniter from "@/utils/EventDeclarator";
 import Header from "./components/layout/TheHeader";
-import Menu from "./components/layout/menu/TheMenu";
+import Menu from "./components/layout/TheMenu";
 import Content from "./components/layout/content/TheContent";
 
 export default {

@@ -18,7 +18,7 @@
 <script>
 import MenuModel from "@/models/MenuModel";
 
-import MenuItem from "@/components/layout/menu/MenuItem";
+import MenuItem from "@/components/base/MisaMenuItem";
 
 export default {
   name: 'TheMenu',

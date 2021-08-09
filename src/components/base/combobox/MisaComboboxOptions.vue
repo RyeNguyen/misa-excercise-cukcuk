@@ -6,6 +6,7 @@
     <a
         href="#"
         :class="{'dropdown__content-link--active': currentIndex === -1}"
+        @click="resetCombobox"
     ><i class="fas fa-check"></i>
       {{ comboboxDefaultOption }}
     </a>
@@ -15,6 +16,7 @@
         href="#"
         :class="{'dropdown__content-link--active': currentIndex === index}"
         :value="option[`${comboboxType}Id`]"
+        @click="optionActive(index)"
     ><i class="fas fa-check"></i>
       {{ option[`${comboboxType}Name`] }}
     </a>
@@ -69,6 +71,20 @@ export default {
     comboboxType: {
       type: String,
       required: true
+    }
+  },
+
+  emits: ['combobox-item-active'],
+
+  methods: {
+    optionActive(index) {
+      this.currentIndex = index;
+      this.$emit('combobox-item-active', this.comboboxOptions[this.currentIndex]);
+    },
+
+    resetCombobox() {
+      this.currentIndex = -1;
+      this.$emit('combobox-item-active');
     }
   }
 }

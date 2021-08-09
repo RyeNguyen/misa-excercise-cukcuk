@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "MenuItem",
+  name: "MisaMenuItem",
 
   props: {
     activeClass: {

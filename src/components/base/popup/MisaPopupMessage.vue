@@ -5,12 +5,14 @@
       @click="closePopup"
   >
     <div class="misa-popup" @click.stop.prevent>
-      <div class="misa-popup__btn-close-container">
+      <div
+          class="misa-popup__btn-close-container"
+          @click="closePopup"
+      >
         <img
             src="@/assets/icon/x.svg"
             alt="close button"
             class="misa-popup__button-close"
-            @click="closePopup"
         >
       </div>
 
@@ -170,7 +172,7 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   z-index: 15;
 

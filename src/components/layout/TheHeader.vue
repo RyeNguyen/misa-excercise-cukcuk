@@ -11,7 +11,6 @@
       />
       <div
           class="header__logo"
-          :class="{'misa-hidden': menuToggled}"
       />
     </div>
     <div
@@ -19,18 +18,10 @@
         :class="{'misa-header--right-extend': menuToggled}"
     >
       <div class="header__title">
-        <div class="misa-dropdown" id="dropdown__restaurant">
-          <button class="dropdown__button">
-            <span class="dropdown__title">Nhà hàng Biển Đông</span>
-            <i class="fas fa-chevron-down"></i>
-          </button>
-          <div class="dropdown__content dropdown__content--hidden">
-            <a href="#" class="dropdown__content-link--active"><i class="fas fa-check"></i>Nhà hàng Biển Đông</a>
-            <a href="#"><i class="fas fa-check"></i>Nhà hàng Sen Việt</a>
-            <a href="#"><i class="fas fa-check"></i>Nhà hàng Vua Chả Cá</a>
-            <a href="#"><i class="fas fa-check"></i>Nhà hàng Don Chicken</a>
-          </div>
-        </div>
+        <MisaDropdown
+            id="dropdown__restaurant"
+            type="Restaurant"
+        />
       </div>
       <div class="header__user">
         <div class="header__profile-picture"></div>
@@ -77,8 +68,9 @@ export default {
     transition: 0.2s all ease-in-out;
 
     &-shrink {
-      width: 64px !important;
-      justify-content: space-evenly;
+      //width: 64px !important;
+      //justify-content: space-evenly;
+      border-bottom: 1px solid var(--color-hightlight);
     }
 
     & .header {
@@ -94,7 +86,7 @@ export default {
       }
 
       &__toggled {
-        margin: 12px 16px 12px 16px !important;
+        //margin: 12px 16px 12px 16px !important;
       }
 
       &__logo {
@@ -110,7 +102,7 @@ export default {
 
   &--right {
     width: calc(100% - 225px);
-    padding: 0 16px;
+    padding: 0 16px 0 8px;
     border-bottom: 1px solid var(--color-hightlight);
     display: flex;
     align-items: center;

@@ -29,12 +29,14 @@
       <div class="misa-modal" @click.stop.prevent>
         <div class="misa-drag-handle"/>
 
-        <div class="misa-modal__button-close-container">
+        <div
+            class="misa-modal__button-close-container"
+            @click="closeModal"
+        >
           <img
               src="@/assets/icon/x.svg"
               alt="close button"
               class="misa-modal__button-close"
-              @click="closeModal"
           >
         </div>
 
@@ -42,7 +44,7 @@
 
         <div class="misa-modal__content">
           <div class="misa-modal__img-picker">
-            <div style="display: flex; flex-direction: column; align-items: center; width: 80%">
+            <div style="display: flex; flex-direction: column; align-items: start; width: 100%">
               <div class="img-picker__placeholder"></div>
               <div class="img-picker__text">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif.)</div>
             </div>
@@ -340,7 +342,7 @@ export default {
 
   data() {
     //Kích thước form mặc định
-    const resizerWidth = 860;
+    const resizerWidth = 820;
     const resizerHeight = 730;
 
     return {
@@ -544,7 +546,7 @@ export default {
   width: 100%;
   height: 100vh;
   z-index: 10;
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 0.5);
   display: none;
   //align-items: center;
   //justify-content: space-evenly;
@@ -616,8 +618,8 @@ export default {
     width: 30%;
 
     & .img-picker__placeholder {
-      width: 144px;
-      height: 144px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       border: 1px solid var(--color-hightlight);
       background-image: url('../../assets/img/default-avatar.jpg');
@@ -627,8 +629,8 @@ export default {
     }
 
     & .img-picker__text {
-      width: 50%;
-      text-align: center;
+      width: 70%;
+      margin: 4px auto;
       font-size: 11px;
     }
   }
@@ -637,7 +639,7 @@ export default {
     width: 75%;
     height: 85%;
     overflow: auto;
-    padding: 0 16px 16px 0;
+    padding: 0 8px 0 0;
 
     & .info__title {
       text-transform: uppercase;
@@ -647,7 +649,7 @@ export default {
       width: 80px;
       height: 4px;
       background-color: var(--color-primary);
-      margin: 8px 0;
+      margin: 8px 0 24px;
     }
   }
 

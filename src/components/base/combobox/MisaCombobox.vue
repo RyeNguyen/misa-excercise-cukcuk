@@ -21,6 +21,7 @@
         :contentHidden="contentHidden"
         :comboboxDefaultOption="comboboxDefaultOption"
         :comboboxType="comboboxType"
+        @combobox-item-active="assignCombobox"
     />
   </div>
 </template>
@@ -38,6 +39,7 @@ export default {
   data() {
     return {
       contentHidden: true,
+      comboboxTitle: this.comboboxDefaultOption,
       iconRotate: false,
       value: ''
     }
@@ -77,16 +79,29 @@ export default {
     },
 
     hideComboboxOptions: function() {
-      this.contentHidden = true;
+
       this.iconRotate = false;
 
       //TODO: Tạm đây đã, sau khi làm optionActive thì bỏ
-      this.resetCombobox();
+      // this.resetCombobox();
     },
 
     resetCombobox: function() {
-      this.$refs.comboboxInput.value = this.comboboxDefaultOption;
+      this.$refs.comboboxInput.value = this.comboboxTitle;
     },
+
+    assignCombobox: function(item) {
+      if (item) {
+        this.comboboxTitle = item[`${this.type}Name`];
+        this.value = item[`${this.type}Id`];
+      } else {
+        this.comboboxTitle = this.comboboxDefaultOption;
+        this.value = '';
+      }
+
+      this.contentHidden = !this.contentHidden;
+      this.iconRotate = false;
+    }
   }
 }
 </script>

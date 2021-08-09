@@ -4,6 +4,16 @@
         class="dropdown__button"
         @click="showDropdownOptions"
     >
+      <span
+          class="misa-dropdown__logo"
+          v-if="dropdownType === 'Restaurant' && dropdownLogo[value - 1]"
+          :style="{
+            color: dropdownLogo[value - 1]['RestaurantColor'],
+            backgroundColor: dropdownLogo[value - 1]['RestaurantBackgroundColor']
+          }"
+      >
+        {{ dropdownLogo[value - 1]['RestaurantIcon'] }}
+      </span>
       <span class="dropdown__title">{{ dropdownTitle }}</span>
       <i class="fas fa-chevron-down" :class="{'misa-rotate180': iconRotate}"></i>
     </button>
@@ -17,6 +27,8 @@
 </template>
 
 <script>
+import RestaurantModel from "@/models/RestaurantModel";
+
 import MisaDropdownOptions from "@/components/base/dropdown/MisaDropdownOptions";
 
 export default {
@@ -28,7 +40,8 @@ export default {
       dropdownTitle: this.title,
       dropdownType: this.type,
       iconRotate: false,
-      value: ''
+      value: '',
+      dropdownLogo: RestaurantModel.initData(),
     }
   },
   props: {
@@ -37,8 +50,7 @@ export default {
       required: true
     },
     title: {
-      type: String,
-      required: true
+      type: String
     },
     type: {
       type: String,
@@ -74,7 +86,7 @@ export default {
         this.value = '';
       }
       //ẩn dropdown content vaf xoay mũi tên
-      this.contentHidden = !this.contentHidden;
+      this.contentHidden = true;
       this.iconRotate = false;
     }
   }
@@ -88,6 +100,13 @@ export default {
   position: relative;
   background-color: var(--color-white);
   border-radius: 4px;
+
+  &__logo {
+    padding: 8px;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-weight: bold;
+  }
 
   & .dropdown__button {
     width: 100%;

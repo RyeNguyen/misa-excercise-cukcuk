@@ -23,12 +23,19 @@
           type="Position"
       />
 
-      <MisaCombobox
-        comboboxId="combobox-department"
-        comboboxPlaceholder="Chọn phòng ban"
-        comboboxDefaultOption="Tất cả phòng ban"
-        comboboxType="Department"
-      />
+      <!--      <MisaCombobox-->
+      <!--        comboboxId="combobox-department"-->
+      <!--        comboboxPlaceholder="Chọn phòng ban"-->
+      <!--        comboboxDefaultOption="Tất cả phòng ban"-->
+      <!--        comboboxType="Department"-->
+      <!--      />-->
+
+      <!--      <MisaCombobox-->
+      <!--          comboboxId="combobox-position"-->
+      <!--          comboboxPlaceholder="Chọn vị trí"-->
+      <!--          comboboxDefaultOption="Tất cả vị trí"-->
+      <!--          comboboxType="Position"-->
+      <!--      />-->
 
     </div>
     <div class="misa-content__search--right">
@@ -61,12 +68,12 @@ export default {
   emits: ['search-input-changed'],
 
   watch: {
-    searchKeyword: function() {
+    searchKeyword: function () {
       this.$emit('search-input-changed', this.searchKeyword);
     },
 
-    isLoading: function() {
-      if(this.isLoading === true) {
+    isLoading: function () {
+      if (this.isLoading === true) {
         this.searchKeyword = '';
       }
     }
@@ -104,6 +111,19 @@ export default {
 
       & input {
         padding-left: 40px;
+
+        &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          font-size: 12px;
+        }
+        &::-moz-placeholder { /* Firefox 19+ */
+          font-size: 12px;
+        }
+        &:-ms-input-placeholder { /* IE 10+ */
+          font-size: 12px;
+        }
+        &:-moz-placeholder { /* Firefox 18- */
+          font-size: 12px;
+        }
       }
     }
 

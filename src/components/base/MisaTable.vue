@@ -119,9 +119,13 @@ export default {
   ],
 
   watch: {
-    data: function () {
-      this.filteredData = this.data;
-      this.employeesToDelete = [];
+    data: {
+      deep: true,
+      immediate: true,
+      handler: function() {
+        this.filteredData = this.data;
+        this.employeesToDelete = [];
+      }
     },
 
     //Watcher kiểm tra sự thay đổi của search keyword để thực hiện filter dữ liệu
@@ -252,6 +256,7 @@ date căn giữa
   height: calc(100vh - 240px);
   margin-top: 16px;
   overflow: auto;
+  background-color: var(--color-white);
 }
 
 .misa-content__table {
@@ -269,10 +274,10 @@ date căn giữa
     left: 0;
     background-color: var(--color-white);
     z-index: 6;
+    border-bottom: 1px solid var(--color-secondary-hover);
 
     &:first-child {
-      min-width: 80px;
-      max-width: 100px;
+      min-width: 48px;
       padding-left: 16px;
     }
 
@@ -290,6 +295,10 @@ date căn giữa
     height: 40px;
     border-bottom: 1px solid var(--color-secondary-hover);
     transition: all 0.07s ease-in-out;
+
+    &:last-child {
+      border-bottom: none;
+    }
   }
 
   & tbody tr {
@@ -298,10 +307,6 @@ date căn giữa
     &:hover {
       background-color: var(--color-secondary-hover);
     }
-
-    //&:nth-child(odd) {
-    //  background-color: rgba(229, 229, 229, 0.5);
-    //}
   }
 
   & .table-row--active {
@@ -320,8 +325,6 @@ date căn giữa
     padding-right: 24px;
 
     &:first-child {
-      min-width: 30px;
-      max-width: 50px;
       padding-left: 16px;
       padding-right: 0;
       margin: 0;
@@ -374,14 +377,13 @@ date căn giữa
       min-width: 150px;
     }
   }
-
   /*#endregion*/
 
   /*#region checkbox*/
   & .delete-box {
     position: relative;
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
     border-radius: 4px;
     overflow: hidden;
     border: 0.1px solid var(--color-hightlight);
@@ -416,19 +418,18 @@ date căn giữa
       position: absolute;
       top: 0;
       left: 0;
-      height: 24px;
-      width: 24px;
-      //background-color: var(--color-secondary-hover);
+      height: 20px;
+      width: 20px;
       background-color: var(--color-white);
 
       &:after {
         content: "";
         position: absolute;
         display: none;
-        left: 8px;
-        top: 3px;
-        width: 5px;
-        height: 10px;
+        left: 7px;
+        top: 2px;
+        width: 3px;
+        height: 9px;
         border: solid white;
         border-width: 0 3px 3px 0;
         -webkit-transform: rotate(45deg);
@@ -436,10 +437,6 @@ date căn giữa
         transform: rotate(45deg);
       }
     }
-
-    //&:hover input ~ .misa-checkmark {
-    //  background-color: var(--color-hightlight);
-    //}
   }
 
   /*#endregion*/

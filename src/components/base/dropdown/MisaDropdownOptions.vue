@@ -6,7 +6,7 @@
           {'out-of-space': dropdownType === 'WorkStatus'}
       ]"
   >
-    <a
+    <a v-if="dropdownTitle"
         href="#"
         :class="{'dropdown__content-link--active': currentIndex === -1}"
         @click="resetDropdown"
@@ -27,8 +27,11 @@
 </template>
 
 <script>
+//#region import models
+import RestaurantModel from "@/models/RestaurantModel";
 import GenderModel from "@/models/GenderModel";
 import WorkStatusModel from "@/models/WorkStatusModel";
+//#endregion
 
 import Toast from "@/utils/ToastsCreator";
 
@@ -51,6 +54,9 @@ export default {
       case 'WorkStatus':
         this.dropdownOptions = WorkStatusModel.initData();
         break;
+      case 'Restaurant':
+        this.dropdownOptions = RestaurantModel.initData();
+        break;
     }
 
     if (this.dropdownType === 'Department' || this.dropdownType === 'Position') {
@@ -59,6 +65,10 @@ export default {
       }).catch(error => {
         new Toast(error.response.status);
       })
+    }
+
+    if (!this.dropdownTitle) {
+      this.optionActive(0);
     }
   },
 
@@ -76,8 +86,7 @@ export default {
     },
 
     dropdownTitle: {
-      type: String,
-      required: true
+      type: String
     },
 
     dropdownType: {
