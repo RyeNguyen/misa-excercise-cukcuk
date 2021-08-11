@@ -79,7 +79,7 @@ export default {
     },
 
     hideComboboxOptions: function() {
-
+      this.contentHidden = true;
       this.iconRotate = false;
 
       //TODO: Tạm đây đã, sau khi làm optionActive thì bỏ
@@ -92,15 +92,13 @@ export default {
 
     assignCombobox: function(item) {
       if (item) {
-        this.comboboxTitle = item[`${this.type}Name`];
-        this.value = item[`${this.type}Id`];
+        this.$refs.comboboxInput.value = item[`${this.comboboxType}Name`];
+        this.value = item[`${this.comboboxType}Id`];
       } else {
-        this.comboboxTitle = this.comboboxDefaultOption;
+        this.$refs.comboboxInput.value = this.comboboxTitle;
         this.value = '';
       }
 
-      this.contentHidden = !this.contentHidden;
-      this.iconRotate = false;
     }
   }
 }
@@ -123,7 +121,7 @@ export default {
   & .misa-button--secondary {
     position: absolute;
     top: 0.7px;
-    right: 0.1px;
+    right: 0.5px;
     width: 38px;
     height: 38px;
     border-radius: 0 4px 4px 0;

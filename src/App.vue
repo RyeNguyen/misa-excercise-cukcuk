@@ -14,9 +14,12 @@
 
 <script>
 import EventIniter from "@/utils/EventDeclarator";
+
+//#region import components
 import Header from "./components/layout/TheHeader";
 import Menu from "./components/layout/TheMenu";
 import Content from "./components/layout/content/TheContent";
+//#endregion
 
 export default {
   name: 'App',

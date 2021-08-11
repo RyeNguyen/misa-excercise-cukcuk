@@ -110,6 +110,10 @@ export default {
   display: none;
 }
 
+#button__refresh {
+  background-color: var(--color-white);
+}
+
 .btn-show {
   display: flex !important;
 }

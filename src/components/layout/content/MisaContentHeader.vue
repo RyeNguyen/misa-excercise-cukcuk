@@ -4,7 +4,7 @@
     <div class="button__container">
       <MisaButton
           buttonId="button__delete-employee"
-          buttonIconFontAwesome="fas fa-trash"
+          buttonIconFontAwesome="far fa-trash-alt"
           buttonText="Xóa nhân viên"
           buttonType="alert"
           :buttonDeleteShown="buttonDeleteShown"

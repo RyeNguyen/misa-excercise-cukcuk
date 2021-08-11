@@ -31,6 +31,7 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--color-hightlight);
   border-radius: 16px;
+  min-height: 40px;
 }
 
 h1 {

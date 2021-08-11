@@ -5,10 +5,15 @@
       <img src="../../../assets/icon/btn-firstpage.svg" alt="First Page" class="misa-pagination__button" />
       <img src="../../../assets/icon/btn-prev-page.svg" alt="Previous Page" class="misa-pagination__button" />
       <div class="misa-pagination__number-container">
-        <div class="misa-pagination__number misa-pagination__number--active"><p>1</p></div>
-        <div class="misa-pagination__number"><p>2</p></div>
-        <div class="misa-pagination__number"><p>3</p></div>
-        <div class="misa-pagination__number"><p>4</p></div>
+        <div
+          v-for="number in 4"
+          :key="number"
+          class="misa-pagination__number"
+          :class="{'misa-pagination__number--active': currentIndex === number}"
+          @click="activePaging(number)"
+        >
+          <p>{{ number }}</p>
+        </div>
       </div>
       <img src="../../../assets/icon/btn-next-page.svg" alt="Next Page" class="misa-pagination__button" />
       <img src="../../../assets/icon/btn-lastpage.svg" alt="Last Page" class="misa-pagination__button" />
@@ -19,7 +24,19 @@
 
 <script>
 export default {
-  name: 'MisaFooter'
+  name: 'MisaFooter',
+
+  data() {
+    return {
+      currentIndex: 1
+    }
+  },
+
+  methods: {
+    activePaging(number) {
+      this.currentIndex = number;
+    }
+  }
 }
 </script>
 

@@ -46,7 +46,7 @@
           <div class="misa-modal__img-picker">
             <div style="display: flex; flex-direction: column; align-items: start; width: 100%">
               <div class="img-picker__placeholder"></div>
-              <div class="img-picker__text">(Vui lòng chọn ảnh có định dạng .jpg, .jpeg, .png, .gif.)</div>
+              <div class="img-picker__text">(Vui lòng chọn ảnh có định <br> dạng .jpg, .jpeg, .png, .gif.)</div>
             </div>
           </div>
 
@@ -334,12 +334,15 @@ import MisaPopupModalField from "@/components/base/MisaPopupModalField";
 export default {
   name: "EmployeeDetail",
 
+  //#region mounted
   mounted() {
     DataValidator.validateRequired();
     DataValidator.validateEmail();
     this.$refs.inputCode.focus();
   },
+  //#endregion
 
+  //#region data
   data() {
     //Kích thước form mặc định
     const resizerWidth = 820;
@@ -356,8 +359,8 @@ export default {
 
       //#region Các thông số cần thiết để thực hiện resize form
       handlers: ["r", "rb", "b", "lb", "l", "lt", "t", "rt"],
-      left: `calc(50vw - ${resizerWidth / 2}px)`,
-      top: `calc(50vh - ${resizerHeight / 2}px)`,
+      left: `calc(50% - ${resizerWidth / 2}px)`,
+      top: `calc(50% - ${resizerHeight / 2}px)`,
       height: resizerHeight,
       width: resizerWidth,
       minHeight: 514,
@@ -369,7 +372,9 @@ export default {
       //#endregion
     }
   },
+  //#endregion
 
+  //#region props
   props: {
     //Biến dữ liệu cá nhân một nv khi click 2 lần vào table row
     employeeData: Object,
@@ -392,12 +397,16 @@ export default {
       default: true
     }
   },
+  //#endregion
 
+  //#region components
   components: {
     MisaPopupModalField,
     VueResizable
   },
+  //#endregion
 
+  //#region watch
   watch: {
     //Hàm kiểm tra user muốn thêm nv hay không -> thêm mã nv mới
     //Author: NQMinh(31/07/2021)
@@ -428,6 +437,7 @@ export default {
       this.employee['Salary'] = this.formatSalary(formatted);
     }
   },
+  //#endregion
 
   emits: ['close-modal', 'modal-submitted'],
 
@@ -440,6 +450,7 @@ export default {
     }
   },
 
+  //#region methods
   methods: {
     /**
      * Hàm xử lý sự kiện thay đổi kích thước và kéo thả form nhập
@@ -447,11 +458,13 @@ export default {
      * Author: NQMinh (05/08/2021)
      */
     ResizeAndDragHandler(data) {
-      this.resizing = true;
       this.width = data.width;
       this.height = data.height;
       this.left = data.left;
       this.top = data.top;
+      setTimeout(() => {
+        this.resizing = true;
+      }, 700)
     },
 
     //Hàm định dạng mức lương
@@ -535,6 +548,7 @@ export default {
       })
     }
   }
+  //#endregion
 }
 </script>
 
@@ -590,6 +604,8 @@ export default {
   position: relative;
 
   &__button-close-container {
+    width: 40px;
+    height: 40px;
     position: absolute;
     top: 0;
     right: 0;
@@ -639,7 +655,7 @@ export default {
     width: 75%;
     height: 85%;
     overflow: auto;
-    padding: 0 8px 0 0;
+    padding: 0 8px 48px 0;
 
     & .info__title {
       text-transform: uppercase;

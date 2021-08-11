@@ -208,11 +208,11 @@ export default {
 
       //Nếu như checkbox thứ index kích hoạt thì đẩy id nv hàng đó vào mảng xóa
       if (this.$refs.deleteBox[index].defaultChecked) {
-        this.employeesToDelete.push(this.$refs.deleteBox[index].defaultValue);
+        this.employeesToDelete.push(this.filteredData[index]);
       } else {
         //Nếu như không còn kích hoạt nữa thì kiếm tra mã nv đó có trong mảng xóa không, nếu có thì xóa khỏi mảng
-        if (this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue) > -1) {
-          this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.$refs.deleteBox[index].defaultValue), 1);
+        if (this.employeesToDelete.indexOf(this.filteredData[index]) > -1) {
+          this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.filteredData[index]), 1);
         }
       }
       //Hiện nút xóa
@@ -257,6 +257,16 @@ date căn giữa
   margin-top: 16px;
   overflow: auto;
   background-color: var(--color-white);
+
+  &::-webkit-scrollbar-track {
+    background-color: var(--color-white);
+    border-radius: 16px;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background-color: var(--color-secondary);
+    margin-top: 40px;
+  }
 }
 
 .misa-content__table {

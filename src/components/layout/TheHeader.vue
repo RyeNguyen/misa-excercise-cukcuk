@@ -24,6 +24,7 @@
         />
       </div>
       <div class="header__user">
+        <div><i class="far fa-bell" style="font-size: 20px"></i></div>
         <div class="header__profile-picture"></div>
         <div class="header__username">Nguyễn Quang Minh</div>
         <div class="header__user header__icon"></div>
@@ -135,6 +136,7 @@ export default {
 
       &__user {
         display: flex;
+        gap: 16px;
         align-items: center;
 
         & .header {
@@ -151,12 +153,10 @@ export default {
             width: 32px;
             height: 32px;
             background-image: url('../../assets/icon/avatar-default.png');
-            margin-right: 16px;
           }
 
           &__icon {
             background-image: url('../../assets/icon/option.png');
-            margin-left: 16px;
           }
         }
       }

@@ -45,7 +45,7 @@
     <MisaPopupMessage
         v-if="employeesToDelete.length > 1"
         popupTitle='Xóa bản ghi'
-        popupDescription='Bạn có chắc muốn xóa thông tin của (các) nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
+        popupDescription='Bạn có chắc muốn xóa thông tin của các nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
         popupType="alert"
         :popupIcon="true"
         :openAlertPopup="openAlertPopupMessage"
@@ -85,6 +85,7 @@ export default {
     this.loadData();
   },
 
+  //#region data
   data() {
     return {
       //Biến kiểm tra nút xóa có hiện ra không
@@ -121,6 +122,7 @@ export default {
       searchKeyword: ''
     }
   },
+  //#endregion
 
   props: {
     menuToggled: {
@@ -136,17 +138,9 @@ export default {
   },
 
   computed: {
-    // eslint-disable-next-line vue/return-in-computed-property
     popupText: function() {
-      // eslint-disable-next-line vue/no-async-in-computed-properties
-      EmployeesAPI.getById(this.employeesToDelete[0]).then(res => {
-        const employeeCode = res['EmployeeCode'];
-        return`Bạn có chắc muốn xóa thông tin của nhân viên có mã ${employeeCode} không? Một khi xóa không thể lấy lại dữ liệu.`
-      }).catch((error) => {
-        console.log(error);
-      })
-      return 'Hello';
-    }
+      return`Bạn có chắc muốn xóa thông tin của nhân viên có mã ${this.employeesToDelete[0]['EmployeeCode']} không? Một khi xóa không thể lấy lại dữ liệu.`
+    },
   },
 
   methods: {

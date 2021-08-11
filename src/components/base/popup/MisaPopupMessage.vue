@@ -68,6 +68,7 @@ export default {
     return {}
   },
 
+  //#region props
   props: {
     popupIcon: {
       type: Boolean
@@ -98,6 +99,7 @@ export default {
 
     employeesToDelete: Array
   },
+  //#endregion
 
   components: {
     MisaButton
@@ -139,8 +141,8 @@ export default {
     deleteEmployee() {
       let deleteCount = 0;
       const vm = this;
-      vm.employeesToDelete.forEach(employeeId => {
-        EmployeesAPI.delete(employeeId).then(() => {
+      vm.employeesToDelete.forEach(employee => {
+        EmployeesAPI.delete(employee['EmployeeId']).then(() => {
           deleteCount += 1;
           if (deleteCount === vm.employeesToDelete.length) {
             new Toast(2);
@@ -192,6 +194,8 @@ export default {
   box-shadow: 0 10px 24px -8px rgba(0, 0, 0, 0.5);
 
   &__btn-close-container {
+    width: 40px;
+    height: 40px;
     position: absolute;
     top: 0;
     right: 0;
