@@ -206,6 +206,11 @@ export default {
         background-color: var(--color-primary) !important;
         color: var(--color-white) !important;
         border-color: var(--color-primary) !important;
+
+        &:hover {
+          background-color: var(--color-primary-hover) !important;
+          border-color: var(--color-primary-hover) !important;
+        }
       }
     }
   }

@@ -24,30 +24,22 @@
 </template>
 
 <script>
-import Toast from "@/utils/ToastsCreator";
-
 export default {
   name: "MisaComboboxOptions",
 
   created() {
-    let apiUrl = '';
-
-    //TODO: Hiện tại đang fix cứng call API của phòng ban và vị trí ở đây
     switch (this.comboboxType) {
       case 'Department':
-        apiUrl = 'http://cukcuk.manhnv.net/api/Department';
+        setTimeout(() => {
+          this.comboboxOptions = this.$departmentData;
+        }, 1000)
         break;
       case 'Position':
-        apiUrl = 'http://cukcuk.manhnv.net/v1/Positions';
+        setTimeout(() => {
+          this.comboboxOptions = this.$positionData;
+        }, 1000)
         break;
     }
-
-    this.$api.get(apiUrl).then(res => {
-      this.comboboxOptions = res.data;
-    }).catch(error => {
-      console.log(error);
-      new Toast(error.response.status);
-    })
   },
 
   data() {
@@ -58,6 +50,7 @@ export default {
     }
   },
 
+  //#region props
   props: {
     contentHidden: {
       type: Boolean
@@ -73,6 +66,7 @@ export default {
       required: true
     }
   },
+  //#endregion
 
   emits: ['combobox-item-active'],
 

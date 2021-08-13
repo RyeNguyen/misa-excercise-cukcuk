@@ -3,15 +3,19 @@
       class="misa-combobox"
       :id="comboboxId"
       :value="value"
-      @click="showComboboxOptions"
+      v-click-outside="hideComboboxOptions"
   >
     <input
         ref="comboboxInput"
         type="text"
         :placeholder="comboboxPlaceholder"
-        @focusout="hideComboboxOptions"
+        @click="showComboboxOptions"
     />
-    <div class="misa-button misa-button--secondary">
+    <div
+        class="misa-button
+        misa-button--secondary"
+        @click="showComboboxOptions"
+    >
       <i
           class="fas fa-chevron-down"
           :class="{'misa-rotate180': iconRotate}"
@@ -27,6 +31,8 @@
 </template>
 
 <script>
+import ClickOutside from "vue-click-outside";
+
 import MisaComboboxOptions from "@/components/base/combobox/MisaComboboxOptions";
 
 export default {
@@ -45,6 +51,7 @@ export default {
     }
   },
 
+  //#region props
   props: {
     comboboxId: {
       type: String,
@@ -66,9 +73,14 @@ export default {
       required: true
     }
   },
+  //#endregion
 
   components: {
     MisaComboboxOptions
+  },
+
+  directives: {
+    ClickOutside
   },
 
   methods: {
@@ -78,19 +90,16 @@ export default {
       this.$refs.comboboxInput.focus();
     },
 
-    hideComboboxOptions: function() {
+    hideComboboxOptions: function () {
       this.contentHidden = true;
       this.iconRotate = false;
-
-      //TODO: Tạm đây đã, sau khi làm optionActive thì bỏ
-      // this.resetCombobox();
     },
 
     resetCombobox: function() {
       this.$refs.comboboxInput.value = this.comboboxTitle;
     },
 
-    assignCombobox: function(item) {
+    assignCombobox: function (item) {
       if (item) {
         this.$refs.comboboxInput.value = item[`${this.comboboxType}Name`];
         this.value = item[`${this.comboboxType}Id`];
@@ -98,7 +107,7 @@ export default {
         this.$refs.comboboxInput.value = this.comboboxTitle;
         this.value = '';
       }
-
+      this.hideComboboxOptions();
     }
   }
 }

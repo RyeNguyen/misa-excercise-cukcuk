@@ -9,7 +9,7 @@ export default class Toast {
         const toastElement = this.createToastELement(this.response);
 
         this.showToast(toastElement);
-        this.removeToastOnTime(toastElement, 5000);
+        this.removeToastOnTime(toastElement, 3000);
 
         document.querySelector('.misa-toast__close').addEventListener('click', () => {
             this.removeToastOnTime(toastElement, 0);

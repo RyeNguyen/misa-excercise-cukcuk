@@ -51,6 +51,8 @@ export default {
       dropdownLogo: RestaurantModel.initData(),
     }
   },
+
+  //#region props
   props: {
     id: {
       type: String,
@@ -64,6 +66,8 @@ export default {
       required: true
     }
   },
+  //#endregion
+
   components: {
     MisaDropdownOptions
   },
@@ -116,10 +120,14 @@ export default {
   border-radius: 4px;
 
   &__logo {
-    padding: 8px;
+    width: 36px;
+    height: 36px;
     border-radius: 4px;
     margin-right: 8px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
   }
 
   & .dropdown__button {

@@ -5,43 +5,43 @@
         <div id="search-icon"></div>
         <label>
           <input
-              type="text"
-              placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
               id="search-input"
               v-model="searchKeyword"
+              placeholder="Tìm kiếm theo Mã, Tên hoặc Số điện thoại"
+              type="text"
           >
         </label>
       </div>
-      <MisaDropdown
-          id="dropdown__department"
-          title="Tất cả phòng ban"
-          type="Department"
-      />
-      <MisaDropdown
-          id="dropdown__position"
-          title="Tất cả vị trí"
-          type="Position"
-      />
-
-<!--            <MisaCombobox-->
-<!--              comboboxId="combobox-department"-->
-<!--              comboboxPlaceholder="Chọn phòng ban"-->
-<!--              comboboxDefaultOption="Tất cả phòng ban"-->
-<!--              comboboxType="Department"-->
-<!--            />-->
-
-      <!--      <MisaCombobox-->
-      <!--          comboboxId="combobox-position"-->
-      <!--          comboboxPlaceholder="Chọn vị trí"-->
-      <!--          comboboxDefaultOption="Tất cả vị trí"-->
-      <!--          comboboxType="Position"-->
+      <!--      <MisaDropdown-->
+      <!--          id="dropdown__department"-->
+      <!--          title="Tất cả phòng ban"-->
+      <!--          type="Department"-->
       <!--      />-->
+      <!--      <MisaDropdown-->
+      <!--          id="dropdown__position"-->
+      <!--          title="Tất cả vị trí"-->
+      <!--          type="Position"-->
+      <!--      />-->
+
+      <MisaCombobox
+          comboboxDefaultOption="Tất cả phòng ban"
+          comboboxId="combobox-department"
+          comboboxPlaceholder="Chọn phòng ban"
+          comboboxType="Department"
+      />
+
+      <MisaCombobox
+          comboboxDefaultOption="Tất cả vị trí"
+          comboboxId="combobox-position"
+          comboboxPlaceholder="Chọn vị trí"
+          comboboxType="Position"
+      />
 
     </div>
     <div class="misa-content__search--right">
       <MisaButton
-          buttonId="button__refresh"
           buttonIcon="refresh.png"
+          buttonId="button__refresh"
           buttonType="secondary"
           @click.native="reloadData"
       />
@@ -115,12 +115,15 @@ export default {
         &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
           font-size: 12px;
         }
+
         &::-moz-placeholder { /* Firefox 19+ */
           font-size: 12px;
         }
+
         &:-ms-input-placeholder { /* IE 10+ */
           font-size: 12px;
         }
+
         &:-moz-placeholder { /* Firefox 18- */
           font-size: 12px;
         }
@@ -139,7 +142,7 @@ export default {
       }
     }
 
-    & .misa-dropdown {
+    & .misa-combobox {
       margin: 0 12px;
     }
   }

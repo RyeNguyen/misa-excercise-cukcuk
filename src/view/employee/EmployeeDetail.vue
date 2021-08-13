@@ -652,7 +652,7 @@ export default {
 
   &__form {
     width: 75%;
-    height: 85%;
+    height: 84%;
     overflow: auto;
     padding: 0 8px 48px 0;
 

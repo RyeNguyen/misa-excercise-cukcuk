@@ -33,20 +33,21 @@ import GenderModel from "@/models/GenderModel";
 import WorkStatusModel from "@/models/WorkStatusModel";
 //#endregion
 
-import Toast from "@/utils/ToastsCreator";
-
 export default {
   name: "MisaDropdownOptions",
-  created() {
-    let apiUrl = '';
 
-    //TODO: Hiện tại đang fix cứng call API của phòng ban và vị trí ở đây
+  //#region mounted
+  created() {
     switch (this.dropdownType) {
       case 'Department':
-        apiUrl = 'http://cukcuk.manhnv.net/api/Department';
+        setTimeout(() => {
+          this.dropdownOptions = this.$departmentData;
+        }, 1000)
         break;
       case 'Position':
-        apiUrl = 'http://cukcuk.manhnv.net/v1/Positions';
+        setTimeout(() => {
+          this.dropdownOptions = this.$positionData;
+        }, 1000)
         break;
       case 'Gender':
         this.dropdownOptions = GenderModel.initData();
@@ -59,18 +60,11 @@ export default {
         break;
     }
 
-    if (this.dropdownType === 'Department' || this.dropdownType === 'Position') {
-      this.$api.get(apiUrl).then(res => {
-        this.dropdownOptions = res.data;
-      }).catch(error => {
-        new Toast(error.response.status);
-      })
-    }
-
     if (!this.dropdownTitle) {
       this.optionActive(0);
     }
   },
+  //#endregion
 
   data() {
     return {
@@ -80,6 +74,7 @@ export default {
     }
   },
 
+  //#region props
   props: {
     contentHidden: {
       type: Boolean
@@ -94,6 +89,7 @@ export default {
       required: true
     }
   },
+  //#endregion
 
   emits: ['dropdown-item-active'],
 
