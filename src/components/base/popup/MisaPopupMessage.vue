@@ -176,7 +176,7 @@ export default {
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
-  z-index: 15;
+  z-index: 21;
 
   &--open {
     display: flex;

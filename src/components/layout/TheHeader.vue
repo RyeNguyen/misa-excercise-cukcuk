@@ -109,6 +109,8 @@ export default {
     align-items: center;
     justify-content: space-between;
     transition: 0.2s all ease-in-out;
+    z-index: 16;
+    box-shadow: 12px 8px 24px -4px rgba(0, 0, 0, 0.25);
 
     &-extend {
       width: calc(100% - 64px) !important;

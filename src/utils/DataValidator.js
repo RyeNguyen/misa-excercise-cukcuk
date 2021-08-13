@@ -35,7 +35,9 @@ export default class DataValidator {
         const self = this;
         let result = true;
         const requiredFields = document.querySelectorAll('input[required]');
+
         let checkList = Array(requiredFields.length).fill(false);
+
         requiredFields.forEach((field, index) => {
             field.addEventListener('blur', () => {
                 if (field.value.trim() === '') {
@@ -63,12 +65,19 @@ export default class DataValidator {
         for (let i = 0; i < checkList.length; i++) {
             if(checkList[i] === false) result = false;
         }
+        console.log(checkList);
         return result;
     }
 
     static validateAll = () => {
-        // const checkRequired = this.validateRequired();
+        const checkRequired = this.validateRequired();
         // const checkEmail = this.validateEmail();
-        return true;
+        if (checkRequired) {
+            console.log("Amazing good job em :v")
+            return true;
+        } else {
+            console.log("Ngu rồi :>");
+            return false;
+        }
     }
 }

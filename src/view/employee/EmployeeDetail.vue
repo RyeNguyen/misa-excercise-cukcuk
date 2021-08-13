@@ -336,8 +336,7 @@ export default {
 
   //#region mounted
   mounted() {
-    DataValidator.validateRequired();
-    DataValidator.validateEmail();
+    DataValidator.validateAll();
     this.$refs.inputCode.focus();
   },
   //#endregion
@@ -559,7 +558,7 @@ export default {
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 10;
+  z-index: 20;
   background-color: rgba(0, 0, 0, 0.5);
   display: none;
   //align-items: center;
