@@ -143,8 +143,12 @@ export default {
     }
 
     & .misa-combobox {
-      margin: 0 12px;
+      margin-left: 12px;
     }
   }
+}
+
+#button__refresh {
+  width: 50px;
 }
 </style>

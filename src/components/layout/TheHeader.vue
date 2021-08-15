@@ -24,7 +24,12 @@
         />
       </div>
       <div class="header__user">
-        <div><i class="far fa-bell" style="font-size: 20px"></i></div>
+        <div>
+          <i
+              class="far fa-bell"
+              style="font-size: 20px"
+          ></i>
+        </div>
         <div class="header__profile-picture"></div>
         <div class="header__username">Nguyễn Quang Minh</div>
         <div class="header__user header__icon"></div>
@@ -34,12 +39,22 @@
 </template>
 
 <script>
+console.log(localStorage.getItem('menuToggled'))
+
 export default {
   name: 'TheHeader',
 
+  created() {
+    console.log('Right now is' + this.menuToggled);
+    const isAlreadyToggled = localStorage.getItem('menuToggled');
+    if (isAlreadyToggled === 'toggled') {
+      this.$emit('toggle-menu');
+    }
+  },
+
   data() {
     return {
-      menuToggled: false
+      menuToggled: localStorage.getItem('menuToggled') === 'toggled'
     }
   },
 
@@ -48,6 +63,11 @@ export default {
   methods: {
     toggleMenu: function() {
       this.menuToggled = !this.menuToggled;
+      if (this.menuToggled === true) {
+        localStorage.setItem('menuToggled', 'toggled');
+      } else {
+        localStorage.setItem('menuToggled', 'untouched');
+      }
       this.$emit('toggle-menu');
     }
   }
@@ -86,10 +106,6 @@ export default {
         cursor: pointer;
       }
 
-      &__toggled {
-        //margin: 12px 16px 12px 16px !important;
-      }
-
       &__logo {
         height: 24px;
         width: 100%;
@@ -97,6 +113,7 @@ export default {
         background-size: contain;
         background-position: 0 center;
         background-repeat: no-repeat;
+        cursor: pointer;
       }
     }
   }
@@ -111,10 +128,6 @@ export default {
     transition: 0.2s all ease-in-out;
     z-index: 16;
     box-shadow: 12px 8px 24px -4px rgba(0, 0, 0, 0.25);
-
-    &-extend {
-      width: calc(100% - 64px) !important;
-    }
 
     & .header {
       &__title {
@@ -149,6 +162,7 @@ export default {
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
+            cursor: pointer;
           }
 
           &__profile-picture {

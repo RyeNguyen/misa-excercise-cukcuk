@@ -408,8 +408,8 @@ date căn giữa
     & input {
       position: absolute;
       opacity: 0;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       margin: 0;
       top: 0;
       left: 0;
@@ -438,7 +438,7 @@ date căn giữa
         content: "";
         position: absolute;
         display: none;
-        left: 7px;
+        left: 6px;
         top: 2px;
         width: 3px;
         height: 9px;
@@ -450,7 +450,6 @@ date căn giữa
       }
     }
   }
-
   /*#endregion*/
 }
 

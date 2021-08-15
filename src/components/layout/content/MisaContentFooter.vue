@@ -1,6 +1,6 @@
 <template>
   <div class="misa-content__footer">
-    <p>Hiển thị <strong>1-10/10000</strong> nhân viên</p>
+    <p>Hiển thị <span style="font-weight: bold">1-10/10000</span> nhân viên</p>
     <div
         class="misa-pagination"
         :totalPage="totalPages"

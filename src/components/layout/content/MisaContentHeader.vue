@@ -93,9 +93,6 @@ export default {
   justify-content: space-between;
 
   & .header__title {
-    font-weight: bold;
-    font-size: 20px;
-    color: var(--color-black);
     margin: 0;
     padding: 0;
   }

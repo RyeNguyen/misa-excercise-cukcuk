@@ -51,7 +51,9 @@ export default class DataValidator {
                     field.removeAttribute('title');
                 }
             })
+        })
 
+        requiredFields.forEach((field, index) => {
             field.addEventListener('input', () => {
                 checkList[index] = true;
                 const inputField = field.parentElement;
