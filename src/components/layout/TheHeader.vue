@@ -39,13 +39,10 @@
 </template>
 
 <script>
-console.log(localStorage.getItem('menuToggled'))
-
 export default {
   name: 'TheHeader',
 
   created() {
-    console.log('Right now is' + this.menuToggled);
     const isAlreadyToggled = localStorage.getItem('menuToggled');
     if (isAlreadyToggled === 'toggled') {
       this.$emit('toggle-menu');
@@ -81,7 +78,7 @@ export default {
   display: flex;
 
   &--left {
-    width: 227px;
+    width: 226px;
     height: 49px;
     border-right: 1px solid var(--color-hightlight);
     display: flex;

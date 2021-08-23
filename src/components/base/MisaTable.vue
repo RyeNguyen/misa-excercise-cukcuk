@@ -24,7 +24,7 @@
       <tbody>
       <tr
           ref="tableRow"
-          v-for="(employee, index) in filteredData"
+          v-for="(employee, index) in data"
           :key="employee['EmployeeId']"
           @click="rowActive(index)"
           @dblclick="bindingDataFromTable(employee)"
@@ -41,7 +41,7 @@
         </td>
         <td>{{ employee['EmployeeCode'] }}</td>
         <td>{{ employee['FullName'] }}</td>
-        <td>{{ employee['GenderName'] }}</td>
+        <td>{{ genderNameIdentify(employee['Gender']) }}</td>
         <td>{{ formatDate(employee['DateOfBirth']) }}</td>
         <td>{{ employee['PhoneNumber'] }}</td>
         <td>{{ employee['Email'] }}</td>
@@ -72,6 +72,8 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 
 import EmployeesAPI from "@/api/components/EmployeesAPI";
 
+import GenderModel from "@/models/GenderModel";
+
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
@@ -80,6 +82,7 @@ export default {
   name: 'MisaTable',
 
   created() {
+    this.genderList = GenderModel.initData();
     this.filteredData = this.data;
   },
 
@@ -88,7 +91,8 @@ export default {
       showModal: true,
       wantToCreateNewEmployee: false,
       employeesToDelete: [],
-      filteredData: this.data
+      filteredData: this.data,
+      genderList: []
     }
   },
 
@@ -101,10 +105,6 @@ export default {
     isLoading: {
       type: Boolean,
       required: true
-    },
-
-    searchKeyword: {
-      type: String
     }
   },
 
@@ -126,23 +126,14 @@ export default {
         this.filteredData = this.data;
         this.employeesToDelete = [];
       }
-    },
-
-    //Watcher kiểm tra sự thay đổi của search keyword để thực hiện filter dữ liệu
-    //Author: NQMinh(03/08/2021)
-    //Modified: NQMinh(08/08/2021)
-    searchKeyword: function () {
-      const vm = this;
-      vm.filteredData = vm.data.filter(item => {
-        return (this.checkNullToFilter(item['FullName'], vm.searchKeyword) ||
-            this.checkNullToFilter(item['EmployeeCode'], vm.searchKeyword) ||
-            this.checkNullToFilter(item['PhoneNumber'], vm.searchKeyword)
-        );
-      })
     }
   },
 
   methods: {
+    genderNameIdentify: function (genderKey) {
+      return genderKey ? this.genderList[genderKey] : null;
+    },
+
     /**
      * Hàm định dạng mức lương
      * @param salary
@@ -164,16 +155,6 @@ export default {
     },
 
     /**
-     * Hàm kiểm tra dữ liệu null để tìm kiếm
-     * @params item: dữ liệu cần kiểm tra, searchWord: từ cần tìm kiếm
-     * @returns {string}
-     * Author: NQMinh(08/08/2021)
-     */
-    checkNullToFilter(item, searchWord) {
-      return item ? item.toLowerCase().includes(searchWord.toLowerCase()) : '';
-    },
-
-    /**
      * Hàm truyền dữ liệu từ table vào modal
      * @param employee
      * Author: NQMinh(30/07/2021)
@@ -188,7 +169,6 @@ export default {
             this.wantToCreateNewEmployee
         );
       }).catch(error => {
-        console.log(error);
         new Toast(error.response.status);
       })
     },

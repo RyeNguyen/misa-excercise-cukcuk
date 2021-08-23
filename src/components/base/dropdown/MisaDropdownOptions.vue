@@ -3,7 +3,7 @@
       class="dropdown__content"
       :class="[
           {'dropdown__content--hidden': contentHidden},
-          {'out-of-space': dropdownType === 'WorkStatus'}
+          {'out-of-space': dropdownType === 'WorkStatus' || dropdownType === 'Paging'}
       ]"
   >
     <a v-if="dropdownTitle"

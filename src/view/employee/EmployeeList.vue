@@ -1,13 +1,13 @@
 <template>
   <div
-      class="misa-content"
       :class="{'misa-content--extend': menuToggled}"
+      class="misa-content"
   >
     <!-- header của content ở đây, bao gồm title và nút thêm nhân viên -->
     <MisaContentHeader
-        :modalIsOpened="modalIsOpened"
         :buttonDeleteShown="buttonDeleteShown"
         :employeesToDelete="employeesToDelete"
+        :modalIsOpened="modalIsOpened"
         @btn-add-clicked="toggleModal"
         @open-popup="toggleAlertMessage"
     />
@@ -15,22 +15,25 @@
     <!-- mục tìm kiếm của content ở đây -->
     <MisaContentSearchSection
         :isLoading="isLoading"
-        @search-input-changed="searchEmployee"
         @reload="loadData"
+        @search-input-changed="searchEmployee"
     />
 
     <!-- bảng chính của content ở đây -->
     <MisaTable
         :data="employees"
         :isLoading="isLoading"
-        :searchKeyword="searchKeyword"
         @row-double-clicked="bindingDataFromTable"
         @show-btn-delete="showButtonDelete"
         @hide-btn-delete="hideButtonDelete"
     />
 
     <!-- footer của content ở đây -->
-    <MisaContentFooter></MisaContentFooter>
+    <MisaContentFooter
+        :totalRecords="totalRecords"
+        :totalPages="totalPages"
+        @paging="pagingActive"
+    />
 
     <EmployeeDetail
         :employeeData="individualData"
@@ -44,24 +47,24 @@
     <!-- popup message ở đây, hiện ra cảnh báo người dùng -->
     <MisaPopupMessage
         v-if="employeesToDelete.length > 1"
-        popupTitle='Xóa bản ghi'
-        popupDescription='Bạn có chắc muốn xóa thông tin của các nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
-        popupType="alert"
-        :popupIcon="true"
-        :openAlertPopup="openAlertPopupMessage"
         :employeesToDelete="employeesToDelete"
+        :openAlertPopup="openAlertPopupMessage"
+        :popupIcon="true"
+        popupDescription='Bạn có chắc muốn xóa thông tin của các nhân viên này hay không? Một khi xóa không thể lấy lại dữ liệu.'
+        popupTitle='Xóa bản ghi'
+        popupType="alert"
         @open-popup="toggleAlertMessage"
         @delete-success="afterDelete"
     />
 
     <MisaPopupMessage
         v-if="employeesToDelete.length === 1"
-        popupTitle='Xóa bản ghi'
-        :popupDescription="popupText"
-        popupType="alert"
-        :popupIcon="true"
-        :openAlertPopup="openAlertPopupMessage"
         :employeesToDelete="employeesToDelete"
+        :openAlertPopup="openAlertPopupMessage"
+        :popupDescription="popupText"
+        :popupIcon="true"
+        popupTitle='Xóa bản ghi'
+        popupType="alert"
         @open-popup="toggleAlertMessage"
         @delete-success="afterDelete"
     />
@@ -80,10 +83,6 @@ import MisaContentSearchSection from "@/components/layout/content/MisaContentSea
 
 export default {
   name: 'EmployeeList',
-
-  mounted() {
-    this.loadData();
-  },
 
   //#region data
   data() {
@@ -119,7 +118,15 @@ export default {
       wantToCreateNewEmployee: true,
 
       //Từ khóa tìm kiếm nv của người dùng
-      searchKeyword: ''
+      searchKeyword: '',
+
+      currentPage: 1,
+
+      pageSize: 10,
+
+      totalRecords: 0,
+
+      totalPages: 0
     }
   },
   //#endregion
@@ -137,9 +144,16 @@ export default {
     MisaContentSearchSection
   },
 
+  watch: {
+    searchKeyword: function() {
+      this.currentPage = 1;
+      this.loadData();
+    },
+  },
+
   computed: {
-    popupText: function() {
-      return`Bạn có chắc muốn xóa thông tin của nhân viên có mã ${this.employeesToDelete[0]['EmployeeCode']} không? Một khi xóa không thể lấy lại dữ liệu.`
+    popupText: function () {
+      return `Bạn có chắc muốn xóa thông tin của nhân viên có mã ${this.employeesToDelete[0]['EmployeeCode']} không? Một khi xóa không thể lấy lại dữ liệu.`
     },
   },
 
@@ -149,12 +163,13 @@ export default {
      * Author: NQMinh(31/07/2021)
      */
     loadData() {
-      this.searchKeyword = '';
       this.isLoading = true;
-      EmployeesAPI.getAll().then(res => {
+      EmployeesAPI.paging(this.searchKeyword, "", "", this.currentPage, this.pageSize).then(res => {
         this.isLoading = false;
         new Toast('okay');
-        this.employees = res.data;
+        this.employees = res.data['data'];
+        this.totalRecords = res.data['totalRecord'];
+        this.totalPages = res.data['totalPage'];
       }).catch(error => {
         new Toast(error.response.status);
       })
@@ -231,6 +246,12 @@ export default {
      */
     searchEmployee(keyword) {
       this.searchKeyword = keyword;
+    },
+
+    pagingActive(currentPage, pageSize) {
+      this.currentPage = currentPage;
+      this.pageSize = pageSize;
+      this.loadData();
     }
   }
 }

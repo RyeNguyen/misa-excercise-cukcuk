@@ -59,23 +59,13 @@ export default {
     }
   },
 
-  props: {
-    isLoading: {
-      type: Boolean
-    }
-  },
-
   emits: ['search-input-changed'],
 
   watch: {
     searchKeyword: function () {
-      this.$emit('search-input-changed', this.searchKeyword);
-    },
-
-    isLoading: function () {
-      if (this.isLoading === true) {
-        this.searchKeyword = '';
-      }
+      setTimeout(() => {
+        this.$emit('search-input-changed', this.searchKeyword);
+      }, 300)
     }
   },
 

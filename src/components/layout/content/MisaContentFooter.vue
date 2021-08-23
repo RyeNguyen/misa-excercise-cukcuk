@@ -1,11 +1,13 @@
 <template>
   <div class="misa-content__footer">
-    <p>Hiển thị <span style="font-weight: bold">1-10/10000</span> nhân viên</p>
+    <p>Hiển thị
+      <span style="font-weight: bold">{{'1-50/' + totalRecords}}</span> nhân viên
+    </p>
     <div
         class="misa-pagination"
         :totalPage="totalPages"
         :totalRecords="totalRecords"
-        :curentPage="currentPage"
+        :currentPage="currentPage"
         @pageChanged="onPageChange"
     >
       <button
@@ -64,7 +66,12 @@
         />
       </button>
     </div>
-    <p>10 nhân viên/trang</p>
+    <MisaDropdown
+        slot="misa-text-box"
+        id="dropdown__pagination"
+        title="10 nhân viên/trang"
+        type="Paging"
+    />
   </div>
 </template>
 
@@ -72,15 +79,33 @@
 export default {
   name: 'MisaFooter',
 
+  created() {
+    //TODO: Hiện tại đang fix cứng dữ liệu pageSize
+    this.$emit('paging', this.currentPage, 50);
+  },
+
   data() {
     return {
       maxVisibleButtons: 4,
-      totalPages: 13,
-      totalRecords: 300,
       currentPage: 1
     }
   },
 
+  props: {
+    totalPages: {
+      type: Number,
+      required: true
+    },
+
+    totalRecords: {
+      type: Number,
+      required: true
+    }
+  },
+
+  emits: ['paging'],
+
+  //#region computed
   computed: {
     isInFirstPage: function () {
       return this.currentPage === 1;
@@ -99,7 +124,7 @@ export default {
         return this.totalPages - this.maxVisibleButtons + 1;
       }
 
-      return this.currentPage - 1
+      return this.currentPage - 1;
     },
 
     endPage: function () {
@@ -117,26 +142,33 @@ export default {
       return range;
     }
   },
+  //#endregion
 
+  //#region methods
   methods: {
     onClickFirstPage: function () {
       this.onPageChange(1);
+      this.$emit('paging', 1, 50);
     },
 
     onClickPreviousPage: function () {
       this.onPageChange(this.currentPage - 1);
+      this.$emit('paging', this.currentPage - 1, 50);
     },
 
     onClickPage: function (page) {
       this.onPageChange(page);
+      this.$emit('paging', page, 50);
     },
 
     onClickNextPage: function () {
       this.onPageChange(this.currentPage + 1);
+      this.$emit('paging', this.currentPage + 1, 50);
     },
 
     onClickLastPage: function () {
       this.onPageChange(this.totalPages);
+      this.$emit('paging', this.totalPages, 50);
     },
 
     isPageActive: function (page) {
@@ -147,6 +179,7 @@ export default {
       this.currentPage = page;
     }
   }
+  //#endregion
 }
 </script>
 

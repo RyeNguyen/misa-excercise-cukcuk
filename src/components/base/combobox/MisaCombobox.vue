@@ -130,7 +130,7 @@ export default {
   & .misa-button--secondary {
     position: absolute;
     top: 0.7px;
-    right: 0.5px;
+    right: 1px;
     width: 38px;
     height: 38px;
     border-radius: 0 4px 4px 0;

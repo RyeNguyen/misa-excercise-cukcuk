@@ -38,8 +38,8 @@ export default class BaseAPI {
      * @param {*} payload
      * createdBy: NQMinh(02/08/2021)
      */
-    paging(payload) {
-        return BaseAPIConfig.post(`${this.controller}/paging`, payload);
+    paging(filter, departmentId, positionId, pageIndex, pageSize) {
+        return BaseAPIConfig.get(`${this.controller}/paging?employeeFilter=${filter}&departmentId=${departmentId}&positionId=${positionId}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
     }
 
     /**

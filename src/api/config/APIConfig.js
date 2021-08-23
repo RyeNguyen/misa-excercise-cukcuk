@@ -1,5 +1,6 @@
 const APIConfig = {
-    development: "http://cukcuk.manhnv.net/",
+    development: "https://localhost:44333/api",
+    // development: "http://cukcuk.manhnv.net/",
     production: "local:8081",
 };
 
