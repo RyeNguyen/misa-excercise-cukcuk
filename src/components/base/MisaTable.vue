@@ -45,8 +45,8 @@
         <td>{{ formatDate(employee['DateOfBirth']) }}</td>
         <td>{{ employee['PhoneNumber'] }}</td>
         <td>{{ employee['Email'] }}</td>
-        <td>{{ employee['PositionName'] }}</td>
-        <td>{{ employee['DepartmentName'] }}</td>
+        <td>{{ roleNameIdentify('Position', employee['PositionId']) }}</td>
+        <td>{{ roleNameIdentify('Department', employee['DepartmentId']) }}</td>
         <td>{{ formatSalary(employee['Salary']) }}</td>
         <td>{{ employee['WorkStatus'] }}</td>
       </tr>
@@ -130,8 +130,19 @@ export default {
   },
 
   methods: {
+    roleNameIdentify: function(role, entityId) {
+      let data;
+      if (role === 'Department') data = this.$departmentData;
+      if (role === 'Position') data = this.$positionData;
+      for (let i = 0; i < data.length; i++) {
+        if (data[i][`${role}Id`] === entityId) {
+          return data[i][`${role}Name`];
+        }
+      }
+    },
+
     genderNameIdentify: function (genderKey) {
-      return genderKey ? this.genderList[genderKey] : null;
+      return genderKey !== null ? this.genderList[genderKey] : null;
     },
 
     /**

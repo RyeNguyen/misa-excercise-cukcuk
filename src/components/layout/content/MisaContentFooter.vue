@@ -67,9 +67,7 @@
       </button>
     </div>
     <MisaDropdown
-        slot="misa-text-box"
         id="dropdown__pagination"
-        title="10 nhân viên/trang"
         type="Paging"
     />
   </div>

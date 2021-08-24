@@ -20,7 +20,8 @@
         {{ dropdownLogo[value - 1]['RestaurantIcon'] }}
       </span>
       <span class="dropdown__title">{{ dropdownTitle }}</span>
-      <i class="fas fa-chevron-down" :class="{'misa-rotate180': iconRotate}"></i>
+      <i v-if="dropdownType === 'Paging'" class="fas fa-chevron-down"></i>
+      <i v-if="dropdownType !== 'Paging'" class="fas fa-chevron-down" :class="{'misa-rotate180': iconRotate}"></i>
     </button>
     <MisaDropdownOptions
         :contentHidden="contentHidden"
