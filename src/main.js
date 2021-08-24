@@ -4,6 +4,10 @@ import App from './App.vue'
 import axios from 'axios';
 import VueAxios from "vue-axios";
 
+import GenderModel from "@/models/GenderModel";
+import WorkStatusModel from "@/models/WorkStatusModel";
+import PagingModel from "@/models/PagingModel";
+
 import MisaDropdown from "@/components/base/dropdown/MisaDropdown";
 import MisaPopupMessage from "@/components/base/popup/MisaPopupMessage";
 import MisaButton from "@/components/base/MisaButton";
@@ -29,6 +33,12 @@ PositionAPI.getAll().then(res => {
 }).catch(error => {
     console.log(error);
 })
+
+Vue.prototype.$genderData = GenderModel.initData();
+
+Vue.prototype.$workStatusData = WorkStatusModel.initData();
+
+Vue.prototype.$pagingData = PagingModel.initData();
 
 Vue.prototype.$api = axios;
 

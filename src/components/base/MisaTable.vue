@@ -23,9 +23,9 @@
       </thead>
       <tbody>
       <tr
-          ref="tableRow"
           v-for="(employee, index) in data"
           :key="employee['EmployeeId']"
+          ref="tableRow"
           @click="rowActive(index)"
           @dblclick="bindingDataFromTable(employee)"
       >
@@ -33,35 +33,35 @@
           <div class="delete-box">
             <input
                 ref="deleteBox"
-                type="checkbox"
                 :value="employee['EmployeeId']"
+                type="checkbox"
             >
             <span class="misa-checkmark"></span>
           </div>
         </td>
         <td>{{ employee['EmployeeCode'] }}</td>
         <td>{{ employee['FullName'] }}</td>
-        <td>{{ genderNameIdentify(employee['Gender']) }}</td>
+        <td>{{ roleNameIdentify('Gender', employee['Gender']) }}</td>
         <td>{{ formatDate(employee['DateOfBirth']) }}</td>
         <td>{{ employee['PhoneNumber'] }}</td>
         <td>{{ employee['Email'] }}</td>
         <td>{{ roleNameIdentify('Position', employee['PositionId']) }}</td>
         <td>{{ roleNameIdentify('Department', employee['DepartmentId']) }}</td>
         <td>{{ formatSalary(employee['Salary']) }}</td>
-        <td>{{ employee['WorkStatus'] }}</td>
+        <td>{{ roleNameIdentify('WorkStatus', employee['WorkStatus']) }}</td>
       </tr>
       </tbody>
     </table>
     <Loading
-        color="#019160"
-        :height=64
-        :width=64
-        loader="spinner"
-        :z-index=17
-        blur="4px"
         :active="isLoading"
         :can-cancel="false"
+        :height=64
         :is-full-page="false"
+        :width=64
+        :z-index=17
+        blur="4px"
+        color="#019160"
+        loader="spinner"
     />
   </div>
 </template>
@@ -72,8 +72,6 @@ import 'vue-loading-overlay/dist/vue-loading.css';
 
 import EmployeesAPI from "@/api/components/EmployeesAPI";
 
-import GenderModel from "@/models/GenderModel";
-
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
@@ -81,18 +79,12 @@ import DateFormatter from "@/utils/DateFormatter";
 export default {
   name: 'MisaTable',
 
-  created() {
-    this.genderList = GenderModel.initData();
-    this.filteredData = this.data;
-  },
-
   data() {
     return {
       showModal: true,
       wantToCreateNewEmployee: false,
       employeesToDelete: [],
       filteredData: this.data,
-      genderList: []
     }
   },
 
@@ -122,27 +114,26 @@ export default {
     data: {
       deep: true,
       immediate: true,
-      handler: function() {
-        this.filteredData = this.data;
-        this.employeesToDelete = [];
+      handler: function () {
+
       }
     }
   },
 
   methods: {
-    roleNameIdentify: function(role, entityId) {
+    roleNameIdentify: function (role, entityId) {
       let data;
+      if (role === 'Gender') data = this.$genderData;
       if (role === 'Department') data = this.$departmentData;
       if (role === 'Position') data = this.$positionData;
-      for (let i = 0; i < data.length; i++) {
-        if (data[i][`${role}Id`] === entityId) {
-          return data[i][`${role}Name`];
+      if (role === 'WorkStatus') data = this.$workStatusData;
+      if (data) {
+        for (let i = 0; i < data.length; i++) {
+          if (data[i][`${role}Id`] === entityId) {
+            return data[i][`${role}Name`];
+          }
         }
       }
-    },
-
-    genderNameIdentify: function (genderKey) {
-      return genderKey !== null ? this.genderList[genderKey] : null;
     },
 
     /**
@@ -380,6 +371,7 @@ date căn giữa
       min-width: 150px;
     }
   }
+
   /*#endregion*/
 
   /*#region checkbox*/
@@ -441,6 +433,7 @@ date căn giữa
       }
     }
   }
+
   /*#endregion*/
 }
 

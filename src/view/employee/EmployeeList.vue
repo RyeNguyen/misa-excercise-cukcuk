@@ -170,6 +170,7 @@ export default {
         this.employees = res.data['data'];
         this.totalRecords = res.data['totalRecord'];
         this.totalPages = res.data['totalPage'];
+        this.employeesToDelete = [];
       }).catch(error => {
         new Toast(error.response.status);
       })

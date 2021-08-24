@@ -1,27 +1,35 @@
 <template>
   <div
-      class="misa-dropdown"
       :id="id"
-      :value="value"
       v-click-outside="hideDropdownOptions"
+      :class="{'misa-dropdown--secondary': dropdownType === 'Paging'}"
+      :value="value"
+      class="misa-dropdown"
   >
     <button
+        :class="{'dropdown__button--secondary': dropdownType === 'Paging'}"
         class="dropdown__button"
         @click="showDropdownOptions"
     >
       <span
-          class="misa-dropdown__logo"
           v-if="dropdownType === 'Restaurant' && dropdownLogo[value - 1]"
           :style="{
             color: dropdownLogo[value - 1]['RestaurantColor'],
             backgroundColor: dropdownLogo[value - 1]['RestaurantBackgroundColor']
           }"
+          class="misa-dropdown__logo"
       >
         {{ dropdownLogo[value - 1]['RestaurantIcon'] }}
       </span>
-      <span class="dropdown__title">{{ dropdownTitle }}</span>
-      <i v-if="dropdownType === 'Paging'" class="fas fa-chevron-down"></i>
-      <i v-if="dropdownType !== 'Paging'" class="fas fa-chevron-down" :class="{'misa-rotate180': iconRotate}"></i>
+      <span class="dropdown__title" v-html="boldTitle"></span>
+      <div
+          v-if="dropdownType === 'Paging'"
+          style="display: flex; flex-direction: column; justify-content: space-evenly;"
+      >
+        <i class="fas fa-chevron-up"></i>
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <i v-if="dropdownType !== 'Paging'" :class="{'misa-rotate180': iconRotate}" class="fas fa-chevron-down"></i>
     </button>
     <MisaDropdownOptions
         :contentHidden="contentHidden"
@@ -41,6 +49,12 @@ import MisaDropdownOptions from "@/components/base/dropdown/MisaDropdownOptions"
 
 export default {
   name: "MisaDropdown",
+
+  created() {
+    if (this.dropdownType === 'Paging' && localStorage.getItem('pageSize') !== null) {
+      this.$emit('dropdown-chosen', localStorage.getItem('pageSize'));
+    }
+  },
 
   data() {
     return {
@@ -77,6 +91,14 @@ export default {
     ClickOutside
   },
 
+  emits: ['dropdown-chosen'],
+
+  computed: {
+    boldTitle() {
+      return this.dropdownTitle ? this.dropdownTitle.replace(/([0-9])/g, "<b style='color: black'>$1</b>") : this.dropdownTitle;
+    }
+  },
+
   methods: {
     //Hàm xổ dropdown content khi click (click lần 2 để đóng)
     //Author: NQMinh(29/07/2021)
@@ -101,6 +123,7 @@ export default {
       if (item) {
         this.dropdownTitle = item[`${this.type}Name`];
         this.value = item[`${this.type}Id`];
+        this.$emit('dropdown-chosen', this.value);
       } else {
         this.dropdownTitle = this.title;
         this.value = '';
@@ -119,6 +142,10 @@ export default {
   position: relative;
   background-color: var(--color-white);
   border-radius: 4px;
+
+  &--secondary {
+    border-radius: 8px;
+  }
 
   &__logo {
     width: 36px;
@@ -144,6 +171,16 @@ export default {
     box-sizing: border-box;
     border: 1px solid var(--color-hightlight);
     cursor: pointer;
+
+    &--secondary {
+      border-radius: 8px;
+      border: none;
+    }
+
+    & .dropdown__title {
+      color: var(--color-content-text);
+      font-family: GoogleSans-Regular, sans-serif;
+    }
 
     & i {
       margin-left: 12px;

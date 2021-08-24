@@ -1,24 +1,24 @@
 <template>
   <div
-      class="dropdown__content"
       :class="[
           {'dropdown__content--hidden': contentHidden},
           {'out-of-space': dropdownType === 'WorkStatus' || dropdownType === 'Paging'}
       ]"
+      class="dropdown__content"
   >
     <a v-if="dropdownTitle"
-        href="#"
-        :class="{'dropdown__content-link--active': currentIndex === -1}"
-        @click="resetDropdown"
+       :class="{'dropdown__content-link--active': currentIndex === -1}"
+       href="#"
+       @click="resetDropdown"
     ><i class="fas fa-check"></i>
       {{ dropdownTitle }}
     </a>
     <a
         v-for="(option, index) in dropdownOptions"
         :key="option[`${dropdownType}Id`]"
-        href="#"
         :class="{'dropdown__content-link--active': currentIndex === index}"
         :value="option[`${dropdownType}Id`]"
+        href="#"
         @click="optionActive(index)"
     ><i class="fas fa-check"></i>
       {{ option[`${dropdownType}Name`] }}
@@ -29,8 +29,6 @@
 <script>
 //#region import models
 import RestaurantModel from "@/models/RestaurantModel";
-import GenderModel from "@/models/GenderModel";
-import WorkStatusModel from "@/models/WorkStatusModel";
 //#endregion
 
 export default {
@@ -50,18 +48,38 @@ export default {
         }, 1000)
         break;
       case 'Gender':
-        this.dropdownOptions = GenderModel.initData();
+        this.dropdownOptions = this.$genderData;
         break;
       case 'WorkStatus':
-        this.dropdownOptions = WorkStatusModel.initData();
+        this.dropdownOptions = this.$workStatusData;
         break;
       case 'Restaurant':
         this.dropdownOptions = RestaurantModel.initData();
         break;
+      case 'Paging':
+        this.dropdownOptions = this.$pagingData;
+        break;
     }
 
     if (!this.dropdownTitle) {
-      this.optionActive(0);
+      //Nếu như kiểu của dropdown là paging thì kiểm tra xem local storage đã có giá trị phân trang chưa
+      if (this.dropdownType === 'Paging') {
+        let alreadyGetFromStorage = false;
+        //Nếu giá trị phân trang đã tồn tại thì thực hiện phân trang bằng chính giá trị đó
+        if (localStorage.getItem('pageSize') !== null) {
+          if (!alreadyGetFromStorage) {
+            this.optionActive(this.$pagingData.findIndex((item) =>
+                item['PagingId'].toString() === localStorage.getItem('pageSize')
+            ));
+            alreadyGetFromStorage = true;
+          }
+        } else {
+          //Nếu không có giá trị nào trong local storage thì thực hiện phân trang với số bản ghi/trang mặc định là 50
+          this.optionActive(2);
+        }
+      } else {
+        this.optionActive(0);
+      }
     }
   },
   //#endregion
