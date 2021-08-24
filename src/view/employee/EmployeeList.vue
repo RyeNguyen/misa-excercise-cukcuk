@@ -17,6 +17,8 @@
         :isLoading="isLoading"
         @reload="loadData"
         @search-input-changed="searchEmployee"
+        @department-combobox-changed="searchEmployee"
+        @position-combobox-changed="searchEmployee"
     />
 
     <!-- bảng chính của content ở đây -->
@@ -117,16 +119,28 @@ export default {
       //Biến kiểm tra user muốn thêm hay sửa thông tin nv
       wantToCreateNewEmployee: true,
 
+      //#region dữ liệu lọc bảng
       //Từ khóa tìm kiếm nv của người dùng
       searchKeyword: '',
 
+      //Phòng ban cần tìm kiếm
+      departmentSearchId: '',
+
+      //Vị trí cần tìm kiếm
+      positionSearchId: '',
+
+      //Trang hiện tại
       currentPage: 1,
 
+      //Số bản ghi/trang
       pageSize: 10,
 
+      //Tổng số bản ghi
       totalRecords: 0,
 
+      //Tổng số trang
       totalPages: 0
+      //#endregion
     }
   },
   //#endregion
@@ -146,9 +160,16 @@ export default {
 
   watch: {
     searchKeyword: function() {
-      this.currentPage = 1;
-      this.loadData();
+      this.reloadData();
     },
+
+    departmentSearchId: function() {
+      this.reloadData();
+    },
+
+    positionSearchId: function() {
+      this.reloadData();
+    }
   },
 
   computed: {
@@ -164,7 +185,7 @@ export default {
      */
     loadData() {
       this.isLoading = true;
-      EmployeesAPI.paging(this.searchKeyword, "", "", this.currentPage, this.pageSize).then(res => {
+      EmployeesAPI.paging(this.searchKeyword, this.departmentSearchId, this.positionSearchId, this.currentPage, this.pageSize).then(res => {
         this.isLoading = false;
         new Toast('okay');
         this.employees = res.data['data'];
@@ -174,6 +195,11 @@ export default {
       }).catch(error => {
         new Toast(error.response.status);
       })
+    },
+
+    reloadData() {
+      this.currentPage = 1;
+      this.loadData();
     },
 
     /**
@@ -243,10 +269,19 @@ export default {
     /**
      * Hàm tìm kiếm nv, pass keyword người dùng gõ vào component MisaTable
      * @param keyword
+     * @param searchType
      * Author: NQMinh(01/08/2021)
      */
-    searchEmployee(keyword) {
-      this.searchKeyword = keyword;
+    searchEmployee(keyword, searchType) {
+      if (searchType === 'filter') {
+        this.searchKeyword = keyword;
+      } else if (searchType === 'department') {
+        this.departmentSearchId = keyword;
+      } else {
+        this.positionSearchId = keyword;
+      }
+      console.log(this.departmentSearchId);
+      console.log(this.positionSearchId);
     },
 
     pagingActive(currentPage, pageSize) {

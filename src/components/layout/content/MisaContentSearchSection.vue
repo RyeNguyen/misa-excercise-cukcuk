@@ -12,22 +12,12 @@
           >
         </label>
       </div>
-      <!--      <MisaDropdown-->
-      <!--          id="dropdown__department"-->
-      <!--          title="Tất cả phòng ban"-->
-      <!--          type="Department"-->
-      <!--      />-->
-      <!--      <MisaDropdown-->
-      <!--          id="dropdown__position"-->
-      <!--          title="Tất cả vị trí"-->
-      <!--          type="Position"-->
-      <!--      />-->
-
       <MisaCombobox
           comboboxDefaultOption="Tất cả phòng ban"
           comboboxId="combobox-department"
           comboboxPlaceholder="Chọn phòng ban"
           comboboxType="Department"
+          @combobox-chosen="roleSearch"
       />
 
       <MisaCombobox
@@ -35,6 +25,7 @@
           comboboxId="combobox-position"
           comboboxPlaceholder="Chọn vị trí"
           comboboxType="Position"
+          @combobox-chosen="roleSearch"
       />
 
     </div>
@@ -55,21 +46,39 @@ export default {
 
   data() {
     return {
-      searchKeyword: ''
+      searchKeyword: '',
+      departmentSearchId: '',
+      positionSearchId: ''
     }
   },
 
-  emits: ['search-input-changed'],
+  emits: ['search-input-changed', 'department-combobox-changed', 'position-combobox-changed'],
 
   watch: {
     searchKeyword: function () {
       setTimeout(() => {
-        this.$emit('search-input-changed', this.searchKeyword);
+        this.$emit('search-input-changed', this.searchKeyword, "filter");
       }, 300)
+    },
+
+    departmentSearchId: function() {
+      this.$emit('department-combobox-changed', this.departmentSearchId, "department");
+    },
+
+    positionSearchId: function() {
+      this.$emit('position-combobox-changed', this.positionSearchId, "position");
     }
   },
 
   methods: {
+    roleSearch: function(searchValue, searchType) {
+      if (searchType === "Department") {
+        this.departmentSearchId = searchValue;
+      } else {
+        this.positionSearchId = searchValue;
+      }
+    },
+
     /**
      * Hàm gọi cha reload dữ liệu
      * Author: NQMinh(02/08/2021)

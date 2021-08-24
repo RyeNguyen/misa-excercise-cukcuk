@@ -83,6 +83,8 @@ export default {
     ClickOutside
   },
 
+  emits: ['combobox-chosen'],
+
   methods: {
     showComboboxOptions: function () {
       this.contentHidden = false;
@@ -107,6 +109,7 @@ export default {
         this.$refs.comboboxInput.value = this.comboboxTitle;
         this.value = '';
       }
+      this.$emit('combobox-chosen', this.value, this.comboboxType);
       this.hideComboboxOptions();
     }
   }

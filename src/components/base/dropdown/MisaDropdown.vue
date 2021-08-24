@@ -123,11 +123,11 @@ export default {
       if (item) {
         this.dropdownTitle = item[`${this.type}Name`];
         this.value = item[`${this.type}Id`];
-        this.$emit('dropdown-chosen', this.value);
       } else {
         this.dropdownTitle = this.title;
         this.value = '';
       }
+      this.$emit('dropdown-chosen', this.value);
       //ẩn dropdown content vaf xoay mũi tên
       this.hideDropdownOptions();
     }
