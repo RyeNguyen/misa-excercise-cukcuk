@@ -79,6 +79,10 @@ export default {
       );
     },
 
+    /**
+     * Hàm mở popup thông báo khi click xóa nhân viên
+     * Author: NQMinh (09/08/2021)
+     */
     openAlertMessage() {
       this.$emit('open-popup', true);
     }

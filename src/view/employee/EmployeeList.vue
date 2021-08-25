@@ -192,11 +192,16 @@ export default {
         this.totalRecords = res.data['totalRecord'];
         this.totalPages = res.data['totalPage'];
         this.employeesToDelete = [];
+        this.hideButtonDelete();
       }).catch(error => {
         new Toast(error.response.status);
       })
     },
 
+    /**
+     * Hàm reload lại dữ liệu cho bảng
+     * Author: NQMinh (24/08/2021)
+     */
     reloadData() {
       this.currentPage = 1;
       this.loadData();
@@ -280,10 +285,14 @@ export default {
       } else {
         this.positionSearchId = keyword;
       }
-      console.log(this.departmentSearchId);
-      console.log(this.positionSearchId);
     },
 
+    /**
+     * Hàm thực hiện load dữ liệu khi có sự thay đổi trong phân trang
+     * @param currentPage
+     * @param pageSize
+     * Author: NQMinh (23/08/2021)
+     */
     pagingActive(currentPage, pageSize) {
       this.currentPage = currentPage;
       this.pageSize = pageSize;

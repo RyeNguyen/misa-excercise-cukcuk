@@ -49,7 +49,7 @@ export default class BaseAPI {
      * createdBy: NQMinh(02/08/2021)
      */
     update(id, body) {
-        return BaseAPIConfig.put(`${this.controller}/${id}`, body);
+        return BaseAPIConfig.patch(`${this.controller}/${id}`, body);
     }
 
     /**

@@ -1,7 +1,7 @@
 <template>
   <div class="misa-content__footer">
     <p>Hiển thị
-      <span style="font-weight: bold">{{'1-50/' + totalRecords}}</span> nhân viên
+      <span style="font-weight: bold">{{(pageSize * (currentPage - 1) + 1) + '-' + (pageSize * currentPage) + '/' + totalRecords}}</span> nhân viên
     </p>
     <div
         class="misa-pagination"
@@ -118,7 +118,7 @@ export default {
     pageSize: function() {
       localStorage.setItem('pageSize', this.pageSize);
       if (!firstLoad) {
-        this.$emit('paging', this.currentPage, this.pageSize);
+        this.$emit('paging', 1, this.pageSize);
       }
     },
 

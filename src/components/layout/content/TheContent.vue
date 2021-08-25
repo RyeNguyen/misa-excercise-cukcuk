@@ -1,9 +1,10 @@
 <template>
-  <EmployeeList :menuToggled="menuToggled"/>
+<!--  <EmployeeList :menuToggled="menuToggled"/>-->
+  <router-view :menuToggled="menuToggled"/>
 </template>
 
 <script>
-import EmployeeList from "@/view/employee/EmployeeList";
+// import EmployeeList from "@/view/employee/EmployeeList";
 
 export default {
   name: 'TheContent',
@@ -18,10 +19,6 @@ export default {
     menuToggled: {
       type: Boolean
     }
-  },
-
-  components: {
-    EmployeeList
   }
 }
 </script>

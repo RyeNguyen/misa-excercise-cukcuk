@@ -323,7 +323,7 @@ import VueResizable from 'vue-resizable';
 import EmployeesAPI from "@/api/components/EmployeesAPI";
 
 //#region import utils
-import DataValidator from "@/utils/DataValidator";
+// import DataValidator from "@/utils/DataValidator";
 import Toast from "@/utils/ToastsCreator";
 import CurrencyFormatter from "@/utils/CurrencyFormatter";
 import DateFormatter from "@/utils/DateFormatter";
@@ -336,7 +336,7 @@ export default {
 
   //#region mounted
   mounted() {
-    DataValidator.validateAll();
+    // DataValidator.validateAll();
     this.$refs.inputCode.focus();
   },
   //#endregion
@@ -508,17 +508,13 @@ export default {
       this.employee['DepartmentId'] = this.$refs.dropdownDepartment.value;
       this.employee['WorkStatus'] = this.$refs.dropdowmWorkStatus.value;
       this.employee['Salary'] = parseInt(this.employee['Salary'].split('.').join(''));
-      if (DataValidator.validateAll()) {
-        if (this.wantToCreateNewEmployee) {
-          this.addEmployee();
-        } else {
-          this.updateEmployee();
-        }
-        this.closeModal();
-        this.employee = {};
+      if (this.wantToCreateNewEmployee) {
+        this.addEmployee();
       } else {
-        new Toast(400);
+        this.updateEmployee();
       }
+      this.closeModal();
+      this.employee = {};
     },
 
     /**

@@ -9,12 +9,11 @@
     <Content
         :menuToggled="menuToggled"
     />
+<!--    <router-view/>-->
   </div>
 </template>
 
 <script>
-import EventIniter from "@/utils/EventDeclarator";
-
 //#region import components
 import Header from "./components/layout/TheHeader";
 import Menu from "./components/layout/TheMenu";
@@ -23,10 +22,6 @@ import Content from "./components/layout/content/TheContent";
 
 export default {
   name: 'App',
-
-  mounted() {
-    new EventIniter()
-  },
 
   data() {
     return {

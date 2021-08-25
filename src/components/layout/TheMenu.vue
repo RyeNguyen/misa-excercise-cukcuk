@@ -8,6 +8,7 @@
         :key="item['menuItemId']"
         :itemIcon="item['menuItemIcon']"
         :itemText="item['menuItemText']"
+        :itemPath="item['menuItemPath']"
         :activeClass="{'misa-menu__item--active': currentIndex === index}"
         :menuToggled="menuToggled"
         @click.native="activeItem(index)"

@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
+import router from './router';
 
 import axios from 'axios';
 import VueAxios from "vue-axios";
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-default.css';
+// import 'vue-toast-notification/dist/theme-sugar.css';
 
 import GenderModel from "@/models/GenderModel";
 import WorkStatusModel from "@/models/WorkStatusModel";
@@ -43,9 +47,11 @@ Vue.prototype.$pagingData = PagingModel.initData();
 Vue.prototype.$api = axios;
 
 Vue.use(VueAxios, axios);
+Vue.use(VueToast);
 
 Vue.config.productionTip = false;
 
 new Vue({
+    router,
     render: h => h(App),
 }).$mount('#app')

@@ -4,32 +4,38 @@ export default class MenuModel {
             {
                 menuItemId: 1,
                 menuItemIcon: 'dashboard.png',
-                menuItemText: 'Báo cáo'
+                menuItemText: 'Báo cáo',
+                menuItemPath: '/dashboard'
             },
             {
                 menuItemId: 2,
                 menuItemIcon: 'report.png',
-                menuItemText: 'Báo cáo'
+                menuItemText: 'Báo cáo',
+                menuItemPath: '/report'
             },
             {
                 menuItemId: 3,
                 menuItemIcon: 'dashboard.png',
-                menuItemText: 'Mua hàng'
+                menuItemText: 'Mua hàng',
+                menuItemPath: '/dashboard'
             },
             {
                 menuItemId: 4,
                 menuItemIcon: 'dic-employee.png',
-                menuItemText: 'Danh mục nhân viên'
+                menuItemText: 'Danh mục nhân viên',
+                menuItemPath: '/'
             },
             {
                 menuItemId: 5,
                 menuItemIcon: 'dic-employee.png',
-                menuItemText: 'Danh mục khách hàng'
+                menuItemText: 'Danh mục khách hàng',
+                menuItemPath: '/customer'
             },
             {
                 menuItemId: 6,
                 menuItemIcon: 'setting.png',
-                menuItemText: 'Thiết lập hệ thống'
+                menuItemText: 'Thiết lập hệ thống',
+                menuItemPath: '/options'
             },
         ]
     }

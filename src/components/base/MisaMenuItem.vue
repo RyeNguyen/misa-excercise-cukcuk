@@ -1,19 +1,21 @@
 <template>
-  <div
-      class="misa-menu__item"
+  <router-link
       :class="[activeClass, {'misa-menu__item--shrink': menuToggled}]"
+      :to="itemPath"
+      class="misa-menu__item"
   >
-    <div class="misa-menu__icon"
-         :class="{'misa-menu__icon--shrink': menuToggled}"
-      :style="{backgroundImage: 'url(' + require(`@/assets/icon/${itemIcon}`) + ')'}"
+    <div
+        :class="{'misa-menu__icon--shrink': menuToggled}"
+        :style="{backgroundImage: 'url(' + require(`@/assets/icon/${itemIcon}`) + ')'}"
+        class="misa-menu__icon"
     />
     <div
-        class="misa-menu__item-text"
         :class="{'misa-hidden': menuToggled}"
+        class="misa-menu__item-text"
     >
       {{ itemText }}
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -35,6 +37,12 @@ export default {
       required: true
     },
 
+    itemPath: {
+      type: String,
+      required: true,
+      default: '/'
+    },
+
     menuToggled: {
       type: Boolean
     }
@@ -50,6 +58,8 @@ export default {
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: var(--color-content-text);
   cursor: pointer;
   transition: 0.2s all ease-in-out;
 

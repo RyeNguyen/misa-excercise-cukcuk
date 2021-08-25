@@ -83,8 +83,7 @@ export default {
     return {
       showModal: true,
       wantToCreateNewEmployee: false,
-      employeesToDelete: [],
-      filteredData: this.data,
+      employeesToDelete: []
     }
   },
 
@@ -115,12 +114,18 @@ export default {
       deep: true,
       immediate: true,
       handler: function () {
-
+        this.employeesToDelete = [];
       }
     }
   },
 
   methods: {
+    /**
+     * Hàm xác định tên dữ liệu qua ID để thể hiện lên table
+     * @param role
+     * @param entityId
+     * Author: NQMinh (24/08/2021)
+     */
     roleNameIdentify: function (role, entityId) {
       let data;
       if (role === 'Gender') data = this.$genderData;
@@ -164,6 +169,7 @@ export default {
     bindingDataFromTable(employee) {
       EmployeesAPI.getById(employee['EmployeeId']).then(res => {
         new Toast('okay');
+        console.log(res.data);
         this.$emit(
             'row-double-clicked',
             this.showModal,
@@ -182,6 +188,7 @@ export default {
      * Author: NQMinh(31/07/2021)
      */
     rowActive(index) {
+      console.log(this.$refs);
       //Khi hàng thứ index được click thì checkbox thứ index cũng được kích hoạt
       this.$refs.tableRow[index].classList.toggle('table-row--active');
 
@@ -190,11 +197,11 @@ export default {
 
       //Nếu như checkbox thứ index kích hoạt thì đẩy id nv hàng đó vào mảng xóa
       if (this.$refs.deleteBox[index].defaultChecked) {
-        this.employeesToDelete.push(this.filteredData[index]);
+        this.employeesToDelete.push(this.data[index]);
       } else {
         //Nếu như không còn kích hoạt nữa thì kiếm tra mã nv đó có trong mảng xóa không, nếu có thì xóa khỏi mảng
-        if (this.employeesToDelete.indexOf(this.filteredData[index]) > -1) {
-          this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.filteredData[index]), 1);
+        if (this.employeesToDelete.indexOf(this.data[index]) > -1) {
+          this.employeesToDelete.splice(this.employeesToDelete.indexOf(this.data[index]), 1);
         }
       }
       //Hiện nút xóa

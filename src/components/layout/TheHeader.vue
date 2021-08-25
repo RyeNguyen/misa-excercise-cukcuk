@@ -58,6 +58,10 @@ export default {
   emits: ['toggle-menu'],
 
   methods: {
+    /**
+     * Hàm kích hoạt chế độ thu gọn của menu
+     * Author: NQMinh (08/08/2021)
+     */
     toggleMenu: function() {
       this.menuToggled = !this.menuToggled;
       if (this.menuToggled === true) {

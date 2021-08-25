@@ -41,22 +41,31 @@
 </template>
 
 <script>
+import EventIniter from "@/utils/EventDeclarator";
+
 export default {
   name: "MisaContentSearch",
+
+  mounted() {
+    new EventIniter();
+  },
 
   data() {
     return {
       searchKeyword: '',
       departmentSearchId: '',
-      positionSearchId: ''
+      positionSearchId: '',
+      timeout: null
     }
   },
 
-  emits: ['search-input-changed', 'department-combobox-changed', 'position-combobox-changed'],
+  emits: ['reload', 'search-input-changed', 'department-combobox-changed', 'position-combobox-changed'],
 
   watch: {
     searchKeyword: function () {
-      setTimeout(() => {
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        console.log(this.searchKeyword);
         this.$emit('search-input-changed', this.searchKeyword, "filter");
       }, 300)
     },
@@ -71,6 +80,12 @@ export default {
   },
 
   methods: {
+    /**
+     * Hàm xác định search combobox là vị trí hay phòng ban
+     * @param searchValue
+     * @param searchType
+     * Author: NQMinh (24/08/2021)
+     */
     roleSearch: function(searchValue, searchType) {
       if (searchType === "Department") {
         this.departmentSearchId = searchValue;

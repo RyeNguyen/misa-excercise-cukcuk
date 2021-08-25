@@ -86,21 +86,38 @@ export default {
   emits: ['combobox-chosen'],
 
   methods: {
+    /**
+     * Hàm hiện các lựa chọn cho combobox
+     * Author: NQMinh (10/08/2021)
+     */
     showComboboxOptions: function () {
       this.contentHidden = false;
       this.iconRotate = true;
       this.$refs.comboboxInput.focus();
     },
 
+    /**
+     * Hàm ẩn các lựa chọn cho combobox
+     * Author: NQMinh (10/08/2021)
+     */
     hideComboboxOptions: function () {
       this.contentHidden = true;
       this.iconRotate = false;
     },
 
+    /**
+     * Hàm đặt lại giá trị mặc định cho combobox
+     * Author: NQMinh (10/08/2021)
+     */
     resetCombobox: function() {
       this.$refs.comboboxInput.value = this.comboboxTitle;
     },
 
+    /**
+     * Hàm chọn giá trị cho combobox
+     * @param item
+     * Author: NQMinh (10/08/2021)
+     */
     assignCombobox: function (item) {
       if (item) {
         this.$refs.comboboxInput.value = item[`${this.comboboxType}Name`];
