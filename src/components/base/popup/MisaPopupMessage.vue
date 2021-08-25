@@ -139,19 +139,28 @@ export default {
      Author: NQMinh(31/07/2021)
      */
     deleteEmployee() {
-      let deleteCount = 0;
+      let deleteIdList = [];
       const vm = this;
       vm.employeesToDelete.forEach(employee => {
-        EmployeesAPI.delete(employee['EmployeeId']).then(() => {
-          deleteCount += 1;
-          if (deleteCount === vm.employeesToDelete.length) {
-            new Toast(2);
-            vm.$emit('delete-success');
-          }
-        }).catch(error => {
-          new Toast(error.response.status);
-        })
+        deleteIdList.push(employee['EmployeeId']);
       })
+      EmployeesAPI.delete(deleteIdList).then(() => {
+        new Toast(2);
+        vm.$emit('delete-success');
+      }).catch(error => {
+        new Toast(error.response.status);
+      })
+      // vm.employeesToDelete.forEach(employee => {
+      //   EmployeesAPI.delete(employee['EmployeeId']).then(() => {
+      //     deleteCount += 1;
+      //     if (deleteCount === vm.employeesToDelete.length) {
+      //       new Toast(2);
+      //       vm.$emit('delete-success');
+      //     }
+      //   }).catch(error => {
+      //
+      //   })
+      // })
     },
 
     /**

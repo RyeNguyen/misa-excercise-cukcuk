@@ -187,7 +187,7 @@ export default {
       this.isLoading = true;
       EmployeesAPI.paging(this.searchKeyword, this.departmentSearchId, this.positionSearchId, this.currentPage, this.pageSize).then(res => {
         this.isLoading = false;
-        new Toast('okay');
+        // new Toast('okay');
         this.employees = res.data['data'];
         this.totalRecords = res.data['totalRecord'];
         this.totalPages = res.data['totalPage'];

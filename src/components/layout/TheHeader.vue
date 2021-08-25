@@ -90,8 +90,6 @@ export default {
     transition: 0.2s all ease-in-out;
 
     &-shrink {
-      //width: 64px !important;
-      //justify-content: space-evenly;
       border-bottom: 1px solid var(--color-hightlight);
     }
 

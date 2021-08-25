@@ -219,7 +219,8 @@ export default {
   margin-top: 4px;
 
   & .misa-pagination {
-    width: 35%;
+    width: auto;
+    gap: 16px;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -35,8 +35,12 @@ export default class BaseAPI {
 
     /**
      * Hàm lấy dữ liệu phân trang
-     * @param {*} payload
      * createdBy: NQMinh(02/08/2021)
+     * @param filter
+     * @param departmentId
+     * @param positionId
+     * @param pageIndex
+     * @param pageSize
      */
     paging(filter, departmentId, positionId, pageIndex, pageSize) {
         return BaseAPIConfig.get(`${this.controller}/paging?employeeFilter=${filter}&departmentId=${departmentId}&positionId=${positionId}&pageIndex=${pageIndex}&pageSize=${pageSize}`);
@@ -54,11 +58,11 @@ export default class BaseAPI {
 
     /**
      * Hàm xóa thông tin nv
-     * @param id
      * @returns {Promise<AxiosResponse<any>>}
      * createdBy: NQMinh(02/08/2021)
+     * @param ids
      */
-    delete(id) {
-        return BaseAPIConfig.delete(`${this.controller}/${id}`);
+    delete(ids) {
+        return BaseAPIConfig.post(`${this.controller}/delete`, ids);
     }
 }
