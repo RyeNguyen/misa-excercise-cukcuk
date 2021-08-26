@@ -500,14 +500,28 @@ export default {
     //Hàm lưu dữ liệu nv lên database
     //Author: NQMinh(30/07/2021)
     submitData() {
-      //TODO: Trước khi submit data cần:
-      //1. Validate 1 lượt dữ liệu
-      //2. Chuyển tiền lương về number vì hiện tại đang là string
-      this.employee['Gender'] = this.$refs.dropdownGender.value;
-      this.employee['PositionId'] = this.$refs.dropdownPosition.value;
-      this.employee['DepartmentId'] = this.$refs.dropdownDepartment.value;
-      this.employee['WorkStatus'] = this.$refs.dropdowmWorkStatus.value;
-      this.employee['Salary'] = parseInt(this.employee['Salary'].split('.').join(''));
+      this.employee['DateOfBirth'] = this.employee['DateOfBirth'] ? this.employee['DateOfBirth'] : null;
+
+      this.employee['Gender'] = parseInt(this.$refs.dropdownGender.value);
+
+      this.employee['IdentityDate'] = this.employee['IdentityDate'] ? this.employee['IdentityDate'] : null;
+
+      this.employee['PositionId'] = this.$refs.dropdownPosition.value ?
+          this.$refs.dropdownPosition.value :
+          null;
+
+      this.employee['DepartmentId'] = this.$refs.dropdownDepartment.value ?
+          this.$refs.dropdownDepartment.value :
+          null;
+
+      this.employee['JoinDate'] = this.employee['JoinDate'] ? this.employee['JoinDate'] : null;
+
+      this.employee['WorkStatus'] = parseInt(this.$refs.dropdowmWorkStatus.value);
+
+      this.employee['Salary'] = this.employee['Salary'] ?
+          parseInt(this.employee['Salary'].split('.').join('')) :
+          parseInt(this.employee['Salary']);
+
       if (this.wantToCreateNewEmployee) {
         this.addEmployee();
       } else {

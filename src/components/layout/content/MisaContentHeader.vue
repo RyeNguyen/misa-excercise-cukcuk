@@ -30,6 +30,14 @@ import Toast from "@/utils/ToastsCreator";
 export default {
   name: "MisaContentHeader",
 
+  created: function() {
+    EmployeesAPI.getNewCode().then(res => {
+      this.newEmployeeCode = res.data;
+    }).catch(error => {
+      new Toast(error.response.status);
+    })
+  },
+
   data() {
     return {
       hideModal: !this.modalIsOpened,

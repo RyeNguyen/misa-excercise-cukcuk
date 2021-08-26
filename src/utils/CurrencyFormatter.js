@@ -6,7 +6,7 @@ export default class CurrencyFormatter {
     static format = (salary) => {
         this.numericOnly();
         let result = '';
-        if (salary) {
+        if (salary !== null) {
             for (let i = String(salary).length; i > 0; i -= 3) {
                 if (i > 3) {
                     const number = String(salary).slice(i - 3, i);
