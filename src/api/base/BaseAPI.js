@@ -24,6 +24,15 @@ export default class BaseAPI {
     }
 
     /**
+     * Hàm sinh mã mới
+     * @returns {Promise<AxiosResponse<any>>}
+     * Author: NQMinh (26/08/2021)
+     */
+    getNewCode() {
+        return BaseAPIConfig.get(`${this.controller}/newCode`);
+    }
+
+    /**
      * Hàm thêm mới dữ liệu
      * @param body
      * @returns {Promise<AxiosResponse<any>>}

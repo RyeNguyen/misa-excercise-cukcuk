@@ -169,7 +169,6 @@ export default {
     bindingDataFromTable(employee) {
       EmployeesAPI.getById(employee['EmployeeId']).then(res => {
         new Toast('okay');
-        console.log(res.data);
         this.$emit(
             'row-double-clicked',
             this.showModal,
@@ -188,7 +187,6 @@ export default {
      * Author: NQMinh(31/07/2021)
      */
     rowActive(index) {
-      console.log(this.$refs);
       //Khi hàng thứ index được click thì checkbox thứ index cũng được kích hoạt
       this.$refs.tableRow[index].classList.toggle('table-row--active');
 

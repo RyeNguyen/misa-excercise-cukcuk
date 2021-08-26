@@ -23,20 +23,12 @@
 </template>
 
 <script>
-import Toast from "@/utils/ToastsCreator";
+import EmployeesAPI from "@/api/components/EmployeesAPI";
 
-import MisaButton from "@/components/base/MisaButton";
+import Toast from "@/utils/ToastsCreator";
 
 export default {
   name: "MisaContentHeader",
-
-  mounted() {
-    this.$api.get(`http://cukcuk.manhnv.net/v1/Employees/NewEmployeeCode`).then(res => {
-      this.newEmployeeCode = res.data;
-    }).catch(error => {
-      new Toast(error.response.status);
-    })
-  },
 
   data() {
     return {
@@ -55,10 +47,6 @@ export default {
     modalIsOpened: Boolean
   },
 
-  components: {
-    MisaButton
-  },
-
   emits: [
     'btn-add-clicked',
     'delete-success',
@@ -71,6 +59,12 @@ export default {
      Author: NQMinh(30/07/2021)
      */
     openModal() {
+      EmployeesAPI.getNewCode().then(res => {
+        this.newEmployeeCode = res.data;
+      }).catch(error => {
+        new Toast(error.response.status);
+      })
+
       this.$emit(
           'btn-add-clicked',
           this.hideModal,

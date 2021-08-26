@@ -1,7 +1,7 @@
 <template>
   <div class="misa-content__footer">
     <p>Hiển thị
-      <span style="font-weight: bold">{{(pageSize * (currentPage - 1) + 1) + '-' + (pageSize * currentPage) + '/' + totalRecords}}</span> nhân viên
+      <span style="font-weight: bold">{{pageInformation + '/' + totalRecords}}</span> nhân viên
     </p>
     <div
         class="misa-pagination"
@@ -150,7 +150,10 @@ export default {
     },
 
     endPage: function () {
-      return Math.min(this.startPage + this.maxVisibleButtons - 1, this.totalPages)
+      return Math.min(
+          this.startPage + this.maxVisibleButtons - 1,
+          this.totalPages
+      )
     },
 
     pages: function () {
@@ -162,6 +165,14 @@ export default {
         })
       }
       return range;
+    },
+
+    pageInformation: function() {
+      if (this.currentPage < this.totalPages) {
+        return `${(this.currentPage - 1) * this.pageSize + 1}-${this
+            .currentPage * this.pageSize}`;
+      }
+      return `${this.totalRecords}`;
     }
   },
   //#endregion
