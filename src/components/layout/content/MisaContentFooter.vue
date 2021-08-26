@@ -4,6 +4,7 @@
       <span style="font-weight: bold">{{pageInformation + '/' + totalRecords}}</span> nhân viên
     </p>
     <div
+        v-if="totalRecords !== 0"
         class="misa-pagination"
         :totalPage="totalPages"
         :totalRecords="totalRecords"
@@ -67,6 +68,7 @@
       </button>
     </div>
     <MisaDropdown
+        v-if="totalRecords !== 0"
         id="dropdown__pagination"
         type="Paging"
         @dropdown-chosen="changePageSize"
@@ -143,7 +145,11 @@ export default {
       }
 
       if (this.currentPage === this.totalPages) {
-        return this.totalPages - this.maxVisibleButtons + 1;
+        if (this.maxVisibleButtons <= this.totalPages) {
+          return this.totalPages - this.maxVisibleButtons + 1;
+        } else {
+          return this.totalPages + 1;
+        }
       }
 
       return this.currentPage - 1;

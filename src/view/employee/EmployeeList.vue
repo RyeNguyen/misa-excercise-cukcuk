@@ -191,6 +191,10 @@ export default {
         this.employees = res.data['data'];
         this.totalRecords = res.data['totalRecord'];
         this.totalPages = res.data['totalPage'];
+        if (!this.totalPages || !this.totalRecords) {
+          this.totalPages = 0;
+          this.totalRecords = 0;
+        }
         this.employeesToDelete = [];
         this.hideButtonDelete();
       }).catch(error => {

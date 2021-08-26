@@ -285,7 +285,7 @@
                 >
                   <MisaDropdown
                       slot="misa-text-box"
-                      ref="dropdowmWorkStatus"
+                      ref="dropdownWorkStatus"
                       id="dropdown__work-status"
                       title="Tình trạng làm việc"
                       type="WorkStatus"
@@ -424,6 +424,12 @@ export default {
     wantToCreateNewEmployee: function () {
       if (!this.wantToCreateNewEmployee) {
         this.employee = this.employeeData;
+
+        this.bindingDropdown(this.$refs.dropdownPosition, this.$positionData, 'Position');
+        this.bindingDropdown(this.$refs.dropdownDepartment, this.$departmentData, 'Department');
+        this.bindingDropdown(this.$refs.dropdownGender, this.$genderData, 'Gender');
+        this.bindingDropdown(this.$refs.dropdownWorkStatus, this.$workStatusData, 'WorkStatus')
+
         this.employee['DateOfBirth'] = this.formatDate(this.employee['DateOfBirth']);
         this.employee['IdentityDate'] = this.formatDate(this.employee['IdentityDate']);
       }
@@ -451,6 +457,22 @@ export default {
 
   //#region methods
   methods: {
+    bindingDropdown(refName, data, type) {
+      let dropdownIndex = data.findIndex(el => el[`${type}Id`] === this.employee[`${type}Id`]);
+      if (type === 'Gender' || type === 'WorkStatus') {
+        dropdownIndex = data.findIndex(el => el[`${type}Id`] === this.employee[`${type}`]);
+      }
+      refName.$children[0].currentIndex = dropdownIndex;
+      refName.dropdownTitle = data[dropdownIndex][`${type}Name`];
+      refName.value = this.employee[`${type}Id`];
+    },
+
+    resetDropdown(refName, defaultTitle) {
+      refName.$children[0].currentIndex = -1;
+      refName.dropdownTitle = defaultTitle;
+      refName.value = '';
+    },
+
     /**
      * Hàm xử lý sự kiện thay đổi kích thước và kéo thả form nhập
      * @params dữ liệu sự kiện
@@ -493,6 +515,11 @@ export default {
       //Clear dữ liệu
       this.employee = {};
 
+      this.resetDropdown(this.$refs.dropdownPosition, 'Chọn vị trí');
+      this.resetDropdown(this.$refs.dropdownDepartment, 'Chọn phòng ban');
+      this.resetDropdown(this.$refs.dropdownGender, 'Chọn giới tính');
+      this.resetDropdown(this.$refs.dropdownWorkStatus, 'Tình trạng làm việc');
+
       this.showModal = false;
       this.$emit('close-modal', this.showModal);
     },
@@ -516,7 +543,7 @@ export default {
 
       this.employee['JoinDate'] = this.employee['JoinDate'] ? this.employee['JoinDate'] : null;
 
-      this.employee['WorkStatus'] = parseInt(this.$refs.dropdowmWorkStatus.value);
+      this.employee['WorkStatus'] = parseInt(this.$refs.dropdownWorkStatus.value);
 
       this.employee['Salary'] = this.employee['Salary'] ?
           parseInt(this.employee['Salary'].split('.').join('')) :

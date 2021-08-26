@@ -61,7 +61,7 @@
         :z-index=17
         blur="4px"
         color="#019160"
-        loader="spinner"
+        loader="bars"
     />
   </div>
 </template>

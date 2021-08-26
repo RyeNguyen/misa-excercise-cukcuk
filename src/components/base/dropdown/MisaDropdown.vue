@@ -11,6 +11,7 @@
         class="dropdown__button"
         @click="showDropdownOptions"
     >
+      <!-- span logo cho dropdown restaurant -->
       <span
           v-if="dropdownType === 'Restaurant' && dropdownLogo[value - 1]"
           :style="{
@@ -21,17 +22,24 @@
       >
         {{ dropdownLogo[value - 1]['RestaurantIcon'] }}
       </span>
+
       <span class="dropdown__title" v-html="boldTitle"></span>
-      <div
+
+      <!-- Mũi tên đôi cho dropdown paging -->
+      <span
           v-if="dropdownType === 'Paging'"
           style="display: flex; flex-direction: column; justify-content: space-evenly;"
       >
         <i class="fas fa-chevron-up"></i>
         <i class="fas fa-chevron-down"></i>
-      </div>
+      </span>
+
+      <!-- Mũi tên đơn cho các dropdown khác -->
       <i v-if="dropdownType !== 'Paging'" :class="{'misa-rotate180': iconRotate}" class="fas fa-chevron-down"></i>
     </button>
+
     <MisaDropdownOptions
+        :defaultValue="defaultValue"
         :contentHidden="contentHidden"
         :dropdownTitle="title"
         :dropdownType="dropdownType"
@@ -79,6 +87,11 @@ export default {
     type: {
       type: String,
       required: true
+    },
+
+    defaultValue: {
+      type: String,
+      default: null
     }
   },
   //#endregion

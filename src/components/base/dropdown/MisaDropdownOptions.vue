@@ -105,9 +105,21 @@ export default {
     dropdownType: {
       type: String,
       required: true
+    },
+
+    defaultValue: {
+      type: String,
+      default: null
     }
   },
   //#endregion
+
+  watch: {
+    defaultValue: function () {
+      const index = this.dropdownOptions.map(e => e[`${this.dropdownType}Name`]).indexOf(this.defaultValue);
+      this.$emit('dropdown-item-active', this.dropdownOptions[index]);
+    }
+  },
 
   emits: ['dropdown-item-active'],
 
